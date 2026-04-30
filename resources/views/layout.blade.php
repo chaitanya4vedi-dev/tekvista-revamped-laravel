@@ -42,7 +42,8 @@
     <script type="application/ld+json">{!! json_encode($organizationSchema, JSON_UNESCAPED_SLASHES) !!}</script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v={{ @filemtime(public_path('assets/app.css')) ?: time() }}">
+    <script defer src="{{ asset('assets/app.js') }}?v={{ @filemtime(public_path('assets/app.js')) ?: time() }}"></script>
 </head>
 <body class="antialiased">
     @php
