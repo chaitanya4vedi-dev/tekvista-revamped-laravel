@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    @php
+        $metaImagePath = '/images/tekvista/meta-image-tekvista.png';
+        $metaImageUrl = request()->getSchemeAndHttpHost().$metaImagePath;
+    @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#031126">
@@ -20,14 +24,14 @@
     <meta property="og:title" content="{{ $title ?? 'Tekvista Infosolutions | Enterprise Technology and Cloud Partner' }}">
     <meta property="og:description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise cloud, cybersecurity, networking and business technology solutions.' }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('images/tekvista/meta-image-tekvista.png') }}">
-    <meta property="og:image:secure_url" content="{{ asset('images/tekvista/meta-image-tekvista.png') }}">
+    <meta property="og:image" content="{{ $metaImageUrl }}">
+    <meta property="og:image:secure_url" content="{{ $metaImageUrl }}">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="Tekvista Infosolutions Private Limited enterprise IT services">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title ?? 'Tekvista Infosolutions | Enterprise Technology and Cloud Partner' }}">
     <meta name="twitter:description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise cloud, cybersecurity, networking and business technology solutions.' }}">
-    <meta name="twitter:image" content="{{ asset('images/tekvista/meta-image-tekvista.png') }}">
+    <meta name="twitter:image" content="{{ $metaImageUrl }}">
     <meta name="twitter:image:alt" content="Tekvista Infosolutions Private Limited enterprise IT services">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,8 +44,8 @@
             '@'.'type' => 'Organization',
             'name' => 'Tekvista Infosolutions Private Limited',
             'url' => url('/'),
-            'logo' => asset('images/tekvista/meta-image-tekvista.png'),
-            'image' => asset('images/tekvista/meta-image-tekvista.png'),
+            'logo' => $metaImageUrl,
+            'image' => $metaImageUrl,
             'telephone' => '+91 9432246063',
             'email' => 'alok@tekvista.in',
             'address' => [
