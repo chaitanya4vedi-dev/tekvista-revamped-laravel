@@ -5,18 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#031126">
     <title>{{ $title ?? 'Tekvista Infosolutions Pvt Ltd' }}</title>
-    <meta name="description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited - enterprise cloud, cybersecurity, networking, Zoho, Odoo, Microsoft and Google solutions.' }}">
-    <meta name="keywords" content="{{ $metaKeywords ?? 'enterprise IT solutions, cybersecurity, cloud services, networking, Zoho, Odoo, Microsoft 365, Google Workspace, Tally on Cloud' }}">
+    <meta name="description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise IT services including cloud solutions, cybersecurity, networking, AV, Zoho, Odoo, Microsoft 365 and Google Workspace from Kolkata, India.' }}">
+    <meta name="keywords" content="{{ $metaKeywords ?? 'Tekvista Infosolutions, enterprise IT solutions Kolkata, cloud solutions, cybersecurity services, networking, AV solutions, Zoho partner, Odoo implementation, Microsoft 365, Google Workspace, Tally on Cloud' }}">
+    <meta name="author" content="Tekvista Infosolutions Private Limited">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="icon" href="/pwa/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/pwa/icon-192.png">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ $title ?? 'Tekvista Infosolutions Pvt Ltd' }}">
-    <meta property="og:description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited technology services.' }}">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="Tekvista Infosolutions Private Limited">
+    <meta property="og:title" content="{{ $title ?? 'Tekvista Infosolutions | Enterprise Technology and Cloud Partner' }}">
+    <meta property="og:description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise cloud, cybersecurity, networking and business technology solutions.' }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ $visuals['hero'] ?? 'https://images.pexels.com/photos/7414033/pexels-photo-7414033.jpeg?auto=compress&cs=tinysrgb&w=1200' }}">
+    <meta property="og:image" content="{{ asset('images/tekvista/meta-image-tekvista.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/tekvista/meta-image-tekvista.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Tekvista Infosolutions Private Limited enterprise IT services">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'Tekvista Infosolutions | Enterprise Technology and Cloud Partner' }}">
+    <meta name="twitter:description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise cloud, cybersecurity, networking and business technology solutions.' }}">
+    <meta name="twitter:image" content="{{ asset('images/tekvista/meta-image-tekvista.png') }}">
+    <meta name="twitter:image:alt" content="Tekvista Infosolutions Private Limited enterprise IT services">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=Anonymous+Pro:wght@700&display=swap" rel="stylesheet">
@@ -28,6 +40,8 @@
             '@'.'type' => 'Organization',
             'name' => 'Tekvista Infosolutions Private Limited',
             'url' => url('/'),
+            'logo' => asset('images/tekvista/meta-image-tekvista.png'),
+            'image' => asset('images/tekvista/meta-image-tekvista.png'),
             'telephone' => '+91 9432246063',
             'email' => 'alok@tekvista.in',
             'address' => [
@@ -36,6 +50,10 @@
                 'addressLocality' => 'Kolkata',
                 'postalCode' => '700072',
                 'addressCountry' => 'IN',
+            ],
+            'sameAs' => [
+                'https://www.linkedin.com/company/tekvista',
+                'https://www.facebook.com/TekVista.in',
             ],
         ];
     @endphp
