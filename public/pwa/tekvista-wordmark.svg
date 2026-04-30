@@ -1,0 +1,13 @@
+<svg width="420" height="92" viewBox="0 0 420 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wm" x1="6" y1="10" x2="86" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0AB883"/>
+      <stop offset="1" stop-color="#0D7B5F"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="80" height="80" rx="22" fill="url(#wm)"/>
+  <path d="M24 30H68V40H52V64H40V40H24V30Z" fill="#F5FFF9"/>
+  <path d="M32 48H60V58H32V48Z" fill="#F5FFF9"/>
+  <text x="102" y="42" font-family="Poppins, Arial, sans-serif" font-size="28" font-weight="800" fill="#0A241F">TekVista</text>
+  <text x="102" y="68" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="600" fill="#2A6759">INFOSOLUTIONS PVT LTD</text>
+</svg>
