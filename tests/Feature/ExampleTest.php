@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\ContactInquiry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -36,7 +35,7 @@ class ExampleTest extends TestCase
 
         $response->assertRedirect();
 
-        $this->assertDatabaseHas(ContactInquiry::class, [
+        $this->assertDatabaseHas('contact_inquiries', [
             'email' => 'aditi@example.com',
             'service' => 'Cloud Solutions',
         ]);
