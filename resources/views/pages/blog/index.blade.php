@@ -52,7 +52,7 @@
                         <h2 class="mt-3 text-2xl font-black leading-8 text-[var(--text)]">{{ $post->title }}</h2>
                         <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ $post->excerpt }}</p>
                         <div class="mt-3 flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface-light)] px-3 py-2 text-xs text-[var(--muted)]">
-                            <img src="{{ $post->author?->avatar_url ?: 'https://ui-avatars.com/api/?name='.urlencode($post->author?->name ?? 'Tekvista Team').'&background=0B5C52&color=fff&size=120' }}" alt="{{ $post->author?->name ?? 'Tekvista Team' }}" class="h-9 w-9 rounded-full border border-[var(--line)] object-cover">
+                            <img src="{{ $post->author?->avatar_url ?: 'https://ui-avatars.com/api/?name='.urlencode($post->author?->name ?? 'Tekvista Team').'&background=0B5C52&color=fff&size=120' }}" alt="{{ $post->author?->name ?? 'Tekvista Team' }}" class="h-12 w-12 rounded-full border border-[var(--line)] object-cover">
                             <div>
                                 By <span class="font-semibold text-[var(--text)]">{{ $post->author?->name ?? 'Tekvista Team' }}</span>
                                 @if($post->author?->job_title)

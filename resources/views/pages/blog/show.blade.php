@@ -38,7 +38,7 @@
             <p class="mt-5 max-w-3xl text-base leading-8 text-[#def7ea]">{{ $post->excerpt }}</p>
             <div class="mt-5 rounded-2xl border border-black/10 bg-white/80 p-4 text-sm text-black shadow-sm backdrop-blur-md">
                 <div class="flex items-start gap-3">
-                    <img src="{{ $author?->avatar_url ?: 'https://ui-avatars.com/api/?name='.urlencode($author?->name ?? 'Tekvista Team').'&background=0B5C52&color=fff&size=200' }}" alt="{{ $author?->name ?? 'Tekvista Team' }}" class="h-14 w-14 rounded-full border border-black/10 object-cover">
+                    <img src="{{ $author?->avatar_url ?: 'https://ui-avatars.com/api/?name='.urlencode($author?->name ?? 'Tekvista Team').'&background=0B5C52&color=fff&size=200' }}" alt="{{ $author?->name ?? 'Tekvista Team' }}" class="h-12 w-12 rounded-full border border-black/10 object-cover">
                     <div>
                         <p class="font-semibold">By {{ $author?->name ?? 'Tekvista Team' }} @if($author?->username) · {{ '@'.$author->username }} @endif</p>
                         @if($author?->job_title || $author?->department)

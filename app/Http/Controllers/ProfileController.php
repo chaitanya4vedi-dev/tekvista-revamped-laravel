@@ -79,6 +79,7 @@ class ProfileController extends Controller
         }
 
         $image = $this->applyExifOrientation($image, $path);
+        $image = $this->fallbackPortraitRotation($image);
 
         $sourceWidth = imagesx($image);
         $sourceHeight = imagesy($image);
@@ -118,10 +119,48 @@ class ProfileController extends Controller
         }
 
         return match ($orientation) {
-            3 => imagerotate($image, 180, 0),
-            6 => imagerotate($image, -90, 0),
-            8 => imagerotate($image, 90, 0),
+            2 => $this->flipImage($image, IMG_FLIP_HORIZONTAL),
+            3 => $this->rotateImage($image, 180),
+            4 => $this->flipImage($image, IMG_FLIP_VERTICAL),
+            5 => $this->flipImage($this->rotateImage($image, -90), IMG_FLIP_HORIZONTAL),
+            6 => $this->rotateImage($image, -90),
+            7 => $this->flipImage($this->rotateImage($image, 90), IMG_FLIP_HORIZONTAL),
+            8 => $this->rotateImage($image, 90),
             default => $image,
         };
+    }
+
+    private function fallbackPortraitRotation(\GdImage $image): \GdImage
+    {
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        // If orientation metadata was absent or ignored and image is strongly landscape,
+        // normalize to portrait for consistent author avatars.
+        if ($width > (int) round($height * 1.20)) {
+            return $this->rotateImage($image, 90);
+        }
+
+        return $image;
+    }
+
+    private function rotateImage(\GdImage $image, int $angle): \GdImage
+    {
+        $rotated = imagerotate($image, $angle, 0);
+        if ($rotated instanceof \GdImage) {
+            imagedestroy($image);
+            return $rotated;
+        }
+
+        return $image;
+    }
+
+    private function flipImage(\GdImage $image, int $mode): \GdImage
+    {
+        if (function_exists('imageflip')) {
+            imageflip($image, $mode);
+        }
+
+        return $image;
     }
 }
