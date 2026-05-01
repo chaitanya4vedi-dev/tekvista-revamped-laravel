@@ -37,13 +37,18 @@
             <h1 class="mt-4 text-4xl font-black leading-tight text-white sm:text-6xl">{{ $post->title }}</h1>
             <p class="mt-5 max-w-3xl text-base leading-8 text-[#def7ea]">{{ $post->excerpt }}</p>
             <div class="mt-5 rounded-2xl border border-white/30 bg-white/10 p-4 text-sm text-white/95">
-                <p class="font-semibold">By {{ $author?->name ?? 'Tekvista Team' }} @if($author?->username) · @{{ $author->username }} @endif</p>
-                @if($author?->job_title || $author?->department)
-                    <p class="mt-1 text-white/80">{{ collect([$author?->job_title, $author?->department])->filter()->implode(' · ') }}</p>
-                @endif
-                @if($author?->bio)
-                    <p class="mt-2 text-white/80">{{ $author->bio }}</p>
-                @endif
+                <div class="flex items-start gap-3">
+                    <img src="{{ $author?->avatar_url ?: 'https://ui-avatars.com/api/?name='.urlencode($author?->name ?? 'Tekvista Team').'&background=0B5C52&color=fff&size=200' }}" alt="{{ $author?->name ?? 'Tekvista Team' }}" class="h-14 w-14 rounded-full border border-white/40 object-cover">
+                    <div>
+                        <p class="font-semibold">By {{ $author?->name ?? 'Tekvista Team' }} @if($author?->username) · @{{ $author->username }} @endif</p>
+                        @if($author?->job_title || $author?->department)
+                            <p class="mt-1 text-white/80">{{ collect([$author?->job_title, $author?->department])->filter()->implode(' · ') }}</p>
+                        @endif
+                        @if($author?->bio)
+                            <p class="mt-2 text-white/80">{{ $author->bio }}</p>
+                        @endif
+                    </div>
+                </div>
             </div>
             <div class="mt-4 flex flex-wrap gap-2">
                 @foreach ($post->tags as $tag)

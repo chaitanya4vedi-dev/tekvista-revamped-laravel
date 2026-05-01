@@ -2,8 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @php
-        $metaImagePath = '/images/tekvista/meta-image-tekvista.png';
-        $metaImageUrl = request()->getSchemeAndHttpHost().$metaImagePath;
+        $defaultMetaImagePath = '/images/tekvista/meta-image-tekvista.png';
+        $providedMetaImage = $metaImage ?? null;
+        $metaImageUrl = $providedMetaImage
+            ? (\Illuminate\Support\Str::startsWith($providedMetaImage, ['http://', 'https://']) ? $providedMetaImage : request()->getSchemeAndHttpHost().$providedMetaImage)
+            : request()->getSchemeAndHttpHost().$defaultMetaImagePath;
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

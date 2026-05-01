@@ -9,6 +9,8 @@ use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -41,9 +43,11 @@ class ManagePostController extends Controller
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:180'],
-            'excerpt' => ['required', 'string', 'max:320'],
+            'slug' => ['nullable', 'string', 'max:190', 'regex:/^[a-z0-9-]+$/', 'unique:posts,slug'],
+            'excerpt' => ['nullable', 'string', 'max:320'],
             'content' => ['required', 'string', 'min:120'],
-            'hero' => ['nullable', 'url', 'max:500'],
+            'hero' => ['nullable', 'url:http,https', 'max:500'],
+            'hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
             'meta_title' => ['nullable', 'string', 'max:180'],
             'meta_description' => ['nullable', 'string', 'max:320'],
             'meta_keywords' => ['nullable', 'string', 'max:320'],
@@ -54,26 +58,22 @@ class ManagePostController extends Controller
             'tags_csv' => ['nullable', 'string', 'max:320'],
         ]);
 
-        $slugBase = Str::slug($validated['title']);
-        $slug = $slugBase;
-        $counter = 1;
-
-        while (Post::query()->where('slug', $slug)->exists()) {
-            $counter++;
-            $slug = $slugBase . '-' . $counter;
-        }
+        $slug = $this->generateUniqueSlug($validated['title'], $validated['slug'] ?? null);
+        $plainContent = $this->plainText($validated['content']);
+        $excerpt = $this->smartExcerpt($validated['excerpt'] ?? '', $plainContent, $validated['title']);
+        $hero = $this->resolveHeroImage($request, (string) ($validated['hero'] ?? ''));
 
         $post = Post::create([
             'user_id' => Auth::id(),
             'title' => $validated['title'],
             'slug' => $slug,
-            'excerpt' => $validated['excerpt'],
+            'excerpt' => $excerpt,
             'content' => $validated['content'],
-            'hero' => $validated['hero'] ?? null,
-            'meta_title' => $validated['meta_title'] ?? $validated['title'],
-            'meta_description' => $validated['meta_description'] ?? $validated['excerpt'],
-            'meta_keywords' => $validated['meta_keywords'] ?? null,
-            'read_time' => $validated['read_time'] ?? '5 min read',
+            'hero' => $hero,
+            'meta_title' => $this->smartMetaTitle((string) ($validated['meta_title'] ?? ''), $validated['title']),
+            'meta_description' => $this->smartMetaDescription((string) ($validated['meta_description'] ?? ''), $excerpt, $plainContent),
+            'meta_keywords' => $this->smartMetaKeywords((string) ($validated['meta_keywords'] ?? ''), $validated['title'], (string) ($validated['categories_csv'] ?? ''), (string) ($validated['tags_csv'] ?? '')),
+            'read_time' => $validated['read_time'] ?: $this->estimateReadTime($plainContent),
             'published_on' => $validated['published_on'] ?? now()->toDateString(),
             'is_published' => (bool) ($validated['is_published'] ?? true),
         ]);
@@ -106,5 +106,149 @@ class ManagePostController extends Controller
         $post->tags()->sync($tagIds);
 
         return redirect()->route('blog.manage.index')->with('status', 'Blog post published successfully.');
+    }
+
+    private function generateUniqueSlug(string $title, ?string $providedSlug = null): string
+    {
+        $base = Str::slug($providedSlug ?: $title);
+        if ($base === '') {
+            $base = 'post';
+        }
+
+        $slug = $base;
+        $counter = 1;
+        while (Post::query()->where('slug', $slug)->exists()) {
+            $counter++;
+            $slug = $base . '-' . $counter;
+        }
+
+        return $slug;
+    }
+
+    private function plainText(string $content): string
+    {
+        return trim((string) preg_replace('/\s+/', ' ', strip_tags($content)));
+    }
+
+    private function smartExcerpt(string $provided, string $plainContent, string $title): string
+    {
+        $candidate = trim($provided);
+        if ($candidate === '') {
+            $source = $plainContent !== '' ? $plainContent : $title;
+            $candidate = Str::limit($source, 300, '...');
+        }
+
+        return Str::limit($candidate, 320, '...');
+    }
+
+    private function smartMetaTitle(string $provided, string $title): string
+    {
+        $candidate = trim($provided) !== '' ? trim($provided) : $title . ' | TekVista Enterprise Insights';
+        return Str::limit($candidate, 180, '');
+    }
+
+    private function smartMetaDescription(string $provided, string $excerpt, string $plainContent): string
+    {
+        $candidate = trim($provided);
+        if ($candidate === '') {
+            $seed = $excerpt !== '' ? $excerpt : $plainContent;
+            $candidate = Str::limit($seed, 300, '...');
+        }
+
+        return Str::limit($candidate, 320, '...');
+    }
+
+    private function smartMetaKeywords(string $provided, string $title, string $categoriesCsv, string $tagsCsv): string
+    {
+        $candidate = trim($provided);
+        if ($candidate !== '') {
+            return Str::limit($candidate, 320, '');
+        }
+
+        $tokens = collect([$title, $categoriesCsv, $tagsCsv, 'enterprise IT', 'cloud', 'cybersecurity', 'networking'])
+            ->flatMap(fn (string $chunk) => preg_split('/[,|]/', $chunk) ?: [])
+            ->map(fn (string $part) => trim($part))
+            ->filter()
+            ->unique(fn (string $part) => Str::lower($part))
+            ->values()
+            ->take(14)
+            ->implode(', ');
+
+        return Str::limit($tokens, 320, '');
+    }
+
+    private function estimateReadTime(string $plainContent): string
+    {
+        $wordCount = str_word_count($plainContent);
+        $minutes = max(1, (int) ceil($wordCount / 210));
+        return $minutes . ' min read';
+    }
+
+    private function resolveHeroImage(Request $request, string $heroUrl): ?string
+    {
+        if ($request->hasFile('hero_image')) {
+            $bytes = file_get_contents($request->file('hero_image')->getRealPath());
+            if ($bytes !== false) {
+                return $this->storeOptimizedImage($bytes, 'blog', 'hero', 1200, 630, 86);
+            }
+        }
+
+        $heroUrl = trim($heroUrl);
+        if ($heroUrl === '') {
+            return null;
+        }
+
+        try {
+            $response = Http::timeout(12)->get($heroUrl);
+            $contentType = Str::lower((string) $response->header('Content-Type'));
+
+            if ($response->ok() && Str::startsWith($contentType, 'image/')) {
+                return $this->storeOptimizedImage($response->body(), 'blog', 'hero', 1200, 630, 86);
+            }
+        } catch (\Throwable $e) {
+        }
+
+        return $heroUrl;
+    }
+
+    private function storeOptimizedImage(string $binary, string $folder, string $prefix, int $targetWidth, int $targetHeight, int $quality): ?string
+    {
+        $image = @imagecreatefromstring($binary);
+        if ($image === false) {
+            return null;
+        }
+
+        $sourceWidth = imagesx($image);
+        $sourceHeight = imagesy($image);
+        $sourceRatio = $sourceWidth / max(1, $sourceHeight);
+        $targetRatio = $targetWidth / $targetHeight;
+
+        if ($sourceRatio > $targetRatio) {
+            $cropHeight = $sourceHeight;
+            $cropWidth = (int) round($sourceHeight * $targetRatio);
+            $srcX = (int) floor(($sourceWidth - $cropWidth) / 2);
+            $srcY = 0;
+        } else {
+            $cropWidth = $sourceWidth;
+            $cropHeight = (int) round($sourceWidth / $targetRatio);
+            $srcX = 0;
+            $srcY = (int) floor(($sourceHeight - $cropHeight) / 2);
+        }
+
+        $canvas = imagecreatetruecolor($targetWidth, $targetHeight);
+        imagecopyresampled($canvas, $image, 0, 0, $srcX, $srcY, $targetWidth, $targetHeight, $cropWidth, $cropHeight);
+
+        $relativeDir = 'uploads/' . $folder . '/' . now()->format('Y/m');
+        $absoluteDir = public_path($relativeDir);
+        File::ensureDirectoryExists($absoluteDir);
+
+        $fileName = $prefix . '-' . Str::random(10) . '.jpg';
+        $absolutePath = $absoluteDir . '/' . $fileName;
+        imagejpeg($canvas, $absolutePath, $quality);
+
+        imagedestroy($canvas);
+        imagedestroy($image);
+
+        return asset($relativeDir . '/' . $fileName);
     }
 }

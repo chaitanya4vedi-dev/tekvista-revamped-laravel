@@ -178,7 +178,12 @@ class SiteController extends Controller
 
         return view('pages.blog.show', [
             ...$this->pageData(),
-            ...$this->seo($post->meta_title ?: $post->title, $post->meta_description ?: $post->excerpt, $post->meta_keywords ?: $post->tags->pluck('name')->implode(', ')),
+            ...$this->seo(
+                $post->meta_title ?: $post->title,
+                $post->meta_description ?: $post->excerpt,
+                $post->meta_keywords ?: $post->tags->pluck('name')->implode(', '),
+                $post->hero ?: '/images/tekvista/meta-image-tekvista.png'
+            ),
             'post' => $post,
             'relatedPosts' => $relatedPosts,
         ]);
@@ -200,9 +205,14 @@ class SiteController extends Controller
         return redirect()->route('contact')->with('status', 'Thanks. Tekvista will review your inquiry and respond shortly.');
     }
 
-    private function seo(string $pageTitle, string $description, string $keywords = ''): array
+    private function seo(string $pageTitle, string $description, string $keywords = '', ?string $metaImage = null): array
     {
-        return ['title' => "Tekvista Infosolutions | {$pageTitle}", 'metaDescription' => $description, 'metaKeywords' => $keywords];
+        return [
+            'title' => "Tekvista Infosolutions | {$pageTitle}",
+            'metaDescription' => $description,
+            'metaKeywords' => $keywords,
+            'metaImage' => $metaImage,
+        ];
     }
 
     private function publishedPosts(): Collection

@@ -11,7 +11,7 @@
             <div class="mt-4 rounded-xl border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">{{ session('status') }}</div>
         @endif
 
-        <form method="POST" action="{{ route('profile.update') }}" class="mt-6 grid gap-4">
+        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 grid gap-4">
             @csrf
             @method('PATCH')
             <div class="grid gap-4 sm:grid-cols-2">
@@ -54,9 +54,21 @@
                     <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $user->linkedin_url) }}" class="input-field" maxlength="255">
                 </label>
             </div>
-            <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Avatar URL
-                <input type="url" name="avatar_url" value="{{ old('avatar_url', $user->avatar_url) }}" class="input-field" maxlength="500">
-            </label>
+            <div class="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-end">
+                <div class="flex items-center gap-3">
+                    <img src="{{ old('avatar_url', $user->avatar_url) ?: 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=0B5C52&color=fff&size=256' }}" alt="{{ $user->name }}" class="h-20 w-20 rounded-full border border-[var(--line)] object-cover">
+                    <span class="text-xs font-medium text-[var(--muted)]">Public author photo</span>
+                </div>
+                <div class="grid gap-3">
+                    <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Upload author image
+                        <input type="file" name="avatar_image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="input-field">
+                        <span class="text-xs font-medium text-[var(--muted)]">Auto-cropped to square and resized to 512x512.</span>
+                    </label>
+                    <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Or author image URL
+                        <input type="url" name="avatar_url" value="{{ old('avatar_url', $user->avatar_url) }}" class="input-field" maxlength="500">
+                    </label>
+                </div>
+            </div>
             <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Bio
                 <textarea name="bio" class="input-field" rows="4" maxlength="1500">{{ old('bio', $user->bio) }}</textarea>
             </label>
