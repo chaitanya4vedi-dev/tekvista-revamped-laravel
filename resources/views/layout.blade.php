@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @php
-        $defaultMetaImagePath = '/images/tekvista/meta-image-tekvista.png';
+        $defaultMetaImagePath = '/images/tekvista/meta-image-tekvista-og.jpg';
         $providedMetaImage = $metaImage ?? null;
         $manifestVersion = @filemtime(public_path('manifest.webmanifest')) ?: time();
         $serviceWorkerVersion = @filemtime(public_path('service-worker.js')) ?: time();
@@ -13,6 +13,8 @@
         $metaImageUrl = $providedMetaImage
             ? (\Illuminate\Support\Str::startsWith($providedMetaImage, ['http://', 'https://']) ? $providedMetaImage : request()->getSchemeAndHttpHost().$providedMetaImage)
             : request()->getSchemeAndHttpHost().$defaultMetaImagePath;
+        $metaImageExt = strtolower(pathinfo(parse_url($metaImageUrl, PHP_URL_PATH) ?? '', PATHINFO_EXTENSION));
+        $metaImageType = $metaImageExt === 'jpg' || $metaImageExt === 'jpeg' ? 'image/jpeg' : ($metaImageExt === 'webp' ? 'image/webp' : 'image/png');
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +40,9 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ $metaImageUrl }}">
     <meta property="og:image:secure_url" content="{{ $metaImageUrl }}">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="{{ $metaImageType }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Tekvista Infosolutions Private Limited enterprise IT services">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title ?? 'Tekvista Infosolutions | Enterprise Technology and Cloud Partner' }}">
