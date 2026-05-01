@@ -73,7 +73,7 @@ class ManagePostController extends Controller
             'meta_title' => $this->smartMetaTitle((string) ($validated['meta_title'] ?? ''), $validated['title']),
             'meta_description' => $this->smartMetaDescription((string) ($validated['meta_description'] ?? ''), $excerpt, $plainContent),
             'meta_keywords' => $this->smartMetaKeywords((string) ($validated['meta_keywords'] ?? ''), $validated['title'], (string) ($validated['categories_csv'] ?? ''), (string) ($validated['tags_csv'] ?? '')),
-            'read_time' => $validated['read_time'] ?: $this->estimateReadTime($plainContent),
+            'read_time' => !empty($validated['read_time']) ? (string) $validated['read_time'] : $this->estimateReadTime($plainContent),
             'published_on' => $validated['published_on'] ?? now()->toDateString(),
             'is_published' => (bool) ($validated['is_published'] ?? true),
         ]);
