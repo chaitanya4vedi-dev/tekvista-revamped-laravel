@@ -6,10 +6,10 @@
         $providedMetaImage = $metaImage ?? null;
         $manifestVersion = @filemtime(public_path('manifest.webmanifest')) ?: time();
         $serviceWorkerVersion = @filemtime(public_path('service-worker.js')) ?: time();
-        $faviconVersion = @filemtime(public_path('favicon.ico')) ?: time();
-        $iconSvgVersion = @filemtime(public_path('pwa/icon.svg')) ?: time();
-        $icon192Version = @filemtime(public_path('pwa/icon-192.png')) ?: time();
-        $wordmarkVersion = @filemtime(public_path('pwa/tekvista-wordmark.svg')) ?: time();
+        $faviconVersion = @filemtime(public_path('favicon-v2.ico')) ?: time();
+        $iconSvgVersion = @filemtime(public_path('pwa/icon-v2.svg')) ?: time();
+        $icon192Version = @filemtime(public_path('pwa/icon-192-v2.png')) ?: time();
+        $wordmarkVersion = @filemtime(public_path('pwa/tekvista-wordmark-v2.svg')) ?: time();
         $metaImageUrl = $providedMetaImage
             ? (\Illuminate\Support\Str::startsWith($providedMetaImage, ['http://', 'https://']) ? $providedMetaImage : request()->getSchemeAndHttpHost().$providedMetaImage)
             : request()->getSchemeAndHttpHost().$defaultMetaImagePath;
@@ -24,11 +24,11 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="manifest" href="/manifest.webmanifest?v={{ $manifestVersion }}">
-    <link rel="icon" href="/favicon.ico?v={{ $faviconVersion }}" sizes="any">
-    <link rel="icon" href="/pwa/icon.svg?v={{ $iconSvgVersion }}" type="image/svg+xml">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v={{ $faviconVersion }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v={{ $faviconVersion }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png?v={{ $icon192Version }}">
+    <link rel="icon" href="/favicon-v2.ico?v={{ $faviconVersion }}" sizes="any">
+    <link rel="icon" href="/pwa/icon-v2.svg?v={{ $iconSvgVersion }}" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-v2.png?v={{ $faviconVersion }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-v2.png?v={{ $faviconVersion }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon-v2.png?v={{ $icon192Version }}">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
@@ -121,7 +121,7 @@
     <header class="app-header sticky top-0 z-50">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-6 lg:px-8">
             <a href="{{ route('home') }}" class="mobile-brand flex min-w-0 items-center gap-2.5">
-                <img src="{{ asset('pwa/tekvista-wordmark.svg') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
+                <img src="{{ asset('pwa/tekvista-wordmark-v2.svg') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
             </a>
 
             <nav class="hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">

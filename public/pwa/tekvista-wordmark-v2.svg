@@ -1,0 +1,14 @@
+<svg width="900" height="180" viewBox="0 0 900 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tv-bg" x1="90" y1="0" x2="90" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061A2B"/>
+      <stop offset="1" stop-color="#0B5C52"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="164" height="164" rx="38" fill="url(#tv-bg)"/>
+  <path d="M90 45L128 83L90 121L52 83L90 45Z" fill="#0E7763" fill-opacity="0.9"/>
+  <rect x="38" y="52" width="104" height="16" rx="8" fill="#24D6B0"/>
+  <rect x="81" y="52" width="18" height="86" rx="9" fill="#EFFFFC"/>
+  <text x="196" y="88" font-family="Poppins, Arial, sans-serif" font-size="58" font-weight="800" fill="#072A33">TekVista</text>
+  <text x="198" y="128" font-family="DM Sans, Arial, sans-serif" font-size="25" font-weight="600" fill="#0D6A5E" letter-spacing="1.8">INFOSOLUTIONS PVT LTD</text>
+</svg>

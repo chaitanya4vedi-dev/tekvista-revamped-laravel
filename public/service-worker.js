@@ -1,18 +1,18 @@
-const CACHE_NAME = 'tekvista-pwa-v5';
+const CACHE_NAME = 'tekvista-pwa-v6';
 
 const CORE_ASSETS = [
   '/',
   '/offline.html',
   '/manifest.webmanifest',
-  '/pwa/icon.svg',
-  '/pwa/icon-192.png',
-  '/pwa/icon-512.png',
-  '/pwa/maskable-512.png',
-  '/pwa/apple-touch-icon.png',
-  '/favicon.ico',
-  '/favicon-32x32.png',
-  '/favicon-16x16.png',
-  '/pwa/tekvista-wordmark.svg'
+  '/pwa/icon-v2.svg',
+  '/pwa/icon-192-v2.png',
+  '/pwa/icon-512-v2.png',
+  '/pwa/maskable-512-v2.png',
+  '/pwa/apple-touch-icon-v2.png',
+  '/favicon-v2.ico',
+  '/favicon-32x32-v2.png',
+  '/favicon-16x16-v2.png',
+  '/pwa/tekvista-wordmark-v2.svg'
 ];
 
 self.addEventListener('install', (event) => {
