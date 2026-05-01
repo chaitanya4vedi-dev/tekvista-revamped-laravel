@@ -15,6 +15,9 @@
             <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Email
                 <input type="email" name="email" value="{{ old('email') }}" required class="input-field">
             </label>
+            <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Username
+                <input type="text" name="username" value="{{ old('username') }}" required class="input-field" minlength="3" maxlength="60" placeholder="author_handle">
+            </label>
             <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Password
                 <input type="password" name="password" required class="input-field" minlength="8">
             </label>

@@ -58,7 +58,7 @@
 @layer components {
     .app-header { border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface-strong) 88%, transparent); backdrop-filter: blur(18px); }
     .brand-mark { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--ink); box-shadow: var(--glow); }
-    .nav-link { border: 1px solid transparent; border-radius: .7rem; color: color-mix(in srgb, var(--text) 84%, transparent); padding: .55rem .8rem; transition: 180ms; }
+    .nav-link { display: inline-flex; align-items: center; white-space: nowrap; line-height: 1.1; border: 1px solid transparent; border-radius: .7rem; color: color-mix(in srgb, var(--text) 84%, transparent); padding: .55rem .8rem; transition: 180ms; }
     .nav-link:hover, .nav-link-active { border-color: var(--line); background: var(--surface-light); color: var(--accent); }
 
     .neo-card {
@@ -115,5 +115,21 @@
         .mobile-brand img { height: 2rem; }
         .mobile-brand p { font-size: .78rem; }
         .nav-link { padding: .62rem .72rem; }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1399px) {
+        .app-header .nav-link {
+            font-size: .81rem;
+            padding: .48rem .58rem;
+        }
+        .app-header .nav-link i.bi {
+            font-size: .8rem;
+            margin-right: .25rem !important;
+        }
+        .app-header .btn-secondary,
+        .app-header .btn-primary {
+            font-size: .78rem;
+            padding: .6rem .8rem;
+        }
     }
 }

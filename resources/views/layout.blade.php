@@ -72,26 +72,30 @@
         $whatsAppEnterpriseText = rawurlencode('Hello Tekvista Team, we need enterprise IT consultation for our organization. Please reply in English.');
         $whatsAppUrl = "https://wa.me/919051433313?text={$whatsAppEnterpriseText}";
         $navItems = [
-            ['label' => 'Home', 'icon' => 'bi-house-fill', 'route' => 'home'],
-            ['label' => 'About', 'icon' => 'bi-building-fill', 'route' => 'about'],
-            ['label' => 'CSR', 'icon' => 'bi-heart-fill', 'route' => 'csr'],
+            ['label' => 'Home', 'route' => 'home'],
+            ['label' => 'About', 'route' => 'about'],
+            ['label' => 'CSR', 'route' => 'csr'],
             [
                 'label' => 'Services',
-                'icon' => 'bi-grid-1x2-fill',
                 'route' => 'services',
                 'children' => [
+                    ['label' => 'IT Consultancy', 'route' => 'it-consultancy'],
                     ['label' => 'Cybersecurity', 'route' => 'cybersecurity'],
                     ['label' => 'Cloud Solutions', 'route' => 'cloud'],
                     ['label' => 'Tally on Cloud', 'route' => 'tally-on-cloud'],
+                    ['label' => 'IT Support', 'route' => 'it-support'],
+                    ['label' => 'Software Solutions', 'route' => 'software-solutions'],
                     ['label' => 'Networking', 'route' => 'networking'],
                     ['label' => 'AV Solutions', 'route' => 'av-solutions'],
                     ['label' => 'Zoho Solutions', 'route' => 'zoho'],
                     ['label' => 'Odoo Solutions', 'route' => 'odoo'],
                     ['label' => 'Mailing Solutions', 'route' => 'mailing'],
+                    ['label' => 'Systems & Infra', 'route' => 'infrastructure'],
+                    ['label' => 'AI Integration', 'route' => 'ai-integration'],
                 ]
             ],
-            ['label' => 'Blog', 'icon' => 'bi-journal-richtext', 'route' => 'blog.index'],
-            ['label' => 'Contact', 'icon' => 'bi-envelope-check-fill', 'route' => 'contact'],
+            ['label' => 'Blog', 'route' => 'blog.index'],
+            ['label' => 'Contact', 'route' => 'contact'],
         ];
     @endphp
 
@@ -101,12 +105,12 @@
                 <img src="{{ asset('pwa/tekvista-wordmark.svg') }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
             </a>
 
-            <nav class="hidden items-center gap-1 text-sm font-semibold lg:flex">
+            <nav class="hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">
                 @foreach ($navItems as $item)
                     @if (isset($item['children']))
                         <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                             <a href="{{ route($item['route']) }}" class="nav-link flex items-center gap-2 {{ request()->routeIs($item['route'].'*') ? 'nav-link-active' : '' }}">
-                                <i class="bi {{ $item['icon'] }}"></i>{{ $item['label'] }}
+                                {{ $item['label'] }}
                                 <i class="bi bi-chevron-down text-xs"></i>
                             </a>
                             <div x-show="open" x-transition.opacity class="absolute left-0 top-full mt-1 w-60 rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] py-2 shadow-xl backdrop-blur-md" style="display:none;">
@@ -116,14 +120,15 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route($item['route']) }}" class="nav-link {{ request()->routeIs($item['route']) ? 'nav-link-active' : '' }}"><i class="bi {{ $item['icon'] }} mr-1"></i>{{ $item['label'] }}</a>
+                        <a href="{{ route($item['route']) }}" class="nav-link {{ request()->routeIs($item['route']) ? 'nav-link-active' : '' }}">{{ $item['label'] }}</a>
                     @endif
                 @endforeach
             </nav>
 
-            <div class="hidden items-center gap-2 lg:flex">
+            <div class="hidden shrink-0 items-center gap-2 lg:flex">
             @auth
                 <a href="{{ route('blog.manage.index') }}" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-pencil-square"></i>Write</a>
+                <a href="{{ route('profile.edit') }}" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-person-gear"></i>Profile</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-box-arrow-right"></i>Logout</button>
@@ -145,10 +150,11 @@
         <div id="mobile-menu" class="hidden border-t border-[var(--line)] bg-[var(--surface-strong)] px-3 py-3 lg:hidden">
             <div class="mobile-menu-scroll mx-auto grid gap-1 text-sm font-semibold">
                 @foreach ($navItems as $item)
-                    <a href="{{ route($item['route']) }}" class="nav-link"><i class="bi {{ $item['icon'] }} mr-2"></i>{{ $item['label'] }}</a>
+                    <a href="{{ route($item['route']) }}" class="nav-link">{{ $item['label'] }}</a>
                 @endforeach
                 @auth
                     <a href="{{ route('blog.manage.index') }}" class="nav-link"><i class="bi bi-pencil-square mr-2"></i>Write Blog</a>
+                    <a href="{{ route('profile.edit') }}" class="nav-link"><i class="bi bi-person-gear mr-2"></i>Edit Profile</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-link w-full text-left"><i class="bi bi-box-arrow-right mr-2"></i>Logout</button>

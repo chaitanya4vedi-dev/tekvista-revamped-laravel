@@ -40,18 +40,22 @@
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         @php
             $serviceIcons = [
+                'IT Consultancy' => 'bi-briefcase-fill',
                 'Cybersecurity' => 'bi-shield-lock-fill',
                 'Cloud Solutions' => 'bi-cloud-check-fill',
                 'Tally on Cloud' => 'bi-calculator-fill',
                 'Networking Solutions' => 'bi-hdd-network-fill',
+                'IT Support' => 'bi-headset',
+                'Software Solutions' => 'bi-code-slash',
                 'AV Solutions' => 'bi-camera-video-fill',
                 'Zoho Solutions' => 'bi-diagram-3-fill',
                 'Odoo Solutions' => 'bi-kanban-fill',
                 'Mailing Solutions' => 'bi-envelope-at-fill',
+                'AI Integration' => 'bi-cpu-fill',
+                'Systems & Infra' => 'bi-server',
             ];
         @endphp
         @foreach ($services as $service)
-            @continue($service['name'] === 'Systems & Infra')
             <a href="{{ route($service['route']) }}" class="neo-card p-5 hover:border-[var(--accent)] transition-colors">
                 <h3 class="text-xl font-black text-[var(--text)]"><i class="bi {{ $serviceIcons[$service['name']] ?? 'bi-stars' }} text-[var(--accent)] mr-2"></i>{{ $service['name'] }}</h3>
                 <p class="mt-2 text-sm font-semibold text-[var(--text)]">{{ $service['tagline'] }}</p>

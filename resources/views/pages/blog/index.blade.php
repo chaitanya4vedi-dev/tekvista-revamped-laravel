@@ -41,9 +41,18 @@
                 <article class="neo-card group">
                     <img src="{{ $post->hero ?: 'https://images.pexels.com/photos/7414033/pexels-photo-7414033.jpeg?auto=compress&cs=tinysrgb&w=1400' }}" alt="{{ $post->title }}" class="h-64 w-full object-cover transition duration-300 group-hover:scale-105">
                     <div class="p-6">
-                        <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }} / {{ optional($post->published_on)->format('F d, Y') }}</p>
+                        <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }} / {{ optional($post->published_on)->timezone('Asia/Kolkata')->format('F d, Y') }}</p>
                         <h2 class="mt-3 text-2xl font-black leading-8 text-[var(--text)]">{{ $post->title }}</h2>
                         <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ $post->excerpt }}</p>
+                        <div class="mt-3 rounded-xl border border-[var(--line)] bg-[var(--surface-light)] px-3 py-2 text-xs text-[var(--muted)]">
+                            By <span class="font-semibold text-[var(--text)]">{{ $post->author?->name ?? 'Tekvista Team' }}</span>
+                            @if($post->author?->job_title)
+                                ({{ $post->author->job_title }})
+                            @endif
+                            @if($post->author?->username)
+                                · @{{ $post->author->username }}
+                            @endif
+                        </div>
                         <div class="mt-3 flex flex-wrap gap-2">
                             @foreach ($post->tags as $tag)
                                 <a href="{{ route('blog.index', ['tag' => \Illuminate\Support\Str::slug($tag->name)]) }}" class="rounded-full border border-[var(--line)] px-2.5 py-1 text-xs font-semibold text-[var(--muted)]">#{{ $tag->name }}</a>

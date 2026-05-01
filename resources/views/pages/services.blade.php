@@ -15,25 +15,44 @@
 <section class="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
     @php
         $serviceIcons = [
+            'IT Consultancy' => 'bi-briefcase-fill',
             'Cybersecurity' => 'bi-shield-lock-fill',
             'Cloud Solutions' => 'bi-cloud-check-fill',
             'Tally on Cloud' => 'bi-calculator-fill',
             'Networking Solutions' => 'bi-hdd-network-fill',
+            'IT Support' => 'bi-headset',
+            'Software Solutions' => 'bi-code-slash',
             'AV Solutions' => 'bi-camera-video-fill',
             'Zoho Solutions' => 'bi-diagram-3-fill',
             'Odoo Solutions' => 'bi-kanban-fill',
             'Mailing Solutions' => 'bi-envelope-at-fill',
+            'AI Integration' => 'bi-cpu-fill',
+            'Systems & Infra' => 'bi-server',
         ];
     @endphp
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         @foreach ($services as $service)
-            @continue($service['name'] === 'Systems & Infra')
             <a href="{{ route($service['route']) }}" class="neo-card p-5 group hover:border-[var(--accent)] transition-colors">
                 <h2 class="text-xl font-black text-[var(--text)]"><i class="bi {{ $serviceIcons[$service['name']] ?? 'bi-stars' }} text-[var(--accent)] mr-2"></i>{{ $service['name'] }}</h2>
                 <p class="mt-2 text-sm font-semibold text-[var(--text)]">{{ $service['tagline'] }}</p>
                 <p class="mt-4 text-sm leading-7 text-[var(--muted)]">{{ $service['summary'] }}</p>
             </a>
         @endforeach
+    </div>
+</section>
+
+<section class="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="neo-card p-6 sm:p-8">
+        <p class="section-kicker">Operating Domains</p>
+        <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Enterprise work areas we actively deliver</h2>
+        <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-diagram-2-fill mr-2 text-[var(--accent)]"></i>Technology consulting and architecture planning</div>
+            <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-shield-check mr-2 text-[var(--accent)]"></i>Cybersecurity posture and controls implementation</div>
+            <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-cloud-arrow-up-fill mr-2 text-[var(--accent)]"></i>Cloud modernization, migration, and governance</div>
+            <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-hdd-network-fill mr-2 text-[var(--accent)]"></i>Networking, infrastructure, and operations support</div>
+            <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-window-stack mr-2 text-[var(--accent)]"></i>Custom software solutions and enterprise workflows</div>
+            <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-cpu-fill mr-2 text-[var(--accent)]"></i>AI integration for productivity and process automation</div>
+        </div>
     </div>
 </section>
 

@@ -12,6 +12,14 @@
 </section>
 
 <section class="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
+    @php
+        $process = [
+            ['step' => '01', 'title' => 'Assess', 'copy' => 'Baseline review of current infrastructure, dependencies, risks, and business continuity requirements.'],
+            ['step' => '02', 'title' => 'Architect', 'copy' => 'Design secure network, compute, storage, and cloud topology aligned to performance and resilience targets.'],
+            ['step' => '03', 'title' => 'Operate', 'copy' => 'Implement monitoring, patching, backup, and governance controls for stable day-to-day enterprise operations.'],
+            ['step' => '04', 'title' => 'Optimize', 'copy' => 'Continuously tune capacity, reliability, and cost posture with measurable operational improvements.'],
+        ];
+    @endphp
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         @foreach ($process as $item)
             <article class="neo-card p-5">
@@ -29,7 +37,7 @@
             <p class="section-kicker">Infra signal matrix</p>
             <div class="mt-5 grid gap-3 sm:grid-cols-2">
                 @foreach (['Firewall and VPN', 'Structured LAN and WAN', 'Cloud backup', 'Server virtualization', 'Endpoint monitoring', 'DR readiness', 'Storage lifecycle', 'Patch governance'] as $signal)
-                    <div class="rounded-lg border border-[var(--line)] bg-[var(--surface-light)] px-4 py-3 text-sm font-semibold text-[var(--muted-strong)]">{{ $signal }}</div>
+                    <div class="rounded-lg border border-[var(--line)] bg-[var(--surface-light)] px-4 py-3 text-sm font-semibold text-[var(--muted)]">{{ $signal }}</div>
                 @endforeach
             </div>
         </div>

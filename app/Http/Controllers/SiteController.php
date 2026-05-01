@@ -49,6 +49,26 @@ class SiteController extends Controller
         ]);
     }
 
+    public function itConsultancy(): View
+    {
+        return view('pages.services.it-consultancy', [...$this->pageData(), ...$this->seo('IT Consultancy', 'Enterprise IT consulting for strategy, architecture, optimization, and modernization roadmaps.', 'it consultancy kolkata, enterprise IT consulting, technology roadmap, IT strategy')]);
+    }
+
+    public function itSupport(): View
+    {
+        return view('pages.services.it-support', [...$this->pageData(), ...$this->seo('IT Support', 'SLA-oriented IT support services covering proactive monitoring, incident response, and lifecycle support.', 'managed IT support, IT operations support, SLA support services, enterprise helpdesk')]);
+    }
+
+    public function softwareSolutions(): View
+    {
+        return view('pages.services.software-solutions', [...$this->pageData(), ...$this->seo('Software Solutions', 'Custom software development and system integration services for enterprise business outcomes.', 'software solutions kolkata, custom software development, enterprise workflow automation')]);
+    }
+
+    public function aiIntegration(): View
+    {
+        return view('pages.services.ai-integration', [...$this->pageData(), ...$this->seo('AI Integration', 'Applied AI integration services to improve business workflows, decisioning, and productivity.', 'AI integration services, enterprise AI workflows, business process automation')]);
+    }
+
     public function cybersecurity(): View
     {
         return view('pages.services.cybersecurity', [...$this->pageData(), ...$this->seo('Cybersecurity', 'Enterprise-grade cybersecurity solutions protecting your assets and data.', 'cybersecurity services, SOC, MDR, zero trust, endpoint security')]);
@@ -112,7 +132,7 @@ class SiteController extends Controller
         $query = trim((string) $request->query('q', ''));
 
         $posts = Post::query()
-            ->with(['categories', 'tags'])
+            ->with(['categories', 'tags', 'author'])
             ->where('is_published', true)
             ->when($query !== '', fn ($q) => $q->where(function ($inner) use ($query) {
                 $inner->where('title', 'like', "%{$query}%")
@@ -142,7 +162,7 @@ class SiteController extends Controller
 
     public function blogShow(string $slug): View
     {
-        $post = Post::query()->with(['categories', 'tags'])->where('slug', $slug)->where('is_published', true)->firstOrFail();
+        $post = Post::query()->with(['categories', 'tags', 'author'])->where('slug', $slug)->where('is_published', true)->firstOrFail();
 
         $relatedPosts = Post::query()
             ->with(['categories', 'tags'])
@@ -199,22 +219,26 @@ class SiteController extends Controller
     private function pageData(): array
     {
         $services = [
+            ['name' => 'IT Consultancy', 'route' => 'it-consultancy', 'tagline' => 'Strategic Technology Advisory.', 'summary' => 'Advisory for architecture, procurement, modernization roadmaps, and enterprise technology governance.'],
             ['name' => 'Cybersecurity', 'route' => 'cybersecurity', 'tagline' => 'Enterprise-Grade Security Architecture.', 'summary' => 'Protecting your digital assets with advanced endpoint security, zero-trust frameworks, and continuous threat monitoring.'],
             ['name' => 'Cloud Solutions', 'route' => 'cloud', 'tagline' => 'Resilient Cloud Architectures.', 'summary' => 'Scalable infrastructure designed for performance, rapid deployment, and optimized operational costs.'],
             ['name' => 'Tally on Cloud', 'route' => 'tally-on-cloud', 'tagline' => 'Uninterrupted Financial Workflows.', 'summary' => 'Host your mission-critical Tally ERP on secure, high-availability cloud infrastructure.'],
             ['name' => 'Networking Solutions', 'route' => 'networking', 'tagline' => 'High-Performance Connectivity.', 'summary' => 'Enterprise networking designs ensuring stable performance, observability, and controlled growth.'],
+            ['name' => 'IT Support', 'route' => 'it-support', 'tagline' => 'Business-Continuity IT Operations.', 'summary' => 'SLA-aligned support operations, proactive monitoring, and issue resolution for critical workloads.'],
+            ['name' => 'Software Solutions', 'route' => 'software-solutions', 'tagline' => 'Custom Application Engineering.', 'summary' => 'Business software, workflow tools, and integrations designed around operational requirements.'],
             ['name' => 'AV Solutions', 'route' => 'av-solutions', 'tagline' => 'Immersive Collaboration Experiences.', 'summary' => 'Boardroom AV, video conferencing, digital signage, and control systems integrated for enterprise communication.'],
             ['name' => 'Zoho Solutions', 'route' => 'zoho', 'tagline' => 'Streamlined Business Operations.', 'summary' => 'Comprehensive integration, customization, and support for the full suite of Zoho applications.'],
             ['name' => 'Odoo Solutions', 'route' => 'odoo', 'tagline' => 'Enterprise Resource Planning.', 'summary' => 'End-to-end implementation of Odoo ERP, centralizing finance, inventory, manufacturing, and sales into one platform.'],
             ['name' => 'Mailing Solutions', 'route' => 'mailing', 'tagline' => 'Secure Enterprise Communication.', 'summary' => 'Implementing and managing industry-leading mailing platforms, including Microsoft 365, Google Workspace, and Zoho Mail.'],
             ['name' => 'Systems & Infra', 'route' => 'infrastructure', 'tagline' => 'Scalable backbone for modern teams', 'summary' => 'Servers, storage, virtualization, data-center planning, monitoring and resilient architecture for enterprise workloads.'],
+            ['name' => 'AI Integration', 'route' => 'ai-integration', 'tagline' => 'Applied AI for Enterprise Teams.', 'summary' => 'Integrating AI-enabled workflows to improve productivity, decision support, and process automation.'],
         ];
 
         return [
             'visuals' => [
-                'hero' => 'https://images.pexels.com/photos/7414033/pexels-photo-7414033.jpeg?auto=compress&cs=tinysrgb&w=1800',
+                'hero' => asset('images/tekvista/server-room.png'),
                 'strategy' => 'https://images.pexels.com/photos/6913224/pexels-photo-6913224.jpeg?auto=compress&cs=tinysrgb&w=1400',
-                'workspace' => 'https://images.pexels.com/photos/6774146/pexels-photo-6774146.jpeg?auto=compress&cs=tinysrgb&w=1400',
+                'workspace' => asset('images/tekvista/Hero_Image.png'),
                 'engineering' => 'https://images.pexels.com/photos/3867849/pexels-photo-3867849.jpeg?auto=compress&cs=tinysrgb&w=1400',
                 'support' => 'https://images.pexels.com/photos/6774939/pexels-photo-6774939.jpeg?auto=compress&cs=tinysrgb&w=1400',
                 'ops' => 'https://images.pexels.com/photos/5990030/pexels-photo-5990030.jpeg?auto=compress&cs=tinysrgb&w=1400',

@@ -3,11 +3,16 @@
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Blog\ManagePostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/services', [SiteController::class, 'services'])->name('services');
+Route::get('/it-consultancy', [SiteController::class, 'itConsultancy'])->name('it-consultancy');
+Route::get('/it-support', [SiteController::class, 'itSupport'])->name('it-support');
+Route::get('/software-solutions', [SiteController::class, 'softwareSolutions'])->name('software-solutions');
+Route::get('/ai-integration', [SiteController::class, 'aiIntegration'])->name('ai-integration');
 Route::get('/cybersecurity', [SiteController::class, 'cybersecurity'])->name('cybersecurity');
 Route::get('/cloud', [SiteController::class, 'cloud'])->name('cloud');
 Route::get('/tally-on-cloud', [SiteController::class, 'tallyOnCloud'])->name('tally-on-cloud');
@@ -22,15 +27,20 @@ Route::get('/contact', [SiteController::class, 'contactPage'])->name('contact');
 Route::get('/blog', [SiteController::class, 'blogIndex'])->name('blog.index');
 Route::get('/blog/{slug}', [SiteController::class, 'blogShow'])->name('blog.show');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10,1')->name('login.submit');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:6,1')->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->prefix('dashboard/blog')->name('blog.manage.')->group(function (): void {
     Route::get('/', [ManagePostController::class, 'index'])->name('index');
     Route::get('/create', [ManagePostController::class, 'create'])->name('create');
     Route::post('/create', [ManagePostController::class, 'store'])->name('store');
+});
+
+Route::middleware('auth')->prefix('dashboard/profile')->name('profile.')->group(function (): void {
+    Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+    Route::patch('/', [ProfileController::class, 'update'])->name('update');
 });
 
 Route::post('/contact', [SiteController::class, 'contact'])
@@ -75,9 +85,9 @@ foreach ([
     'cybersecurity.html' => '/cybersecurity',
     'systems.html' => '/infrastructure',
     'av.html' => '/av-solutions',
-    'consultancy.html' => '/services',
+    'consultancy.html' => '/it-consultancy',
     'networking.html' => '/networking',
-    'support.html' => '/services',
+    'support.html' => '/it-support',
 ] as $from => $to) {
     Route::redirect('/'.$from, $to, 301);
 }
