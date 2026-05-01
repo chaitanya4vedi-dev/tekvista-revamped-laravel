@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tekvista-pwa-v4';
+const CACHE_NAME = 'tekvista-pwa-v5';
 
 const CORE_ASSETS = [
   '/',

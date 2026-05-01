@@ -4,6 +4,12 @@
     @php
         $defaultMetaImagePath = '/images/tekvista/meta-image-tekvista.png';
         $providedMetaImage = $metaImage ?? null;
+        $manifestVersion = @filemtime(public_path('manifest.webmanifest')) ?: time();
+        $serviceWorkerVersion = @filemtime(public_path('service-worker.js')) ?: time();
+        $faviconVersion = @filemtime(public_path('favicon.ico')) ?: time();
+        $iconSvgVersion = @filemtime(public_path('pwa/icon.svg')) ?: time();
+        $icon192Version = @filemtime(public_path('pwa/icon-192.png')) ?: time();
+        $wordmarkVersion = @filemtime(public_path('pwa/tekvista-wordmark.svg')) ?: time();
         $metaImageUrl = $providedMetaImage
             ? (\Illuminate\Support\Str::startsWith($providedMetaImage, ['http://', 'https://']) ? $providedMetaImage : request()->getSchemeAndHttpHost().$providedMetaImage)
             : request()->getSchemeAndHttpHost().$defaultMetaImagePath;
@@ -17,12 +23,12 @@
     <meta name="author" content="Tekvista Infosolutions Private Limited">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/pwa/icon.svg" type="image/svg+xml">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest?v={{ $manifestVersion }}">
+    <link rel="icon" href="/favicon.ico?v={{ $faviconVersion }}" sizes="any">
+    <link rel="icon" href="/pwa/icon.svg?v={{ $iconSvgVersion }}" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v={{ $faviconVersion }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v={{ $faviconVersion }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png?v={{ $icon192Version }}">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
@@ -72,6 +78,13 @@
 
     <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v={{ @filemtime(public_path('assets/app.css')) ?: time() }}">
     <script defer src="{{ asset('assets/app.js') }}?v={{ @filemtime(public_path('assets/app.js')) ?: time() }}"></script>
+    <script>
+        if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/service-worker.js?v={{ $serviceWorkerVersion }}').catch(function () {});
+            });
+        }
+    </script>
 </head>
 <body class="antialiased">
     @php
@@ -108,7 +121,7 @@
     <header class="app-header sticky top-0 z-50">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-6 lg:px-8">
             <a href="{{ route('home') }}" class="mobile-brand flex min-w-0 items-center gap-2.5">
-                <img src="{{ asset('pwa/tekvista-wordmark.svg') }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
+                <img src="{{ asset('pwa/tekvista-wordmark.svg') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
             </a>
 
             <nav class="hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">
