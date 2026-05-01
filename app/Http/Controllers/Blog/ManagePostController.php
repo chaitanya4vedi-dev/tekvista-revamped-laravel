@@ -6,16 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ManagePostController extends Controller
 {
+    private const PUBLISH_TZ = 'Asia/Kolkata';
+
     public function index(): View
     {
         $posts = Post::query()
@@ -32,18 +36,60 @@ class ManagePostController extends Controller
 
     public function create(): View
     {
-        return view('pages.blog.manage.create', [
+        return view('pages.blog.manage.form', [
             'title' => 'Tekvista | Write Blog',
-            'categories' => Category::query()->orderBy('name')->get(),
-            'tags' => Tag::query()->orderBy('name')->get(),
+            'mode' => 'create',
+            'post' => null,
         ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
+        $validated = $this->validatePostRequest($request);
+        $post = new Post(['user_id' => Auth::id()]);
+        $this->savePost($post, $request, $validated);
+
+        return redirect()->route('blog.manage.index')->with('status', 'Blog post saved successfully.');
+    }
+
+    public function edit(int $postId): View
+    {
+        $post = Post::query()
+            ->with(['categories', 'tags'])
+            ->where('user_id', Auth::id())
+            ->findOrFail($postId);
+
+        return view('pages.blog.manage.form', [
+            'title' => 'Tekvista | Edit Blog',
+            'mode' => 'edit',
+            'post' => $post,
+        ]);
+    }
+
+    public function update(Request $request, int $postId): RedirectResponse
+    {
+        $post = Post::query()
+            ->where('user_id', Auth::id())
+            ->findOrFail($postId);
+
+        $validated = $this->validatePostRequest($request, $post);
+        $this->savePost($post, $request, $validated);
+
+        return redirect()->route('blog.manage.index')->with('status', 'Blog post updated successfully.');
+    }
+
+    private function validatePostRequest(Request $request, ?Post $post = null): array
+    {
+        $slugRule = ['nullable', 'string', 'max:190', 'regex:/^[a-z0-9-]+$/'];
+        $slugUnique = Rule::unique('posts', 'slug');
+        if ($post !== null) {
+            $slugUnique = $slugUnique->ignore($post->id);
+        }
+        $slugRule[] = $slugUnique;
+
+        return $request->validate([
             'title' => ['required', 'string', 'max:180'],
-            'slug' => ['nullable', 'string', 'max:190', 'regex:/^[a-z0-9-]+$/', 'unique:posts,slug'],
+            'slug' => $slugRule,
             'excerpt' => ['nullable', 'string', 'max:320'],
             'content' => ['required', 'string', 'min:120'],
             'hero' => ['nullable', 'url:http,https', 'max:500'],
@@ -52,19 +98,22 @@ class ManagePostController extends Controller
             'meta_description' => ['nullable', 'string', 'max:320'],
             'meta_keywords' => ['nullable', 'string', 'max:320'],
             'read_time' => ['nullable', 'string', 'max:40'],
-            'published_on' => ['nullable', 'date'],
-            'is_published' => ['nullable', 'boolean'],
+            'publish_mode' => ['required', Rule::in(['draft', 'publish', 'schedule'])],
+            'publish_at' => ['nullable', 'date_format:Y-m-d\TH:i'],
             'categories_csv' => ['required', 'string', 'max:320'],
             'tags_csv' => ['nullable', 'string', 'max:320'],
         ]);
+    }
 
-        $slug = $this->generateUniqueSlug($validated['title'], $validated['slug'] ?? null);
+    private function savePost(Post $post, Request $request, array $validated): void
+    {
+        $slug = $this->generateUniqueSlug($validated['title'], $validated['slug'] ?? null, $post->id ?: null);
         $plainContent = $this->plainText($validated['content']);
         $excerpt = $this->smartExcerpt($validated['excerpt'] ?? '', $plainContent, $validated['title']);
-        $hero = $this->resolveHeroImage($request, (string) ($validated['hero'] ?? ''));
+        $hero = $this->resolveHeroImage($request, (string) ($validated['hero'] ?? ''), $post->hero);
+        [$isPublished, $publishedAtUtc] = $this->resolvePublishingState((string) $validated['publish_mode'], (string) ($validated['publish_at'] ?? ''));
 
-        $post = Post::create([
-            'user_id' => Auth::id(),
+        $post->fill([
             'title' => $validated['title'],
             'slug' => $slug,
             'excerpt' => $excerpt,
@@ -74,41 +123,59 @@ class ManagePostController extends Controller
             'meta_description' => $this->smartMetaDescription((string) ($validated['meta_description'] ?? ''), $excerpt, $plainContent),
             'meta_keywords' => $this->smartMetaKeywords((string) ($validated['meta_keywords'] ?? ''), $validated['title'], (string) ($validated['categories_csv'] ?? ''), (string) ($validated['tags_csv'] ?? '')),
             'read_time' => !empty($validated['read_time']) ? (string) $validated['read_time'] : $this->estimateReadTime($plainContent),
-            'published_on' => $validated['published_on'] ?? now()->toDateString(),
-            'is_published' => (bool) ($validated['is_published'] ?? true),
+            'published_at' => $publishedAtUtc,
+            'published_on' => $publishedAtUtc?->clone()->timezone(self::PUBLISH_TZ)->toDateString(),
+            'is_published' => $isPublished,
         ]);
+
+        $post->save();
 
         $categoryIds = collect(explode(',', $validated['categories_csv']))
             ->map(fn ($name) => trim((string) $name))
             ->filter()
             ->map(function (string $name): int {
-            $category = Category::firstOrCreate(
-                ['slug' => Str::slug($name)],
-                ['name' => $name, 'description' => null]
-            );
+                $category = Category::firstOrCreate(
+                    ['slug' => Str::slug($name)],
+                    ['name' => $name, 'description' => null]
+                );
 
-            return $category->id;
-        })->all();
+                return $category->id;
+            })->all();
 
         $tagIds = collect(explode(',', (string) ($validated['tags_csv'] ?? '')))
             ->map(fn ($name) => trim((string) $name))
             ->filter()
             ->map(function (string $name): int {
-            $tag = Tag::firstOrCreate(
-                ['slug' => Str::slug($name)],
-                ['name' => $name]
-            );
+                $tag = Tag::firstOrCreate(
+                    ['slug' => Str::slug($name)],
+                    ['name' => $name]
+                );
 
-            return $tag->id;
-        })->all();
+                return $tag->id;
+            })->all();
 
         $post->categories()->sync($categoryIds);
         $post->tags()->sync($tagIds);
-
-        return redirect()->route('blog.manage.index')->with('status', 'Blog post published successfully.');
     }
 
-    private function generateUniqueSlug(string $title, ?string $providedSlug = null): string
+    private function resolvePublishingState(string $mode, string $publishAtInput): array
+    {
+        if ($mode === 'draft') {
+            return [false, null];
+        }
+
+        if ($mode === 'schedule') {
+            $publishAtIst = $publishAtInput !== ''
+                ? Carbon::createFromFormat('Y-m-d\TH:i', $publishAtInput, self::PUBLISH_TZ)
+                : Carbon::now(self::PUBLISH_TZ)->addHour();
+
+            return [true, $publishAtIst->clone()->utc()];
+        }
+
+        return [true, Carbon::now(self::PUBLISH_TZ)->utc()];
+    }
+
+    private function generateUniqueSlug(string $title, ?string $providedSlug = null, ?int $ignoreId = null): string
     {
         $base = Str::slug($providedSlug ?: $title);
         if ($base === '') {
@@ -117,7 +184,7 @@ class ManagePostController extends Controller
 
         $slug = $base;
         $counter = 1;
-        while (Post::query()->where('slug', $slug)->exists()) {
+        while (Post::query()->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))->where('slug', $slug)->exists()) {
             $counter++;
             $slug = $base . '-' . $counter;
         }
@@ -184,7 +251,7 @@ class ManagePostController extends Controller
         return $minutes . ' min read';
     }
 
-    private function resolveHeroImage(Request $request, string $heroUrl): ?string
+    private function resolveHeroImage(Request $request, string $heroUrl, ?string $existingHero = null): ?string
     {
         if ($request->hasFile('hero_image')) {
             $bytes = file_get_contents($request->file('hero_image')->getRealPath());
@@ -195,7 +262,7 @@ class ManagePostController extends Controller
 
         $heroUrl = trim($heroUrl);
         if ($heroUrl === '') {
-            return null;
+            return $existingHero;
         }
 
         try {

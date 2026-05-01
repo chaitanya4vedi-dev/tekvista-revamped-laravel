@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<section class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+<section class="mx-auto max-w-5xl overflow-x-hidden px-4 py-14 sm:px-6 lg:px-8">
     <div class="neo-card p-6 sm:p-8">
         <p class="section-kicker">User Profile</p>
         <h1 class="mt-2 text-3xl font-black text-[var(--text)]">Enterprise Author Profile Settings</h1>
@@ -54,12 +54,12 @@
                     <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $user->linkedin_url) }}" class="input-field" maxlength="255">
                 </label>
             </div>
-            <div class="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-end">
+            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-[auto_1fr] lg:items-end">
                 <div class="flex items-center gap-3">
                     <img src="{{ old('avatar_url', $user->avatar_url) ?: 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=0B5C52&color=fff&size=256' }}" alt="{{ $user->name }}" class="h-20 w-20 rounded-full border border-[var(--line)] object-cover">
                     <span class="text-xs font-medium text-[var(--muted)]">Public author photo</span>
                 </div>
-                <div class="grid gap-3">
+                <div class="grid min-w-0 gap-3">
                     <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Upload author image
                         <input type="file" name="avatar_image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="input-field">
                         <span class="text-xs font-medium text-[var(--muted)]">Auto-cropped to square and resized to 512x512.</span>

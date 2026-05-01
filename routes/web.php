@@ -36,6 +36,8 @@ Route::middleware('auth')->prefix('dashboard/blog')->name('blog.manage.')->group
     Route::get('/', [ManagePostController::class, 'index'])->name('index');
     Route::get('/create', [ManagePostController::class, 'create'])->name('create');
     Route::post('/create', [ManagePostController::class, 'store'])->name('store');
+    Route::get('/{post}/edit', [ManagePostController::class, 'edit'])->name('edit');
+    Route::patch('/{post}/edit', [ManagePostController::class, 'update'])->name('update');
 });
 
 Route::middleware('auth')->prefix('dashboard/profile')->name('profile.')->group(function (): void {

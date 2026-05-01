@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-    $publishedDate = optional($post->published_on)->timezone('Asia/Kolkata');
+    $publishedDate = optional($post->published_at ?: $post->published_on)->timezone('Asia/Kolkata');
     $author = $post->author;
     $articleSchema = [
         '@context' => 'https://schema.org',

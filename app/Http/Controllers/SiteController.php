@@ -14,6 +14,7 @@ use Illuminate\View\View;
 
 class SiteController extends Controller
 {
+    private const PUBLISH_TZ = 'Asia/Kolkata';
     public function home(): View
     {
         $data = $this->pageData();
@@ -134,6 +135,9 @@ class SiteController extends Controller
         $posts = Post::query()
             ->with(['categories', 'tags', 'author'])
             ->where('is_published', true)
+            ->where(function ($q) {
+                $q->whereNull('published_at')->orWhere('published_at', '<=', now()->utc());
+            })
             ->when($query !== '', fn ($q) => $q->where(function ($inner) use ($query) {
                 $inner->where('title', 'like', "%{$query}%")
                     ->orWhere('excerpt', 'like', "%{$query}%")
@@ -141,7 +145,7 @@ class SiteController extends Controller
             }))
             ->when($category !== '', fn ($q) => $q->whereHas('categories', fn ($c) => $c->where('slug', Str::slug($category))))
             ->when($tag !== '', fn ($q) => $q->whereHas('tags', fn ($t) => $t->where('slug', Str::slug($tag))))
-            ->orderByDesc('published_on')
+            ->orderByDesc('published_at')
             ->orderByDesc('created_at')
             ->get();
 
@@ -162,17 +166,27 @@ class SiteController extends Controller
 
     public function blogShow(string $slug): View
     {
-        $post = Post::query()->with(['categories', 'tags', 'author'])->where('slug', $slug)->where('is_published', true)->firstOrFail();
+        $post = Post::query()
+            ->with(['categories', 'tags', 'author'])
+            ->where('slug', $slug)
+            ->where('is_published', true)
+            ->where(function ($q) {
+                $q->whereNull('published_at')->orWhere('published_at', '<=', now()->utc());
+            })
+            ->firstOrFail();
 
         $relatedPosts = Post::query()
             ->with(['categories', 'tags'])
             ->where('id', '!=', $post->id)
             ->where('is_published', true)
+            ->where(function ($q) {
+                $q->whereNull('published_at')->orWhere('published_at', '<=', now()->utc());
+            })
             ->where(function ($q) use ($post) {
                 $q->whereHas('categories', fn ($c) => $c->whereIn('categories.id', $post->categories->pluck('id')))
                   ->orWhereHas('tags', fn ($t) => $t->whereIn('tags.id', $post->tags->pluck('id')));
             })
-            ->orderByDesc('published_on')
+            ->orderByDesc('published_at')
             ->take(3)
             ->get();
 
@@ -217,7 +231,15 @@ class SiteController extends Controller
 
     private function publishedPosts(): Collection
     {
-        $dbPosts = Post::query()->with(['categories', 'tags'])->where('is_published', true)->orderByDesc('published_on')->take(4)->get();
+        $dbPosts = Post::query()
+            ->with(['categories', 'tags'])
+            ->where('is_published', true)
+            ->where(function ($q) {
+                $q->whereNull('published_at')->orWhere('published_at', '<=', now()->utc());
+            })
+            ->orderByDesc('published_at')
+            ->take(4)
+            ->get();
 
         if ($dbPosts->isNotEmpty()) {
             return $dbPosts;

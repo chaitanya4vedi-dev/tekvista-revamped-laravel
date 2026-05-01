@@ -22,12 +22,14 @@ class Post extends Model
         'meta_description',
         'meta_keywords',
         'read_time',
+        'published_at',
         'published_on',
         'is_published',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
+        'published_at' => 'datetime',
         'published_on' => 'date',
     ];
 

@@ -48,7 +48,7 @@
                         <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(6,26,43,0.45))]"></div>
                     </div>
                     <div class="p-6">
-                        <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }} / {{ optional($post->published_on)->timezone('Asia/Kolkata')->format('F d, Y') }}</p>
+                        <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }} / {{ optional($post->published_at ?: $post->published_on)->timezone('Asia/Kolkata')->format('F d, Y h:i A') }} IST</p>
                         <h2 class="mt-3 text-2xl font-black leading-8 text-[var(--text)]">{{ $post->title }}</h2>
                         <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ $post->excerpt }}</p>
                         <div class="mt-3 flex items-center gap-2.5 rounded-xl border border-[var(--line)] bg-[var(--surface-light)] px-3 py-2 text-xs text-[var(--muted)]">
