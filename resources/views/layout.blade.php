@@ -7,7 +7,7 @@
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#031126">
+    <meta name="theme-color" content="#0b3440">
     <title>{{ $title ?? 'Tekvista Infosolutions Pvt Ltd' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise IT services including cloud solutions, cybersecurity, networking, AV, Zoho, Odoo, Microsoft 365 and Google Workspace from Kolkata, India.' }}">
     <meta name="keywords" content="{{ $metaKeywords ?? 'Tekvista Infosolutions, enterprise IT solutions Kolkata, cloud solutions, cybersecurity services, networking, AV solutions, Zoho partner, Odoo implementation, Microsoft 365, Google Workspace, Tally on Cloud' }}">
@@ -15,8 +15,11 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/pwa/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/pwa/icon-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">

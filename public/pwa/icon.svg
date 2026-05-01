@@ -1,18 +1,15 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="68" y1="44" x2="452" y2="470" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#EFFFF7"/>
-      <stop offset="1" stop-color="#BDF2D3"/>
-    </linearGradient>
-    <linearGradient id="ink" x1="136" y1="122" x2="378" y2="398" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0AB883"/>
-      <stop offset="1" stop-color="#0D7B5F"/>
+    <linearGradient id="tv-bg" x1="256" y1="0" x2="256" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061A2B"/>
+      <stop offset="1" stop-color="#0B5C52"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <path d="M256 68L386 126V236C386 326 332 393 256 430C180 393 126 326 126 236V126L256 68Z" fill="url(#ink)"/>
-  <path d="M174 188H338V228H278V352H234V228H174V188Z" fill="#F5FFF9"/>
-  <path d="M210 262H302V304H210V262Z" fill="#F5FFF9"/>
-  <rect x="96" y="380" width="320" height="44" rx="22" fill="#0F5D49" fill-opacity="0.14"/>
-  <text x="256" y="410" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="26" font-weight="700" fill="#0F5D49">TEKVISTA</text>
+  <rect width="512" height="512" rx="112" fill="url(#tv-bg)"/>
+  <circle cx="256" cy="256" r="200" stroke="white" stroke-opacity="0.16" stroke-width="8"/>
+  <circle cx="256" cy="256" r="160" stroke="white" stroke-opacity="0.2" stroke-width="7"/>
+  <path d="M256 138L374 256L256 374L138 256L256 138Z" fill="#0E7763" fill-opacity="0.9"/>
+  <rect x="124" y="160" width="264" height="40" rx="20" fill="#24D6B0"/>
+  <rect x="232" y="160" width="48" height="220" rx="24" fill="#EFFFFC"/>
+  <rect x="124" y="160" width="264" height="10" rx="5" fill="#5AEBCD"/>
 </svg>

@@ -11,7 +11,7 @@
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "portrait-primary",
   "background_color": "#f4fffb",
-  "theme_color": "#0bb884",
+  "theme_color": "#0b3440",
   "categories": ["business", "productivity", "enterprise", "technology"],
   "icons": [
     {
@@ -37,6 +37,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/pwa/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [

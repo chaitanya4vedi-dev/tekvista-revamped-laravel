@@ -1,13 +1,14 @@
-<svg width="420" height="92" viewBox="0 0 420 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="900" height="180" viewBox="0 0 900 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="wm" x1="6" y1="10" x2="86" y2="84" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0AB883"/>
-      <stop offset="1" stop-color="#0D7B5F"/>
+    <linearGradient id="tv-bg" x1="90" y1="0" x2="90" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061A2B"/>
+      <stop offset="1" stop-color="#0B5C52"/>
     </linearGradient>
   </defs>
-  <rect x="6" y="6" width="80" height="80" rx="22" fill="url(#wm)"/>
-  <path d="M24 30H68V40H52V64H40V40H24V30Z" fill="#F5FFF9"/>
-  <path d="M32 48H60V58H32V48Z" fill="#F5FFF9"/>
-  <text x="102" y="42" font-family="Poppins, Arial, sans-serif" font-size="28" font-weight="800" fill="#0A241F">TekVista</text>
-  <text x="102" y="68" font-family="DM Sans, Arial, sans-serif" font-size="15" font-weight="600" fill="#2A6759">INFOSOLUTIONS PVT LTD</text>
+  <rect x="8" y="8" width="164" height="164" rx="38" fill="url(#tv-bg)"/>
+  <path d="M90 45L128 83L90 121L52 83L90 45Z" fill="#0E7763" fill-opacity="0.9"/>
+  <rect x="38" y="52" width="104" height="16" rx="8" fill="#24D6B0"/>
+  <rect x="81" y="52" width="18" height="86" rx="9" fill="#EFFFFC"/>
+  <text x="196" y="88" font-family="Poppins, Arial, sans-serif" font-size="58" font-weight="800" fill="#072A33">TekVista</text>
+  <text x="198" y="128" font-family="DM Sans, Arial, sans-serif" font-size="25" font-weight="600" fill="#0D6A5E" letter-spacing="1.8">INFOSOLUTIONS PVT LTD</text>
 </svg>
