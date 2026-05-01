@@ -8,13 +8,13 @@
     $currentPublishMode = old('publish_mode', $isEdit ? (($post->is_published && $post->published_at && $post->published_at->isFuture()) ? 'schedule' : ($post->is_published ? 'publish' : 'draft')) : 'publish');
     $currentPublishAt = old('publish_at', $isEdit && $post->published_at ? $post->published_at->clone()->timezone('Asia/Kolkata')->format('Y-m-d\\TH:i') : now('Asia/Kolkata')->addHour()->format('Y-m-d\\TH:i'));
 @endphp
-<section class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-    <div class="neo-card p-6 sm:p-8">
+<section class="mx-auto max-w-4xl overflow-x-hidden px-4 py-14 sm:px-6 lg:px-8">
+    <div class="neo-card min-w-0 overflow-hidden p-6 sm:p-8">
         <p class="section-kicker">SEO Authoring</p>
         <h1 class="mt-2 text-3xl font-black text-[var(--text)]">{{ $isEdit ? 'Edit Enterprise Blog Post' : 'Write Enterprise Blog Post' }}</h1>
         <p class="mt-2 text-sm text-[var(--muted)]">Publishing timezone for all posts is fixed to Asia/Kolkata.</p>
 
-        <form method="POST" action="{{ $isEdit ? route('blog.manage.update', $post->id) : route('blog.manage.store') }}" enctype="multipart/form-data" class="mt-6 grid gap-4">
+        <form method="POST" action="{{ $isEdit ? route('blog.manage.update', $post->id) : route('blog.manage.store') }}" enctype="multipart/form-data" class="mt-6 grid min-w-0 gap-4">
             @csrf
             @if($isEdit)
                 @method('PATCH')
@@ -33,44 +33,44 @@
                 <textarea id="content-editor" name="content" class="input-field" rows="14" required>{{ old('content', $isEdit ? $post->content : '') }}</textarea>
             </label>
 
-            <div class="grid gap-4 sm:grid-cols-2">
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Header image upload
+            <div class="grid min-w-0 gap-4 sm:grid-cols-2">
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Header image upload
                     <input type="file" name="hero_image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="input-field">
                     <span class="text-xs font-medium text-[var(--muted)]">Auto-optimized to 1200x630 for header and social meta image.</span>
                 </label>
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Or online header image URL
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Or online header image URL
                     <input type="url" name="hero" value="{{ old('hero', $isEdit ? $post->hero : '') }}" class="input-field" placeholder="https://example.com/image.jpg">
                     <span class="text-xs font-medium text-[var(--muted)]">If valid, image will be downloaded and optimized automatically.</span>
                 </label>
             </div>
 
-            <div class="grid gap-4 sm:grid-cols-2">
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Publish mode
+            <div class="grid min-w-0 gap-4 sm:grid-cols-2">
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Publish mode
                     <select name="publish_mode" class="input-field">
                         <option value="draft" @selected($currentPublishMode === 'draft')>Draft</option>
                         <option value="publish" @selected($currentPublishMode === 'publish')>Publish now</option>
                         <option value="schedule" @selected($currentPublishMode === 'schedule')>Schedule</option>
                     </select>
                 </label>
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Publish date/time (Asia/Kolkata)
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Publish date/time (Asia/Kolkata)
                     <input type="datetime-local" name="publish_at" value="{{ $currentPublishAt }}" class="input-field">
                 </label>
             </div>
 
-            <div class="grid gap-4 sm:grid-cols-2">
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Categories (comma-separated)
+            <div class="grid min-w-0 gap-4 sm:grid-cols-2">
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Categories (comma-separated)
                     <input type="text" name="categories_csv" value="{{ $currentCategories }}" class="input-field" placeholder="Cloud, Cybersecurity">
                 </label>
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Tags (comma-separated)
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Tags (comma-separated)
                     <input type="text" name="tags_csv" value="{{ $currentTags }}" class="input-field" placeholder="Zero Trust, SD-WAN">
                 </label>
             </div>
 
-            <div class="grid gap-4 sm:grid-cols-2">
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Meta title
+            <div class="grid min-w-0 gap-4 sm:grid-cols-2">
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Meta title
                     <input type="text" name="meta_title" value="{{ old('meta_title', $isEdit ? $post->meta_title : '') }}" class="input-field" maxlength="180">
                 </label>
-                <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Meta keywords
+                <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Meta keywords
                     <input type="text" name="meta_keywords" value="{{ old('meta_keywords', $isEdit ? $post->meta_keywords : '') }}" class="input-field" maxlength="320" placeholder="enterprise IT, cloud strategy">
                 </label>
             </div>
@@ -85,6 +85,26 @@
         </form>
     </div>
 </section>
+
+<style>
+    .ck-editor {
+        max-width: 100%;
+    }
+    .ck-editor__main,
+    .ck-editor__editable,
+    .ck-content {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+    .ck.ck-toolbar {
+        flex-wrap: wrap;
+        row-gap: 6px;
+    }
+    .ck.ck-editor__main > .ck-editor__editable {
+        min-height: 280px;
+    }
+</style>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
