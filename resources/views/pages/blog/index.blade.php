@@ -1,10 +1,14 @@
 @extends('layout')
 
 @section('content')
-<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <p class="section-kicker">Tekvista insights</p>
-    <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Enterprise technology blog ecosystem</h1>
-    <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">Search by topic, category, and tags to find practical guidance across cloud, cybersecurity, networking, Zoho, Odoo, and enterprise operations.</p>
+<section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-20 bg-[linear-gradient(110deg,#effcf6,#e6f8ef,#f6fffb)]"></div>
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(11,184,132,0.14),transparent_40%),radial-gradient(circle_at_85%_10%,rgba(58,168,107,0.18),transparent_36%)]"></div>
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <p class="section-kicker">Tekvista insights</p>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Enterprise technology blog ecosystem</h1>
+        <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">Practical implementation playbooks for cloud, cybersecurity, networking, Zoho, Odoo, and modern IT operations.</p>
+    </div>
 </section>
 
 <section class="mx-auto max-w-7xl px-4 pb-5 sm:px-6 lg:px-8">
@@ -36,10 +40,13 @@
             <a href="{{ route('blog.index') }}" class="btn-secondary mt-4">Reset filters</a>
         </div>
     @else
-        <div class="grid gap-5 md:grid-cols-2">
+        <div class="grid gap-6 md:grid-cols-2">
             @foreach ($posts as $post)
-                <article class="neo-card group">
-                    <img src="{{ $post->hero ?: 'https://images.pexels.com/photos/7414033/pexels-photo-7414033.jpeg?auto=compress&cs=tinysrgb&w=1400' }}" alt="{{ $post->title }}" class="h-64 w-full object-cover transition duration-300 group-hover:scale-105">
+                <article class="neo-card group overflow-hidden">
+                    <div class="relative">
+                        <img src="{{ $post->hero ?: 'https://images.pexels.com/photos/7414033/pexels-photo-7414033.jpeg?auto=compress&cs=tinysrgb&w=1400' }}" alt="{{ $post->title }}" class="h-64 w-full object-cover transition duration-300 group-hover:scale-105">
+                        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(6,26,43,0.45))]"></div>
+                    </div>
                     <div class="p-6">
                         <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }} / {{ optional($post->published_on)->timezone('Asia/Kolkata')->format('F d, Y') }}</p>
                         <h2 class="mt-3 text-2xl font-black leading-8 text-[var(--text)]">{{ $post->title }}</h2>

@@ -64,4 +64,32 @@
         @endforeach
     </div>
 </section>
+
+<section class="mx-auto mt-14 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+            <p class="section-kicker">Latest Insights</p>
+            <h2 class="mt-2 text-4xl font-black text-[var(--text)]">From the Tekvista blog</h2>
+            <p class="mt-2 max-w-3xl text-sm text-[var(--muted)]">Short, actionable enterprise IT insights from our consulting and implementation teams.</p>
+        </div>
+        <a href="{{ route('blog.index') }}" class="btn-secondary"><i class="bi bi-journal-text"></i>View All Posts</a>
+    </div>
+    @if(($latestPosts ?? collect())->isEmpty())
+        <div class="neo-card p-6 text-sm text-[var(--muted)]">No published posts yet. Fresh insights will appear here automatically.</div>
+    @else
+        <div class="grid gap-5 md:grid-cols-3">
+            @foreach ($latestPosts as $post)
+                <article class="neo-card overflow-hidden">
+                    <img src="{{ $post->hero ?: 'https://images.pexels.com/photos/7414033/pexels-photo-7414033.jpeg?auto=compress&cs=tinysrgb&w=1400' }}" alt="{{ $post->title }}" class="h-48 w-full object-cover">
+                    <div class="p-5">
+                        <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }}</p>
+                        <h3 class="mt-2 text-xl font-black leading-7 text-[var(--text)]">{{ $post->title }}</h3>
+                        <p class="mt-3 text-sm leading-7 text-[var(--muted)]">{{ $post->excerpt }}</p>
+                        <a href="{{ route('blog.show', $post->slug) }}" class="btn-secondary mt-4 px-4 py-2 text-sm">Read Article</a>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    @endif
+</section>
 @endsection

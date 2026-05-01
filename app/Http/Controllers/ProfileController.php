@@ -45,12 +45,10 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('avatar_image')) {
-            $bytes = file_get_contents($request->file('avatar_image')->getRealPath());
-            if ($bytes !== false) {
-                $optimizedAvatar = $this->storeAuthorAvatar($bytes);
-                if ($optimizedAvatar !== null) {
-                    $validated['avatar_url'] = $optimizedAvatar;
-                }
+            $uploaded = $request->file('avatar_image');
+            $optimizedAvatar = $this->storeAuthorAvatar((string) $uploaded->getRealPath(), (string) $uploaded->getMimeType());
+            if ($optimizedAvatar !== null) {
+                $validated['avatar_url'] = $optimizedAvatar;
             }
         }
 
@@ -62,12 +60,25 @@ class ProfileController extends Controller
         return redirect()->route('profile.edit')->with('status', 'Profile updated successfully.');
     }
 
-    private function storeAuthorAvatar(string $binary): ?string
+    private function storeAuthorAvatar(string $path, string $mimeType = ''): ?string
     {
-        $image = @imagecreatefromstring($binary);
+        if (!is_file($path)) {
+            return null;
+        }
+
+        $mimeType = Str::lower($mimeType);
+        $image = match ($mimeType) {
+            'image/jpeg', 'image/jpg' => @imagecreatefromjpeg($path),
+            'image/png' => @imagecreatefrompng($path),
+            'image/webp' => function_exists('imagecreatefromwebp') ? @imagecreatefromwebp($path) : @imagecreatefromstring((string) file_get_contents($path)),
+            default => @imagecreatefromstring((string) file_get_contents($path)),
+        };
+
         if ($image === false) {
             return null;
         }
+
+        $image = $this->applyExifOrientation($image, $path);
 
         $sourceWidth = imagesx($image);
         $sourceHeight = imagesy($image);
@@ -91,5 +102,26 @@ class ProfileController extends Controller
         imagedestroy($image);
 
         return asset($relativeDir . '/' . $fileName);
+    }
+
+    private function applyExifOrientation(\GdImage $image, string $path): \GdImage
+    {
+        if (!function_exists('exif_read_data')) {
+            return $image;
+        }
+
+        try {
+            $exif = @exif_read_data($path);
+            $orientation = (int) ($exif['Orientation'] ?? 1);
+        } catch (\Throwable $e) {
+            $orientation = 1;
+        }
+
+        return match ($orientation) {
+            3 => imagerotate($image, 180, 0),
+            6 => imagerotate($image, -90, 0),
+            8 => imagerotate($image, 90, 0),
+            default => $image,
+        };
     }
 }

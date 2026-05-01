@@ -65,7 +65,7 @@
                 $paragraphs = preg_split('/\n{2,}/', (string) $normalizedContent) ?: [];
             @endphp
             @foreach ($paragraphs as $paragraph)
-                <p>{!! nl2br(e(trim((string) $paragraph))) !!}</p>
+                <p class="rounded-xl border border-[var(--line)] bg-white/70 px-4 py-3 text-[1.02rem] leading-8 text-[#123a31] shadow-xs">{!! nl2br(e(trim((string) $paragraph))) !!}</p>
             @endforeach
         </div>
     </section>
