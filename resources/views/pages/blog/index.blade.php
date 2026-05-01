@@ -52,7 +52,7 @@
                                     ({{ $post->author->job_title }})
                                 @endif
                                 @if($post->author?->username)
-                                    · @{{ $post->author->username }}
+                                    · {{ '@'.$post->author->username }}
                                 @endif
                             </div>
                         </div>
