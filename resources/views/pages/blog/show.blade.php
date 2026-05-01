@@ -60,8 +60,12 @@
 
     <section class="mx-auto mt-10 max-w-4xl px-4 sm:px-6 lg:px-8">
         <div class="neo-card space-y-6 p-7 text-base leading-8 text-[var(--text)]">
-            @foreach (preg_split('/\n\n+/', trim($post->content)) as $paragraph)
-                <p>{{ $paragraph }}</p>
+            @php
+                $normalizedContent = preg_replace("/\r\n|\r/", "\n", trim((string) $post->content));
+                $paragraphs = preg_split('/\n{2,}/', (string) $normalizedContent) ?: [];
+            @endphp
+            @foreach ($paragraphs as $paragraph)
+                <p>{!! nl2br(e(trim((string) $paragraph))) !!}</p>
             @endforeach
         </div>
     </section>
