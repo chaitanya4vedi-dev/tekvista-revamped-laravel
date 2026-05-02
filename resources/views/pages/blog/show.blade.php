@@ -36,7 +36,7 @@
             <p class="section-kicker">{{ $post->categories->pluck('name')->first() ?: 'Enterprise' }} / {{ $post->read_time }} / {{ $publishedDate?->format('F d, Y h:i A') }} IST</p>
             <h1 class="mt-4 text-4xl font-black leading-tight text-white sm:text-6xl">{{ $post->title }}</h1>
             <p class="mt-5 max-w-3xl text-base leading-8 text-[#def7ea]">{{ $post->excerpt }}</p>
-            <div class="mt-5 rounded-2xl border border-black/10 bg-white p-3 text-sm text-black shadow-sm backdrop-blur-md">
+            <div class="mt-5 rounded-2xl border border-white/80 bg-white p-3 text-sm text-black shadow-[10px_10px_24px_rgba(148,163,184,0.28),-10px_-10px_24px_rgba(255,255,255,0.95)]">
                 <div class="flex items-start gap-2.5">
                     <img src="{{ $author?->avatar_url ?: 'https://ui-avatars.com/api/?name='.urlencode($author?->name ?? 'Tekvista Team').'&background=0B5C52&color=fff&size=200' }}" alt="{{ $author?->name ?? 'Tekvista Team' }}" class="h-9 w-9 rounded-full border border-black/10 object-cover">
                     <div>
