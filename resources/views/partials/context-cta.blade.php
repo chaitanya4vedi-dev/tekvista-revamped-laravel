@@ -3,8 +3,7 @@
     $waBase = 'https://wa.me/919051433313?text=';
     $ctaMap = [
         'cybersecurity' => ['title' => 'Need a Security Posture Review?', 'copy' => 'Get a targeted assessment for endpoint risk, access control, and incident response readiness.', 'intent' => 'Request Cybersecurity Assessment'],
-        'cloud' => ['title' => 'Planning a Cloud Migration?', 'copy' => 'We design migration waves with cost governance and minimal disruption.', 'intent' => 'Plan Cloud Migration'],
-        'tally-on-cloud' => ['title' => 'Move Tally to Secure Cloud Access', 'copy' => 'Discuss Tally hosting architecture, backup, and multi-user access.', 'intent' => 'Start Tally on Cloud Consultation'],
+        'cloud' => ['title' => 'Planning Enterprise Cloud and Tally Hosting?', 'copy' => 'Design migration waves, Tally cloud architecture, backup policy, and cost governance in one rollout.', 'intent' => 'Plan Cloud and Tally Hosting Rollout'],
         'networking' => ['title' => 'Upgrade Your Network Architecture', 'copy' => 'Design LAN/WAN and SD-WAN with visibility, security, and performance goals.', 'intent' => 'Get Networking Consultation'],
         'av-solutions' => ['title' => 'Design AV for Boardrooms and Campuses', 'copy' => 'Plan conferencing, signage, and control systems for productive collaboration spaces.', 'intent' => 'Discuss AV Solutions Project'],
         'zoho' => ['title' => 'Implement Zoho with Process Clarity', 'copy' => 'We align CRM, mail, and automation around your business workflow.', 'intent' => 'Discuss Zoho Implementation'],

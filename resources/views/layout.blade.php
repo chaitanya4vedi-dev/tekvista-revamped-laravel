@@ -7,9 +7,8 @@
         $manifestVersion = @filemtime(public_path('manifest.webmanifest')) ?: time();
         $serviceWorkerVersion = @filemtime(public_path('service-worker.js')) ?: time();
         $faviconVersion = @filemtime(public_path('favicon-v2.ico')) ?: time();
-        $iconSvgVersion = @filemtime(public_path('pwa/icon-v2.svg')) ?: time();
         $icon192Version = @filemtime(public_path('pwa/icon-192-v2.png')) ?: time();
-        $wordmarkVersion = @filemtime(public_path('pwa/tekvista-wordmark-v2.svg')) ?: time();
+        $wordmarkVersion = @filemtime(public_path('branding/tekvista-logo-header.png')) ?: time();
         $metaImageUrl = $providedMetaImage
             ? (\Illuminate\Support\Str::startsWith($providedMetaImage, ['http://', 'https://']) ? $providedMetaImage : request()->getSchemeAndHttpHost().$providedMetaImage)
             : request()->getSchemeAndHttpHost().$defaultMetaImagePath;
@@ -27,7 +26,7 @@
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="manifest" href="/manifest.webmanifest?v={{ $manifestVersion }}">
     <link rel="icon" href="/favicon-v2.ico?v={{ $faviconVersion }}" sizes="any">
-    <link rel="icon" href="/pwa/icon-v2.svg?v={{ $iconSvgVersion }}" type="image/svg+xml">
+    <link rel="icon" href="/pwa/icon-192-v2.png?v={{ $icon192Version }}" type="image/png" sizes="192x192">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32-v2.png?v={{ $faviconVersion }}">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-v2.png?v={{ $faviconVersion }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon-v2.png?v={{ $icon192Version }}">
@@ -105,7 +104,6 @@
                     ['label' => 'IT Consultancy', 'route' => 'it-consultancy'],
                     ['label' => 'Cybersecurity', 'route' => 'cybersecurity'],
                     ['label' => 'Cloud Solutions', 'route' => 'cloud'],
-                    ['label' => 'Tally on Cloud', 'route' => 'tally-on-cloud'],
                     ['label' => 'IT Support', 'route' => 'it-support'],
                     ['label' => 'Software Solutions', 'route' => 'software-solutions'],
                     ['label' => 'Networking', 'route' => 'networking'],
@@ -125,7 +123,7 @@
     <header class="app-header sticky top-0 z-50">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-6 lg:px-8">
             <a href="{{ route('home') }}" class="mobile-brand flex min-w-0 items-center gap-2.5">
-                <img src="{{ asset('pwa/tekvista-wordmark-v2.svg') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
+                <img src="{{ asset('branding/tekvista-logo-header.png') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
             </a>
 
             <nav class="hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">
@@ -206,7 +204,7 @@
                 <p class="section-kicker">Enterprise Focus</p>
                 <div class="mt-2 grid gap-1 text-sm text-[var(--muted)]">
                     <span><i class="bi bi-shield-check mr-2"></i>Cybersecurity</span>
-                    <span><i class="bi bi-cloud-check mr-2"></i>Cloud and Tally on Cloud</span>
+                    <span><i class="bi bi-cloud-check mr-2"></i>Cloud workloads including Tally hosting</span>
                     <span><i class="bi bi-envelope-at mr-2"></i>Microsoft, Google, Zoho Mail</span>
                 </div>
             </div>

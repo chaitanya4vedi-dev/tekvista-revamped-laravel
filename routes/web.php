@@ -15,7 +15,6 @@ Route::get('/software-solutions', [SiteController::class, 'softwareSolutions'])-
 Route::get('/ai-integration', [SiteController::class, 'aiIntegration'])->name('ai-integration');
 Route::get('/cybersecurity', [SiteController::class, 'cybersecurity'])->name('cybersecurity');
 Route::get('/cloud', [SiteController::class, 'cloud'])->name('cloud');
-Route::get('/tally-on-cloud', [SiteController::class, 'tallyOnCloud'])->name('tally-on-cloud');
 Route::get('/networking', [SiteController::class, 'networking'])->name('networking');
 Route::get('/av-solutions', [SiteController::class, 'avSolutions'])->name('av-solutions');
 Route::get('/zoho', [SiteController::class, 'zoho'])->name('zoho');
@@ -56,7 +55,6 @@ Route::get('/sitemap.xml', function () {
         route('services'),
         route('cybersecurity'),
         route('cloud'),
-        route('tally-on-cloud'),
         route('networking'),
         route('av-solutions'),
         route('zoho'),
@@ -93,3 +91,5 @@ foreach ([
 ] as $from => $to) {
     Route::redirect('/'.$from, $to, 301);
 }
+
+Route::redirect('/tally-on-cloud', '/cloud', 301);

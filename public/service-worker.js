@@ -4,7 +4,6 @@ const CORE_ASSETS = [
   '/',
   '/offline.html',
   '/manifest.webmanifest',
-  '/pwa/icon-v2.svg',
   '/pwa/icon-192-v2.png',
   '/pwa/icon-512-v2.png',
   '/pwa/maskable-512-v2.png',
@@ -12,7 +11,7 @@ const CORE_ASSETS = [
   '/favicon-v2.ico',
   '/favicon-32x32-v2.png',
   '/favicon-16x16-v2.png',
-  '/pwa/tekvista-wordmark-v2.svg'
+  '/branding/tekvista-logo-header.png'
 ];
 
 self.addEventListener('install', (event) => {

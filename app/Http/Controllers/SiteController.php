@@ -80,11 +80,6 @@ class SiteController extends Controller
         return view('pages.services.cloud', [...$this->pageData(), ...$this->seo('Cloud Solutions', 'Scalable, secure, and resilient enterprise cloud architectures.', 'cloud migration, cloud governance, managed cloud services, enterprise cloud')]);
     }
 
-    public function tallyOnCloud(): View
-    {
-        return view('pages.services.tally-on-cloud', [...$this->pageData(), ...$this->seo('Tally on Cloud', 'Reliable and accessible Tally on Cloud services for continuous business operations.', 'tally on cloud, tally hosting, tally remote access, tally cloud backup')]);
-    }
-
     public function networking(): View
     {
         return view('pages.services.networking', [...$this->pageData(), ...$this->seo('Networking', 'Next-generation networking infrastructure for high performance and observability.', 'enterprise networking, SD-WAN, firewall, network monitoring')]);
@@ -254,7 +249,6 @@ class SiteController extends Controller
             ['name' => 'IT Consultancy', 'route' => 'it-consultancy', 'tagline' => 'Strategic Technology Advisory.', 'summary' => 'Advisory for architecture, procurement, modernization roadmaps, and enterprise technology governance.'],
             ['name' => 'Cybersecurity', 'route' => 'cybersecurity', 'tagline' => 'Enterprise-Grade Security Architecture.', 'summary' => 'Protecting your digital assets with advanced endpoint security, zero-trust frameworks, and continuous threat monitoring.'],
             ['name' => 'Cloud Solutions', 'route' => 'cloud', 'tagline' => 'Resilient Cloud Architectures.', 'summary' => 'Scalable infrastructure designed for performance, rapid deployment, and optimized operational costs.'],
-            ['name' => 'Tally on Cloud', 'route' => 'tally-on-cloud', 'tagline' => 'Uninterrupted Financial Workflows.', 'summary' => 'Host your mission-critical Tally ERP on secure, high-availability cloud infrastructure.'],
             ['name' => 'Networking Solutions', 'route' => 'networking', 'tagline' => 'High-Performance Connectivity.', 'summary' => 'Enterprise networking designs ensuring stable performance, observability, and controlled growth.'],
             ['name' => 'IT Support', 'route' => 'it-support', 'tagline' => 'Business-Continuity IT Operations.', 'summary' => 'SLA-aligned support operations, proactive monitoring, and issue resolution for critical workloads.'],
             ['name' => 'Software Solutions', 'route' => 'software-solutions', 'tagline' => 'Custom Application Engineering.', 'summary' => 'Business software, workflow tools, and integrations designed around operational requirements.'],

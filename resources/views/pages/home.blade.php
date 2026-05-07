@@ -43,7 +43,6 @@
                 'IT Consultancy' => 'bi-briefcase-fill',
                 'Cybersecurity' => 'bi-shield-lock-fill',
                 'Cloud Solutions' => 'bi-cloud-check-fill',
-                'Tally on Cloud' => 'bi-calculator-fill',
                 'Networking Solutions' => 'bi-hdd-network-fill',
                 'IT Support' => 'bi-headset',
                 'Software Solutions' => 'bi-code-slash',
