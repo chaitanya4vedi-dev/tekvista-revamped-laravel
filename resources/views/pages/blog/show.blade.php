@@ -61,12 +61,20 @@
     <section class="mx-auto mt-10 max-w-4xl px-4 sm:px-6 lg:px-8">
         <div class="neo-card space-y-6 p-7 text-base leading-8 text-[var(--text)]">
             @php
-                $normalizedContent = preg_replace("/\r\n|\r/", "\n", trim((string) $post->content));
+                $rawContent = trim((string) $post->content);
+                $hasHtml = $rawContent !== strip_tags($rawContent);
+                $normalizedContent = preg_replace("/\r\n|\r/", "\n", $rawContent);
                 $paragraphs = preg_split('/\n{2,}/', (string) $normalizedContent) ?: [];
             @endphp
-            @foreach ($paragraphs as $paragraph)
-                <p class="rounded-xl border border-[var(--line)] bg-white/70 px-4 py-3 text-[1.02rem] leading-8 text-[#123a31] shadow-xs">{!! nl2br(e(trim((string) $paragraph))) !!}</p>
-            @endforeach
+            @if ($hasHtml)
+                <div class="blog-content text-[1.02rem] leading-8 text-[#123a31]">
+                    {!! $rawContent !!}
+                </div>
+            @else
+                @foreach ($paragraphs as $paragraph)
+                    <p class="rounded-xl border border-[var(--line)] bg-white/70 px-4 py-3 text-[1.02rem] leading-8 text-[#123a31] shadow-xs">{!! nl2br(e(trim((string) $paragraph))) !!}</p>
+                @endforeach
+            @endif
         </div>
     </section>
 </article>
@@ -85,4 +93,45 @@
         @endforeach
     </div>
 </section>
+
+<style>
+    .blog-content > :first-child { margin-top: 0; }
+    .blog-content > :last-child { margin-bottom: 0; }
+    .blog-content p,
+    .blog-content ul,
+    .blog-content ol,
+    .blog-content blockquote,
+    .blog-content pre,
+    .blog-content table {
+        margin-top: .9rem;
+        margin-bottom: .9rem;
+    }
+    .blog-content ul,
+    .blog-content ol {
+        padding-left: 1.2rem;
+    }
+    .blog-content ul { list-style: disc; }
+    .blog-content ol { list-style: decimal; }
+    .blog-content a {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+    .blog-content h1,
+    .blog-content h2,
+    .blog-content h3,
+    .blog-content h4 {
+        margin-top: 1.2rem;
+        margin-bottom: .55rem;
+        color: var(--text);
+        font-weight: 900;
+        line-height: 1.25;
+    }
+    .blog-content img,
+    .blog-content iframe,
+    .blog-content video {
+        max-width: 100%;
+        height: auto;
+        border-radius: .9rem;
+    }
+</style>
 @endsection
