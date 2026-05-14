@@ -91,7 +91,7 @@ class ManagePostController extends Controller
             'title' => ['required', 'string', 'max:180'],
             'slug' => $slugRule,
             'excerpt' => ['nullable', 'string', 'max:320'],
-            'content' => ['required', 'string', 'min:120'],
+            'content' => ['required', 'string', 'min:40'],
             'hero' => ['nullable', 'url:http,https', 'max:500'],
             'hero_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
             'meta_title' => ['nullable', 'string', 'max:180'],
@@ -100,7 +100,7 @@ class ManagePostController extends Controller
             'read_time' => ['nullable', 'string', 'max:40'],
             'publish_mode' => ['required', Rule::in(['draft', 'publish', 'schedule'])],
             'publish_at' => ['nullable', 'date_format:Y-m-d\TH:i'],
-            'categories_csv' => ['required', 'string', 'max:320'],
+            'categories_csv' => ['nullable', 'string', 'max:320'],
             'tags_csv' => ['nullable', 'string', 'max:320'],
         ]);
     }
@@ -130,9 +130,15 @@ class ManagePostController extends Controller
 
         $post->save();
 
-        $categoryIds = collect(explode(',', $validated['categories_csv']))
+        $categoryNames = collect(explode(',', (string) ($validated['categories_csv'] ?? '')))
             ->map(fn ($name) => trim((string) $name))
-            ->filter()
+            ->filter();
+
+        if ($categoryNames->isEmpty()) {
+            $categoryNames = collect(['General']);
+        }
+
+        $categoryIds = $categoryNames
             ->map(function (string $name): int {
                 $category = Category::firstOrCreate(
                     ['slug' => Str::slug($name)],

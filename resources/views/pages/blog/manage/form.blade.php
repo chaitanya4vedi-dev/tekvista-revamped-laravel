@@ -31,6 +31,7 @@
             </label>
             <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Content
                 <textarea id="content-editor" name="content" class="input-field w-full min-w-0" rows="14" required>{{ old('content', $isEdit ? $post->content : '') }}</textarea>
+                <span class="text-xs font-medium text-[var(--muted)]">Minimum recommended content length: 40 characters.</span>
             </label>
 
             <div class="grid min-w-0 gap-4 sm:grid-cols-2">
@@ -60,6 +61,7 @@
             <div class="grid min-w-0 gap-4 sm:grid-cols-2">
                 <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Categories (comma-separated)
                     <input type="text" name="categories_csv" value="{{ $currentCategories }}" class="input-field w-full min-w-0" placeholder="Cloud, Cybersecurity">
+                    <span class="text-xs font-medium text-[var(--muted)]">Optional. If empty, category defaults to "General".</span>
                 </label>
                 <label class="grid min-w-0 gap-2 text-sm font-bold text-[var(--text)]">Tags (comma-separated)
                     <input type="text" name="tags_csv" value="{{ $currentTags }}" class="input-field w-full min-w-0" placeholder="Zero Trust, SD-WAN">
@@ -79,7 +81,14 @@
             </label>
 
             @if ($errors->any())
-                <div class="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{{ $errors->first() }}</div>
+                <div class="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                    <p class="font-semibold">Please fix the following:</p>
+                    <ul class="mt-2 list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
             <button type="submit" class="btn-primary justify-center">{{ $isEdit ? 'Update Post' : 'Save Post' }}</button>
         </form>
