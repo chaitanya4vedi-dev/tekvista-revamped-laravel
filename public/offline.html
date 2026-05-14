@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="transparent">
+    <meta name="theme-color" content="#0b2f25">
     <title>Tekvista Offline</title>
     <style>
         body {
@@ -11,35 +11,61 @@
             min-height: 100vh;
             display: grid;
             place-items: center;
-            background: #f5f7f8;
-            color: #152426;
-            font-family: Inter, Segoe UI, system-ui, sans-serif;
+            background:
+                radial-gradient(circle at 18% 12%, rgba(11, 184, 132, 0.24), transparent 32rem),
+                radial-gradient(circle at 82% 86%, rgba(36, 214, 176, 0.2), transparent 26rem),
+                linear-gradient(145deg, #030f0c 0%, #08251e 46%, #0b3a2e 100%);
+            color: #e9fff6;
+            font-family: "DM Sans", "Segoe UI", system-ui, sans-serif;
+            padding: 20px;
         }
 
         main {
             width: min(92vw, 560px);
-            border: 1px solid #dbe4e6;
-            border-radius: 8px;
-            background: #ffffff;
+            border: 1px solid rgba(124, 247, 222, 0.3);
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(5, 26, 21, 0.9), rgba(8, 47, 37, 0.84));
             padding: 32px;
-            box-shadow: 0 20px 60px rgba(11, 59, 60, .12);
+            box-shadow: 0 24px 62px rgba(1, 7, 6, 0.56);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 10px 14px;
+            background: rgba(239, 255, 250, 0.96);
+            border: 1px solid rgba(176, 242, 218, 0.9);
+            box-shadow: 0 10px 30px rgba(5, 31, 24, 0.36);
+            margin-bottom: 18px;
+        }
+
+        .logo-wrap img {
+            width: min(100%, 280px);
+            height: auto;
         }
 
         h1 {
-            margin: 0 0 12px;
-            font-size: 32px;
-            line-height: 1.1;
+            margin: 0 0 10px;
+            font-size: clamp(28px, 5vw, 34px);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
         }
 
         p {
             margin: 0;
-            color: #53666a;
-            line-height: 1.7;
+            color: #b7e8d7;
+            line-height: 1.75;
         }
     </style>
 </head>
 <body>
     <main>
+        <span class="logo-wrap">
+            <img src="/branding/tekvista-logo.png" alt="Tekvista logo">
+        </span>
         <h1>Tekvista is offline-ready.</h1>
         <p>Your network connection is unavailable. The main app shell is cached, so return to the home page once the connection is restored.</p>
     </main>
