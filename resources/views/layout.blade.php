@@ -17,7 +17,7 @@
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0bb884">
+    <meta name="theme-color" content="transparent">
     <title>{{ $title ?? 'Tekvista Infosolutions Pvt Ltd' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise IT services including cloud solutions, cybersecurity, networking, AV, Zoho, Odoo, Microsoft 365 and Google Workspace from Kolkata, India.' }}">
     <meta name="keywords" content="{{ $metaKeywords ?? 'Tekvista Infosolutions, enterprise IT solutions Kolkata, cloud solutions, cybersecurity services, networking, AV solutions, Zoho partner, Odoo implementation, Microsoft 365, Google Workspace, Tally on Cloud' }}">
