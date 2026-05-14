@@ -3,11 +3,16 @@
 @section('content')
 <section class="service-hero">
     <img src="{{ $visuals['infra'] }}" alt="Enterprise cloud infrastructure" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.95),rgba(5,7,13,0.78),rgba(5,7,13,0.45))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker">Cloud Solutions</p>
+        <p class="section-kicker hero-kicker-readable">Cloud Solutions</p>
         <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">One enterprise cloud platform for workloads, applications, and business continuity.</h1>
         <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">TekVista delivers Tally on Cloud, Zoho, Odoo, Microsoft Azure, Google Cloud Platform (GCP), Amazon Web Services (AWS), and CtrlS datacenter-backed hosting through one integrated cloud delivery model.</p>
+        <div class="mt-7">
+            <a href="{{ route('contact', ['intent' => 'Plan Cloud and Tally Hosting Rollout']) }}" class="btn-primary">
+                <i class="bi bi-send-check-fill"></i>Contact Us
+            </a>
+        </div>
     </div>
 </section>
 
@@ -21,14 +26,14 @@
     <div class="neo-card p-6 sm:p-8">
         <p class="section-kicker">Platforms We Deliver</p>
         <div class="mt-4 grid gap-3 sm:grid-cols-4">
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/tally.png') }}" alt="Tally"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/zoho.svg') }}" alt="Zoho"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/microsoft.svg') }}" alt="Microsoft Azure"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/googlecloud.svg') }}" alt="Google Cloud"></div>
-            <div class="logo-chip"><span class="font-bold text-[var(--text)]">AWS</span></div>
-            <div class="logo-chip"><span class="font-bold text-[var(--text)]">CtrlS</span></div>
-            <div class="logo-chip"><span class="font-bold text-[var(--text)]">Dedicated Cloud Hosting</span></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/tally.png') }}" alt="Tally"><p class="logo-chip-name">Tally on Cloud</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/zoho.svg') }}" alt="Zoho"><p class="logo-chip-name">Zoho</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo"><p class="logo-chip-name">Odoo ERP</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/microsoft.svg') }}" alt="Microsoft Azure"><p class="logo-chip-name">Microsoft Azure</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/googlecloud.svg') }}" alt="Google Cloud"><p class="logo-chip-name">Google Cloud</p></div>
+            <div class="logo-chip"><span class="text-lg font-black text-[var(--text)]">AWS</span><p class="logo-chip-name">Amazon Web Services</p></div>
+            <div class="logo-chip"><span class="text-lg font-black text-[var(--text)]">CtrlS</span><p class="logo-chip-name">CtrlS Datacenters</p></div>
+            <div class="logo-chip"><span class="text-lg font-black text-[var(--text)]">Dedicated Cloud</span><p class="logo-chip-name">Isolated Enterprise Hosting</p></div>
         </div>
     </div>
 </section>

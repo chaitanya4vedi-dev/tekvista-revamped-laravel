@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tekvista-pwa-v6';
+const CACHE_NAME = 'tekvista-pwa-v7';
 
 const CORE_ASSETS = [
   '/',
@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   '/pwa/icon-512-v2.png',
   '/pwa/maskable-512-v2.png',
   '/pwa/apple-touch-icon-v2.png',
+  '/pwa/tekvista-logo.png',
   '/favicon-v2.ico',
   '/favicon-32x32-v2.png',
   '/favicon-16x16-v2.png',

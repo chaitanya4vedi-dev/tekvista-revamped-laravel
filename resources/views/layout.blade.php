@@ -17,7 +17,7 @@
     @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0b3440">
+    <meta name="theme-color" content="#0bb884">
     <title>{{ $title ?? 'Tekvista Infosolutions Pvt Ltd' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Tekvista Infosolutions Private Limited delivers enterprise IT services including cloud solutions, cybersecurity, networking, AV, Zoho, Odoo, Microsoft 365 and Google Workspace from Kolkata, India.' }}">
     <meta name="keywords" content="{{ $metaKeywords ?? 'Tekvista Infosolutions, enterprise IT solutions Kolkata, cloud solutions, cybersecurity services, networking, AV solutions, Zoho partner, Odoo implementation, Microsoft 365, Google Workspace, Tally on Cloud' }}">
@@ -111,6 +111,7 @@
                     ['label' => 'Zoho Solutions', 'route' => 'zoho'],
                     ['label' => 'Odoo Solutions', 'route' => 'odoo'],
                     ['label' => 'Mailing Solutions', 'route' => 'mailing'],
+                    ['label' => 'Email Security', 'route' => 'email-security'],
                     ['label' => 'Systems & Infra', 'route' => 'infrastructure'],
                     ['label' => 'AI Integration', 'route' => 'ai-integration'],
                 ]
@@ -195,24 +196,60 @@
     </button>
 
     <footer class="mt-16 border-t border-[var(--line)] bg-[var(--surface-strong)] py-10 backdrop-blur-xl">
-        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
             <div>
                 <p class="text-lg font-black text-[var(--text)]">Tekvista Infosolutions Pvt Ltd</p>
-                <p class="mt-2 text-sm leading-7 text-[var(--muted)]">Enterprise solutions company. Agile Innotech is part of the Tekvista ecosystem.</p>
-            </div>
-            <div>
-                <p class="section-kicker">Enterprise Focus</p>
-                <div class="mt-2 grid gap-1 text-sm text-[var(--muted)]">
+                <p class="mt-2 text-sm leading-7 text-[var(--muted)]">Enterprise IT delivery across cybersecurity, cloud, infrastructure, collaboration, and business applications.</p>
+                <div class="mt-4 grid gap-1 text-sm text-[var(--muted)]">
                     <span><i class="bi bi-shield-check mr-2"></i>Cybersecurity</span>
-                    <span><i class="bi bi-cloud-check mr-2"></i>Cloud workloads including Tally hosting</span>
-                    <span><i class="bi bi-envelope-at mr-2"></i>Microsoft, Google, Zoho Mail</span>
+                    <span><i class="bi bi-cloud-check mr-2"></i>Cloud and Infrastructure</span>
+                    <span><i class="bi bi-envelope-at mr-2"></i>Mail and Email Security</span>
                 </div>
             </div>
+
+            <div>
+                <p class="section-kicker">Quick Links</p>
+                <div class="mt-3 grid gap-2 text-sm text-[var(--muted)]">
+                    <a href="{{ route('home') }}" class="hover:text-[var(--accent)]">Home</a>
+                    <a href="{{ route('about') }}" class="hover:text-[var(--accent)]">About</a>
+                    <a href="{{ route('services') }}" class="hover:text-[var(--accent)]">Services</a>
+                    <a href="{{ route('csr') }}" class="hover:text-[var(--accent)]">CSR</a>
+                    <a href="{{ route('blog.index') }}" class="hover:text-[var(--accent)]">Blog</a>
+                    <a href="{{ route('contact') }}" class="hover:text-[var(--accent)]">Contact</a>
+                </div>
+            </div>
+
+            <div>
+                <p class="section-kicker">Service Links</p>
+                <div class="mt-3 grid gap-2 text-sm text-[var(--muted)]">
+                    <a href="{{ route('it-consultancy') }}" class="hover:text-[var(--accent)]">IT Consultancy</a>
+                    <a href="{{ route('cybersecurity') }}" class="hover:text-[var(--accent)]">Cybersecurity</a>
+                    <a href="{{ route('email-security') }}" class="hover:text-[var(--accent)]">Email Security</a>
+                    <a href="{{ route('cloud') }}" class="hover:text-[var(--accent)]">Cloud Solutions</a>
+                    <a href="{{ route('networking') }}" class="hover:text-[var(--accent)]">Networking</a>
+                    <a href="{{ route('it-support') }}" class="hover:text-[var(--accent)]">IT Support</a>
+                    <a href="{{ route('software-solutions') }}" class="hover:text-[var(--accent)]">Software Solutions</a>
+                    <a href="{{ route('av-solutions') }}" class="hover:text-[var(--accent)]">AV Solutions</a>
+                    <a href="{{ route('zoho') }}" class="hover:text-[var(--accent)]">Zoho Solutions</a>
+                    <a href="{{ route('odoo') }}" class="hover:text-[var(--accent)]">Odoo Solutions</a>
+                    <a href="{{ route('mailing') }}" class="hover:text-[var(--accent)]">Mailing Solutions</a>
+                    <a href="{{ route('infrastructure') }}" class="hover:text-[var(--accent)]">Systems and Infra</a>
+                    <a href="{{ route('ai-integration') }}" class="hover:text-[var(--accent)]">AI Integration</a>
+                </div>
+            </div>
+
             <div>
                 <p class="section-kicker">Contact</p>
-                <p class="mt-2 text-sm text-[var(--muted)]"><i class="bi bi-telephone-fill mr-2"></i><a href="tel:+919432246063">+91 9432246063</a></p>
-                <p class="text-sm text-[var(--muted)]"><i class="bi bi-envelope-fill mr-2"></i><a href="mailto:alok@tekvista.in">alok@tekvista.in</a></p>
-                <p class="text-sm text-[var(--muted)]"><i class="bi bi-geo-alt-fill mr-2"></i>Kolkata, India</p>
+                <p class="mt-3 text-sm text-[var(--muted)]"><i class="bi bi-telephone-fill mr-2"></i><a href="tel:+919432246063">+91 9432246063</a></p>
+                <p class="mt-1 text-sm text-[var(--muted)]"><i class="bi bi-telephone mr-2"></i><a href="tel:+913348001523">033 48001523</a></p>
+                <p class="mt-1 text-sm text-[var(--muted)]"><i class="bi bi-envelope-fill mr-2"></i><a href="mailto:alok@tekvista.in">alok@tekvista.in</a></p>
+                <p class="mt-1 text-sm text-[var(--muted)]"><i class="bi bi-geo-alt-fill mr-2"></i>Kolkata, India</p>
+            </div>
+        </div>
+        <div class="mx-auto mt-8 max-w-7xl border-t border-[var(--line)] px-4 pt-4 text-xs text-[var(--muted)] sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <p>© {{ now()->year }} Tekvista Infosolutions Pvt Ltd. All rights reserved.</p>
+                <a href="{{ url('/sitemap.xml') }}" class="hover:text-[var(--accent)]">Sitemap</a>
             </div>
         </div>
     </footer>

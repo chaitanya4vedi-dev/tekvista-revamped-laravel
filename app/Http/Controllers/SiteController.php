@@ -46,7 +46,7 @@ class SiteController extends Controller
 
         return view('pages.services', [
             ...$data,
-            ...$this->seo('Services', 'Explore Tekvista enterprise services across cybersecurity, cloud, networking, AV, Zoho, Odoo and mailing solutions.', 'enterprise services, cybersecurity, cloud services, networking solutions, av solutions, Zoho solutions, Odoo ERP, mailing solutions'),
+            ...$this->seo('Services', 'Explore Tekvista enterprise services across cybersecurity, cloud, networking, AV, Zoho, Odoo, mailing and email security solutions.', 'enterprise services, cybersecurity, cloud services, networking solutions, av solutions, Zoho solutions, Odoo ERP, mailing solutions, email security services'),
         ]);
     }
 
@@ -103,6 +103,11 @@ class SiteController extends Controller
     public function mailing(): View
     {
         return view('pages.services.mailing', [...$this->pageData(), ...$this->seo('Mailing Solutions', 'Enterprise mailing platforms including Microsoft 365, Google Workspace, and Zoho Mail.', 'microsoft 365 setup, google workspace migration, zoho mail setup, enterprise email security')]);
+    }
+
+    public function emailSecurity(): View
+    {
+        return view('pages.services.email-security', [...$this->pageData(), ...$this->seo('Email Security', 'Enterprise email security services for phishing defense, policy enforcement, and continuity planning.', 'email security services, barracuda, fortimail, sophos email, anti phishing gateway, dmarc implementation')]);
     }
 
     public function infrastructure(): View
@@ -256,6 +261,7 @@ class SiteController extends Controller
             ['name' => 'Zoho Solutions', 'route' => 'zoho', 'tagline' => 'Streamlined Business Operations.', 'summary' => 'Comprehensive integration, customization, and support for the full suite of Zoho applications.'],
             ['name' => 'Odoo Solutions', 'route' => 'odoo', 'tagline' => 'Enterprise Resource Planning.', 'summary' => 'End-to-end implementation of Odoo ERP, centralizing finance, inventory, manufacturing, and sales into one platform.'],
             ['name' => 'Mailing Solutions', 'route' => 'mailing', 'tagline' => 'Secure Enterprise Communication.', 'summary' => 'Implementing and managing industry-leading mailing platforms, including Microsoft 365, Google Workspace, and Zoho Mail.'],
+            ['name' => 'Email Security', 'route' => 'email-security', 'tagline' => 'Threat-Safe Mail Exchange.', 'summary' => 'Phishing defense, secure email gateway deployment, DMARC alignment, and continuous mailbox threat hardening.'],
             ['name' => 'Systems & Infra', 'route' => 'infrastructure', 'tagline' => 'Scalable backbone for modern teams', 'summary' => 'Servers, storage, virtualization, data-center planning, monitoring and resilient architecture for enterprise workloads.'],
             ['name' => 'AI Integration', 'route' => 'ai-integration', 'tagline' => 'Applied AI for Enterprise Teams.', 'summary' => 'Integrating AI-enabled workflows to improve productivity, decision support, and process automation.'],
         ];
@@ -302,7 +308,15 @@ class SiteController extends Controller
                 'Projects emphasize quality education access, digital enablement, and community-first development.',
                 'Our CSR model aligns sustainable business growth with practical social impact in education.',
             ],
-            'avOems' => ['Crestron', 'Biamp', 'Poly', 'Logitech', 'Barco', 'AMX'],
+            'avOems' => [
+                ['name' => 'LG', 'logo' => asset('images/tekvista/logos/lg.svg'), 'service' => 'Commercial displays, video walls, and digital signage deployment.'],
+                ['name' => 'Samsung', 'logo' => asset('images/tekvista/logos/samsung.svg'), 'service' => 'Professional signage, meeting room displays, and collaboration screens.'],
+                ['name' => 'Sony', 'logo' => asset('images/tekvista/logos/sony.svg'), 'service' => 'Professional displays, projectors, and enterprise visual communication systems.'],
+                ['name' => 'Epson', 'logo' => asset('images/tekvista/logos/epson.svg'), 'service' => 'Business and education projector rollout with lifecycle support.'],
+                ['name' => 'Panasonic', 'logo' => asset('images/tekvista/logos/panasonic.svg'), 'service' => 'Display infrastructure and integrated AV installation services.'],
+                ['name' => 'JBL', 'logo' => asset('images/tekvista/logos/jbl.svg'), 'service' => 'Conference room audio, PA, and speech-focused acoustic systems.'],
+                ['name' => 'Bose', 'logo' => asset('images/tekvista/logos/bose.svg'), 'service' => 'Enterprise audio collaboration and meeting room sound optimization.'],
+            ],
         ];
     }
 }

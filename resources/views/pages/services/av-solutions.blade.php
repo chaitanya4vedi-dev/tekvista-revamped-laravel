@@ -9,6 +9,11 @@
         <p class="section-kicker">AV Solutions</p>
         <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Transforming spaces with cutting-edge enterprise AV technology.</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">Tekvista Infosolutions delivers end-to-end AV solutions, from system design to integration and managed support, for boardrooms, training rooms, campuses, and event spaces.</p>
+        <div class="mt-7">
+            <a href="{{ route('contact', ['intent' => 'Discuss AV Solutions Project']) }}" class="btn-primary">
+                <i class="bi bi-send-check-fill"></i>Contact Us
+            </a>
+        </div>
     </div>
 </section>
 
@@ -33,10 +38,14 @@
 <section class="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="neo-card p-6 sm:p-8">
         <p class="section-kicker">AV OEM Ecosystem</p>
-        <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Technology partners for AV integration projects</h2>
+        <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Technology partners for AV integration projects in India delivery environments</h2>
         <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($avOems as $oem)
-                <div class="logo-chip"><span class="text-lg font-black tracking-wide text-[var(--text)]">{{ $oem }}</span></div>
+                <div class="logo-chip">
+                    <img src="{{ $oem['logo'] }}" alt="{{ $oem['name'] }}">
+                    <p class="logo-chip-title">{{ $oem['name'] }}</p>
+                    <p class="logo-chip-name">{{ $oem['service'] }}</p>
+                </div>
             @endforeach
         </div>
     </div>

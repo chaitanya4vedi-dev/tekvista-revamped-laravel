@@ -3,12 +3,17 @@
 @section('content')
 <section class="hero-shell">
     <img src="{{ $visuals['ops'] }}" alt="AI integration for enterprise operations" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(95deg,rgba(5,11,20,0.9),rgba(5,11,20,0.7),rgba(5,11,20,0.42))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(95deg,rgba(5,11,20,0.8),rgba(5,11,20,0.58),rgba(5,11,20,0.26))]"></div>
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker">AI Integration</p>
+        <p class="section-kicker hero-kicker-readable">AI Integration</p>
         <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Practical AI integration for enterprise teams.</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#def2ff]">We help organizations adopt AI where it creates measurable value: service operations, internal workflows, analytics, and assisted decision systems.</p>
+        <div class="mt-7">
+            <a href="{{ route('contact', ['intent' => 'Plan AI Integration']) }}" class="btn-primary">
+                <i class="bi bi-send-check-fill"></i>Contact Us
+            </a>
+        </div>
     </div>
 </section>
 

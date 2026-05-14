@@ -3,11 +3,16 @@
 @section('content')
 <section class="service-hero">
     <img src="{{ $visuals['odoo'] }}" alt="Odoo ERP implementation" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.95),rgba(5,7,13,0.78),rgba(5,7,13,0.45))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker">Odoo Solutions</p>
+        <p class="section-kicker hero-kicker-readable">Odoo Solutions</p>
         <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Odoo ERP that unifies finance, operations, and growth.</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Module selection, implementation, customization, and integration services for enterprise-grade Odoo delivery.</p>
+        <div class="mt-7">
+            <a href="{{ route('contact', ['intent' => 'Book Odoo Discovery Session']) }}" class="btn-primary">
+                <i class="bi bi-send-check-fill"></i>Contact Us
+            </a>
+        </div>
     </div>
 </section>
 
@@ -19,7 +24,7 @@
 
 <section class="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="neo-card p-6 sm:p-8">
-        <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo"></div>
+        <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo"><p class="logo-chip-name">Odoo ERP Platform</p></div>
     </div>
 </section>
 @endsection

@@ -3,11 +3,16 @@
 @section('content')
 <section class="service-hero">
     <img src="{{ $visuals['network'] }}" alt="Enterprise networking infrastructure" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.95),rgba(5,7,13,0.78),rgba(5,7,13,0.45))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker">Networking Solutions</p>
+        <p class="section-kicker hero-kicker-readable">Networking Solutions</p>
         <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Networks, servers, cloud and security engineered as one operating layer.</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Campus LAN, branch WAN, managed and unmanaged switching, firewall operations, secure remote access, and observable network governance.</p>
+        <div class="mt-7">
+            <a href="{{ route('contact', ['intent' => 'Get Networking Consultation']) }}" class="btn-primary">
+                <i class="bi bi-send-check-fill"></i>Contact Us
+            </a>
+        </div>
     </div>
 </section>
 

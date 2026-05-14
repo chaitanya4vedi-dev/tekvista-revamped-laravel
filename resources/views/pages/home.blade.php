@@ -50,6 +50,7 @@
                 'Zoho Solutions' => 'bi-diagram-3-fill',
                 'Odoo Solutions' => 'bi-kanban-fill',
                 'Mailing Solutions' => 'bi-envelope-at-fill',
+                'Email Security' => 'bi-shield-exclamation',
                 'AI Integration' => 'bi-cpu-fill',
                 'Systems & Infra' => 'bi-server',
             ];

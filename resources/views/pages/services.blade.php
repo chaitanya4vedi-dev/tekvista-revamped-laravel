@@ -9,6 +9,11 @@
         <p class="section-kicker">Tekvista Enterprise Services</p>
         <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Enterprise-grade IT solutions designed for scale and reliability.</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">A completely business-focused portfolio: cybersecurity, cloud (including Tally hosting), networking, Zoho, Odoo, and enterprise mailing ecosystems.</p>
+        <div class="mt-7">
+            <a href="{{ route('contact', ['intent' => 'Request Enterprise Service Consultation']) }}" class="btn-primary">
+                <i class="bi bi-send-check-fill"></i>Contact Us
+            </a>
+        </div>
     </div>
 </section>
 
@@ -25,6 +30,7 @@
             'Zoho Solutions' => 'bi-diagram-3-fill',
             'Odoo Solutions' => 'bi-kanban-fill',
             'Mailing Solutions' => 'bi-envelope-at-fill',
+            'Email Security' => 'bi-shield-exclamation',
             'AI Integration' => 'bi-cpu-fill',
             'Systems & Infra' => 'bi-server',
         ];
@@ -60,14 +66,14 @@
         <p class="section-kicker">Technology Ecosystem</p>
         <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Platforms and logos we actively support</h2>
         <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/microsoft.svg') }}" alt="Microsoft"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/googleworkspace.svg') }}" alt="Google"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/zoho.svg') }}" alt="Zoho"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/office-365.png') }}" alt="Microsoft 365"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/googlecloud.svg') }}" alt="Google Cloud"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/tally.png') }}" alt="Tally"></div>
-            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/zohomail.svg') }}" alt="Zoho Mail"></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/microsoft.svg') }}" alt="Microsoft"><p class="logo-chip-name">Microsoft</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/googleworkspace.svg') }}" alt="Google"><p class="logo-chip-name">Google Workspace</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/zoho.svg') }}" alt="Zoho"><p class="logo-chip-name">Zoho</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo"><p class="logo-chip-name">Odoo ERP</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/office-365.png') }}" alt="Microsoft 365"><p class="logo-chip-name">Microsoft 365</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/googlecloud.svg') }}" alt="Google Cloud"><p class="logo-chip-name">Google Cloud</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/tally.png') }}" alt="Tally"><p class="logo-chip-name">Tally on Cloud</p></div>
+            <div class="logo-chip"><img src="{{ asset('images/tekvista/logos/zohomail.svg') }}" alt="Zoho Mail"><p class="logo-chip-name">Zoho Mail</p></div>
         </div>
     </div>
 </section>

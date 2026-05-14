@@ -2,19 +2,33 @@
     $route = request()->route()?->getName();
     $waBase = 'https://wa.me/919051433313?text=';
     $ctaMap = [
+        'it-consultancy' => ['title' => 'Need IT Advisory for the Next 12 Months?', 'copy' => 'Align technology investments, security controls, and execution priorities with your growth plan.', 'intent' => 'Book IT Consultancy Session'],
         'cybersecurity' => ['title' => 'Need a Security Posture Review?', 'copy' => 'Get a targeted assessment for endpoint risk, access control, and incident response readiness.', 'intent' => 'Request Cybersecurity Assessment'],
+        'email-security' => ['title' => 'Stop Phishing and Business Email Compromise', 'copy' => 'Deploy layered email security with policy tuning, continuity planning, and user awareness.', 'intent' => 'Discuss Email Security Rollout'],
         'cloud' => ['title' => 'Planning Enterprise Cloud and Tally Hosting?', 'copy' => 'Design migration waves, Tally cloud architecture, backup policy, and cost governance in one rollout.', 'intent' => 'Plan Cloud and Tally Hosting Rollout'],
         'networking' => ['title' => 'Upgrade Your Network Architecture', 'copy' => 'Design LAN/WAN and SD-WAN with visibility, security, and performance goals.', 'intent' => 'Get Networking Consultation'],
+        'it-support' => ['title' => 'Strengthen Daily IT Operations', 'copy' => 'Set up monitoring, incident response, and lifecycle support with measurable SLA targets.', 'intent' => 'Discuss IT Support Model'],
+        'software-solutions' => ['title' => 'Build Business Software that Actually Gets Adopted', 'copy' => 'Plan integration-first software delivery with secure coding and structured rollouts.', 'intent' => 'Scope Software Solution Project'],
+        'ai-integration' => ['title' => 'Bring AI into Real Business Workflows', 'copy' => 'Move from demos to governed AI implementation with measurable operational outcomes.', 'intent' => 'Plan AI Integration'],
         'av-solutions' => ['title' => 'Design AV for Boardrooms and Campuses', 'copy' => 'Plan conferencing, signage, and control systems for productive collaboration spaces.', 'intent' => 'Discuss AV Solutions Project'],
         'zoho' => ['title' => 'Implement Zoho with Process Clarity', 'copy' => 'We align CRM, mail, and automation around your business workflow.', 'intent' => 'Discuss Zoho Implementation'],
         'odoo' => ['title' => 'Roll Out Odoo in Phases', 'copy' => 'Plan module-by-module implementation for lower risk and faster adoption.', 'intent' => 'Book Odoo Discovery Session'],
         'mailing' => ['title' => 'Secure Business Mail for Every Team', 'copy' => 'Set up Microsoft, Google, or Zoho mail with migration and policy controls.', 'intent' => 'Configure Enterprise Mailing Platform'],
-        'blog.index' => ['title' => 'Need Help Applying These Insights?', 'copy' => 'Talk to our team and convert strategy into implementation milestones.', 'intent' => 'Book Strategy Consultation'],
-        'blog.show' => ['title' => 'Want This Implemented in Your Organization?', 'copy' => 'Get a practical rollout plan based on your current systems and goals.', 'intent' => 'Discuss Implementation Plan'],
+        'infrastructure' => ['title' => 'Need Infrastructure Rationalization?', 'copy' => 'Map compute, storage, backup, and network controls into one governable operating model.', 'intent' => 'Review Infrastructure Roadmap'],
+        'csr' => ['title' => 'Partner with Tekvista CSR Programs', 'copy' => 'Collaborate on education-focused CSR initiatives with measurable community outcomes.', 'intent' => 'Discuss CSR Partnership'],
         'services' => ['title' => 'Build a Full Enterprise IT Roadmap', 'copy' => 'Combine security, cloud, networking, and business platforms into one scalable operating model.', 'intent' => 'Request Enterprise Roadmap'],
     ];
 
     $cta = $ctaMap[$route] ?? null;
+    $excludeCta = request()->routeIs(['home', 'about', 'blog.*', 'contact', 'login', 'register', 'profile.*', 'blog.manage.*']);
+
+    if (!$cta && !$excludeCta) {
+        $cta = [
+            'title' => 'Need a Direct Consultation?',
+            'copy' => 'Tell us your current challenge and we can route it to the right delivery team quickly.',
+            'intent' => 'Book Consultation with Tekvista',
+        ];
+    }
 @endphp
 
 @if ($cta)

@@ -20,6 +20,7 @@ Route::get('/av-solutions', [SiteController::class, 'avSolutions'])->name('av-so
 Route::get('/zoho', [SiteController::class, 'zoho'])->name('zoho');
 Route::get('/odoo', [SiteController::class, 'odoo'])->name('odoo');
 Route::get('/mailing', [SiteController::class, 'mailing'])->name('mailing');
+Route::get('/email-security', [SiteController::class, 'emailSecurity'])->name('email-security');
 Route::get('/infrastructure', [SiteController::class, 'infrastructure'])->name('infrastructure');
 Route::get('/csr', [SiteController::class, 'csr'])->name('csr');
 Route::get('/contact', [SiteController::class, 'contactPage'])->name('contact');
@@ -60,6 +61,7 @@ Route::get('/sitemap.xml', function () {
         route('zoho'),
         route('odoo'),
         route('mailing'),
+        route('email-security'),
         route('infrastructure'),
         route('csr'),
         route('contact'),
@@ -83,6 +85,7 @@ foreach ([
     'software.html' => '/services',
     'cloud.html' => '/cloud',
     'cybersecurity.html' => '/cybersecurity',
+    'email-security.html' => '/email-security',
     'systems.html' => '/infrastructure',
     'av.html' => '/av-solutions',
     'consultancy.html' => '/it-consultancy',
