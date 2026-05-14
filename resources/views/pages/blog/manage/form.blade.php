@@ -14,7 +14,7 @@
         <h1 class="mt-2 break-words text-2xl font-black text-[var(--text)] sm:text-3xl">{{ $isEdit ? 'Edit Enterprise Blog Post' : 'Write Enterprise Blog Post' }}</h1>
         <p class="mt-2 text-sm text-[var(--muted)]">Publishing timezone for all posts is fixed to Asia/Kolkata.</p>
 
-        <form method="POST" action="{{ $isEdit ? route('blog.manage.update', $post->id) : route('blog.manage.store') }}" enctype="multipart/form-data" class="mt-6 grid min-w-0 gap-4">
+        <form id="blog-post-form" method="POST" action="{{ $isEdit ? route('blog.manage.update', $post->id) : route('blog.manage.store') }}" enctype="multipart/form-data" class="mt-6 grid min-w-0 gap-4">
             @csrf
             @if($isEdit)
                 @method('PATCH')
@@ -30,8 +30,9 @@
                 <textarea name="excerpt" class="input-field w-full min-w-0" rows="3" maxlength="320">{{ old('excerpt', $isEdit ? $post->excerpt : '') }}</textarea>
             </label>
             <label class="grid gap-2 text-sm font-bold text-[var(--text)]">Content
-                <textarea id="content-editor" name="content" class="input-field w-full min-w-0" rows="14" required>{{ old('content', $isEdit ? $post->content : '') }}</textarea>
+                <textarea id="content-editor" name="content" class="input-field w-full min-w-0" rows="14">{{ old('content', $isEdit ? $post->content : '') }}</textarea>
                 <span class="text-xs font-medium text-[var(--muted)]">Minimum recommended content length: 40 characters.</span>
+                <span id="content-client-error" class="hidden rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">Content must be at least 40 characters.</span>
             </label>
 
             <div class="grid min-w-0 gap-4 sm:grid-cols-2">
@@ -155,12 +156,72 @@
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
+    const blogPostForm = document.querySelector('#blog-post-form');
+    const contentField = document.querySelector('#content-editor');
+    const contentClientError = document.querySelector('#content-client-error');
+    let contentEditor = null;
+    const CONTENT_MIN_CHARS = 40;
+
+    const clearContentClientError = () => {
+        if (!contentClientError) return;
+        contentClientError.classList.add('hidden');
+    };
+
+    const setContentClientError = (message) => {
+        if (!contentClientError) return;
+        contentClientError.textContent = message;
+        contentClientError.classList.remove('hidden');
+    };
+
+    const plainTextFromHtml = (html) => {
+        const container = document.createElement('div');
+        container.innerHTML = html || '';
+        return (container.textContent || container.innerText || '')
+            .replace(/\u00A0/g, ' ')
+            .trim();
+    };
+
+    const syncEditorToTextarea = () => {
+        if (contentEditor && contentField) {
+            contentField.value = contentEditor.getData();
+        }
+    };
+
+    if (blogPostForm && contentField) {
+        blogPostForm.addEventListener('submit', (event) => {
+            syncEditorToTextarea();
+            const plainText = plainTextFromHtml(contentField.value);
+
+            if (plainText.length < CONTENT_MIN_CHARS) {
+                event.preventDefault();
+                setContentClientError(`Content must be at least ${CONTENT_MIN_CHARS} characters.`);
+
+                const contentBlock = document.querySelector('.ck-editor') || contentField;
+                contentBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (contentEditor) {
+                    contentEditor.editing.view.focus();
+                } else {
+                    contentField.focus();
+                }
+                return;
+            }
+
+            clearContentClientError();
+        });
+    }
+
     ClassicEditor.create(document.querySelector('#content-editor'), {
         toolbar: [
             'heading', '|',
             'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
             'blockQuote', 'insertTable', 'undo', 'redo'
         ]
+    }).then((editor) => {
+        contentEditor = editor;
+        editor.model.document.on('change:data', () => {
+            syncEditorToTextarea();
+            clearContentClientError();
+        });
     }).catch((error) => {
         console.error(error);
     });
