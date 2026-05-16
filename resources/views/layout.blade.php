@@ -283,11 +283,6 @@
                     <span><i class="bi bi-cloud-check mr-2"></i>Cloud and Infrastructure</span>
                     <span><i class="bi bi-envelope-at mr-2"></i>Mail and Email Security</span>
                 </div>
-                <div class="mt-4 grid gap-2 text-xs">
-                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-light)] px-3 py-1 text-[var(--text)]"><i class="bi bi-award text-[var(--accent)]"></i>ISO 9001 Reference</span>
-                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-light)] px-3 py-1 text-[var(--text)]"><i class="bi bi-shield-check text-[var(--accent)]"></i>ISO/IEC 27001 Reference</span>
-                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-light)] px-3 py-1 text-[var(--text)]"><i class="bi bi-diagram-3 text-[var(--accent)]"></i>ISO/IEC 27003 Guidance</span>
-                </div>
             </div>
 
             <div>

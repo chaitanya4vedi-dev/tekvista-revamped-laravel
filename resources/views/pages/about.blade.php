@@ -47,24 +47,6 @@
 </section>
 
 <section class="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="light-panel p-6">
-        <p class="section-kicker text-[#0b8f9a]">Assurance and Standards</p>
-        <h2 class="mt-2 text-2xl font-black text-[#0d283d]">ISO and quality governance references for enterprise buyers</h2>
-        <p class="mt-3 text-sm leading-7 text-[#244761]">Tekvista delivery teams align project execution with security and quality control frameworks used across the broader Tekvista and Agile Innotech business operations.</p>
-        <div class="mt-5 grid gap-4 md:grid-cols-3">
-            @foreach ($assuranceBadges as $badge)
-                <article class="rounded-xl border border-[#0a8f99]/20 bg-white/70 p-4">
-                    <p class="text-xs font-mono font-bold tracking-wide text-[#00796b]">{{ $badge['subtitle'] }}</p>
-                    <h3 class="mt-2 text-lg font-black text-[#0d283d]"><i class="bi {{ $badge['icon'] }} mr-2 text-[#0b8f9a]"></i>{{ $badge['title'] }}</h3>
-                    <p class="mt-2 text-sm leading-6 text-[#244761]">{{ $badge['note'] }}</p>
-                </article>
-            @endforeach
-        </div>
-        <p class="mt-4 text-xs leading-6 text-[#4b697f]">Procurement note: Certificate numbers, scope boundaries, and validity windows are shared during due-diligence and commercial onboarding workflows.</p>
-    </div>
-</section>
-
-<section class="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="grid gap-6 lg:grid-cols-3">
         <article class="light-panel p-6 lg:col-span-2">
             <p class="section-kicker text-[#0b8f9a]">Founder Journey</p>

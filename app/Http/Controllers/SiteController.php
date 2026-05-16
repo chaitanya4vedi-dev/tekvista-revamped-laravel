@@ -500,11 +500,6 @@ class SiteController extends Controller
                 'Company Status' => 'Active',
                 'Business Activity' => 'Enterprise IT and computer-related services',
             ],
-            'assuranceBadges' => [
-                ['title' => 'ISO/IEC 27001', 'subtitle' => 'Information Security Management', 'note' => 'Security control baseline reference for enterprise engagements.', 'icon' => 'bi-shield-check'],
-                ['title' => 'ISO/IEC 27003', 'subtitle' => 'ISMS Implementation Guidance', 'note' => 'Guidance standard referenced for implementation maturity (non-certifiable standard).', 'icon' => 'bi-diagram-3'],
-                ['title' => 'ISO 9001', 'subtitle' => 'Quality Management', 'note' => 'Quality-process alignment for delivery and support operations.', 'icon' => 'bi-award'],
-            ],
             'legalPolicies' => collect($this->legalPolicies())
                 ->map(fn (array $policy, string $slug) => ['slug' => $slug, 'title' => $policy['title']])
                 ->values()
