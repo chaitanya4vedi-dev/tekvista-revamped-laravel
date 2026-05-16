@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Http\Middleware\VerifyCsrfToken;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -24,6 +25,8 @@ class ExampleTest extends TestCase
 
     public function test_contact_inquiry_can_be_submitted(): void
     {
+        $this->withoutMiddleware(VerifyCsrfToken::class);
+
         $response = $this->post('/contact', [
             'name' => 'Aditi Sen',
             'email' => 'aditi@example.com',

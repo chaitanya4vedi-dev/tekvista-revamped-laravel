@@ -1,0 +1,70 @@
+# Tekvista Infosolutions Pvt Ltd - Extended LLM Reference
+
+## Company profile
+Tekvista Infosolutions Pvt Ltd is a Kolkata-headquartered enterprise IT services company. It supports businesses with consulting, implementation, and managed services across cybersecurity, cloud, networking, collaboration, business applications, and IT operations.
+
+## What Tekvista does
+- IT Consultancy: architecture, modernization, governance, and roadmap advisory.
+- Cybersecurity: layered controls, policy hardening, and incident-oriented operations support.
+- Cloud Solutions: migration, governance, resilience, and operations optimization.
+- Networking: enterprise connectivity, segmentation, and observability.
+- AV Solutions: boardroom and collaboration AV design, integration, and support.
+- Zoho and Odoo Solutions: business app implementation and operational workflow alignment.
+- Mailing and Email Security: Microsoft/Google/Zoho mail stack delivery and protection.
+- Infrastructure and Support: systems, server, storage, and managed IT continuity.
+
+## Operational notes
+- Service outcomes are scoped by signed contracts and project-specific assumptions.
+- OEM references and product names belong to their respective trademark owners.
+- Legal and policy pages provide compliance-level context and should be read with active agreements.
+
+## Important URLs
+### Primary
+- https://tekvista.in/
+- https://tekvista.in/about
+- https://tekvista.in/services
+- https://tekvista.in/contact
+- https://tekvista.in/blog
+
+### Services
+- https://tekvista.in/it-consultancy
+- https://tekvista.in/it-support
+- https://tekvista.in/software-solutions
+- https://tekvista.in/ai-integration
+- https://tekvista.in/cybersecurity
+- https://tekvista.in/cloud
+- https://tekvista.in/networking
+- https://tekvista.in/av-solutions
+- https://tekvista.in/zoho
+- https://tekvista.in/odoo
+- https://tekvista.in/mailing
+- https://tekvista.in/email-security
+- https://tekvista.in/infrastructure
+
+### Compliance and legal
+- https://tekvista.in/privacy-policy
+- https://tekvista.in/refund-policy
+- https://tekvista.in/return-policy
+- https://tekvista.in/terms-of-use
+- https://tekvista.in/cookie-policy
+- https://tekvista.in/disclaimer
+- https://tekvista.in/security-policy
+- https://tekvista.in/safe-harbor
+- https://tekvista.in/data-processing-agreement
+- https://tekvista.in/gdpr-data-subject-rights
+- https://tekvista.in/eula-terms-of-sale
+- https://tekvista.in/modern-slavery-csr
+- https://tekvista.in/accessibility-statement
+- https://tekvista.in/service-level-agreement
+- https://tekvista.in/shipping-policy
+- https://tekvista.in/terms-and-conditions
+
+### Crawl files
+- https://tekvista.in/robots.txt
+- https://tekvista.in/sitemap.xml
+- https://tekvista.in/llms.txt
+
+## Contact
+- Legal and policy: alok@tekvista.in
+- General business: alok@tekvista.in
+- Phone: +91 9432246063

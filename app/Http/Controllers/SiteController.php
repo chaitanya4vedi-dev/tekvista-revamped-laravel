@@ -125,6 +125,23 @@ class SiteController extends Controller
         return view('pages.contact', [...$this->pageData(), ...$this->seo('Contact', 'Contact Tekvista Infosolutions for IT consulting, implementation and managed support.', 'contact tekvista infosolutions, enterprise IT consultation kolkata')]);
     }
 
+    public function policy(string $slug): View
+    {
+        $policies = $this->legalPolicies();
+        abort_if(!isset($policies[$slug]), 404);
+
+        $policy = $policies[$slug];
+
+        return view('pages.policy', [
+            ...$this->pageData(),
+            ...$this->seo($policy['title'], $policy['metaDescription'], $policy['metaKeywords']),
+            'policy' => $policy,
+            'policySlug' => $slug,
+            'policyIndex' => $policies,
+            'policyEffectiveDate' => now(self::PUBLISH_TZ)->format('F j, Y'),
+        ]);
+    }
+
     public function blogIndex(Request $request): View
     {
         $data = $this->pageData();
@@ -229,6 +246,187 @@ class SiteController extends Controller
         ];
     }
 
+    private function legalPolicies(): array
+    {
+        return [
+            'privacy-policy' => [
+                'title' => 'Privacy Policy',
+                'metaDescription' => 'How Tekvista Infosolutions Private Limited collects, processes, secures, and retains personal and business data across IT consulting and managed services.',
+                'metaKeywords' => 'Tekvista privacy policy, data protection policy, DPDP compliance support, business data handling',
+                'summary' => 'This Privacy Policy explains how Tekvista Infosolutions Private Limited handles personal and operational data when you use our website, submit inquiries, or engage us for enterprise technology services.',
+                'sections' => [
+                    ['heading' => 'Information We Collect', 'points' => ['Contact details shared in forms, calls, emails, and project discussions.', 'Project and service records such as requirements, ticket history, and implementation notes.', 'Security and technical telemetry including IP address, user-agent, and request logs for abuse prevention.']],
+                    ['heading' => 'How We Use Information', 'points' => ['To respond to consultations, deliver contracted services, and provide ongoing support.', 'To maintain service quality, prevent fraud, and strengthen infrastructure security.', 'To comply with lawful requests, accounting obligations, and record-retention needs.']],
+                    ['heading' => 'Data Rights and Contact', 'points' => ['You may request access, correction, or deletion of personal data where applicable law permits.', 'Privacy requests can be sent to alok@tekvista.in with your organization details and request scope.']],
+                ],
+            ],
+            'refund-policy' => [
+                'title' => 'Refund Policy',
+                'metaDescription' => 'Refund terms for Tekvista Infosolutions service engagements, software subscriptions, and implementation projects.',
+                'metaKeywords' => 'Tekvista refund policy, IT service refund, implementation refund terms',
+                'summary' => 'Refunds are governed by the commercial scope, milestone acceptance, and third-party licensing conditions defined in the signed proposal or agreement.',
+                'sections' => [
+                    ['heading' => 'General Refund Framework', 'points' => ['Advance retainers and discovery fees are generally non-refundable once engagement starts.', 'Milestone-based work is billable for accepted deliverables and effort completed.', 'Refund eligibility is evaluated against approved scope, delivery evidence, and signed terms.']],
+                    ['heading' => 'Subscription and License Components', 'points' => ['Third-party licenses, cloud fees, and OEM subscriptions follow provider refund rules.', 'Provisioned license keys or activated subscriptions are typically non-refundable.']],
+                    ['heading' => 'Escalation Process', 'points' => ['Send refund requests to alok@tekvista.in within seven business days of invoiced dispute.', 'Include invoice number, project reference, and reason for refund review.']],
+                ],
+            ],
+            'return-policy' => [
+                'title' => 'Return Policy',
+                'metaDescription' => 'Return process for hardware and bundled IT products supplied through Tekvista Infosolutions procurement channels.',
+                'metaKeywords' => 'Tekvista return policy, IT hardware return, DOA replacement terms',
+                'summary' => 'Return terms apply mainly to physical products procured through Tekvista-led supply and are subject to OEM/authorized distributor conditions.',
+                'sections' => [
+                    ['heading' => 'Eligible Return Cases', 'points' => ['Dead-on-arrival products reported within 48 hours of delivery.', 'Wrong SKU, incomplete shipment, or transit-damaged package with delivery evidence.', 'Manufacturer-approved replacement cases under valid warranty scope.']],
+                    ['heading' => 'Non-Returnable Cases', 'points' => ['Opened software media, activated licenses, and custom-ordered items.', 'Consumables and products damaged due to misuse or unauthorized changes.']],
+                    ['heading' => 'Return Workflow', 'points' => ['Write to alok@tekvista.in with invoice, serial number, and issue visuals.', 'RMA timelines depend on OEM validation and logistics partner pick-up cycles.']],
+                ],
+            ],
+            'terms-of-use' => [
+                'title' => 'Terms of Use',
+                'metaDescription' => 'Website usage terms for Tekvista Infosolutions including acceptable use, intellectual property, and liability boundaries.',
+                'metaKeywords' => 'Tekvista terms of use, website use terms, acceptable use policy',
+                'summary' => 'By using this website, you agree to lawful usage, accurate inquiry submissions, and respect for intellectual property and security boundaries.',
+                'sections' => [
+                    ['heading' => 'Acceptable Use', 'points' => ['Do not attempt unauthorized access, scraping abuse, or service disruption.', 'Do not submit false, harmful, or unlawful content through forms and channels.']],
+                    ['heading' => 'Content and IP', 'points' => ['Website copy, graphics, and solution descriptions remain property of Tekvista and respective trademark owners.', 'Brand logos shown on service pages are used only for partner ecosystem representation.']],
+                    ['heading' => 'Service Dependency', 'points' => ['Website information is indicative and may be superseded by signed commercial agreements.', 'Tekvista may revise pages, offerings, and policies without prior notice.']],
+                ],
+            ],
+            'cookie-policy' => [
+                'title' => 'Cookie Policy',
+                'metaDescription' => 'Cookie and tracking practices for Tekvista Infosolutions website, including functional and security cookies.',
+                'metaKeywords' => 'Tekvista cookie policy, website cookies, session cookies',
+                'summary' => 'Our site uses limited cookies and local-storage mechanisms to maintain sessions, security, and basic website functionality.',
+                'sections' => [
+                    ['heading' => 'Cookie Categories Used', 'points' => ['Essential session cookies for login state, CSRF security, and request integrity.', 'Preference storage to remember lightweight UI settings and usability choices.']],
+                    ['heading' => 'How to Manage Cookies', 'points' => ['You can clear or block cookies in browser settings, but core site features may degrade.', 'Security-related cookies are required for authenticated and form-based interactions.']],
+                    ['heading' => 'Policy Updates', 'points' => ['Cookie practices may change when new features or analytics tooling is introduced.', 'Material updates will be reflected on this page with revised effective date.']],
+                ],
+            ],
+            'disclaimer' => [
+                'title' => 'Disclaimer',
+                'metaDescription' => 'Legal disclaimer for information and service descriptions published by Tekvista Infosolutions Private Limited.',
+                'metaKeywords' => 'Tekvista disclaimer, website legal disclaimer, IT advisory disclaimer',
+                'summary' => 'Information on this website is provided for general business context and does not constitute legal, tax, or regulatory advice.',
+                'sections' => [
+                    ['heading' => 'Informational Nature', 'points' => ['Service details are indicative and may vary by project complexity and customer environment.', 'Compliance references describe implementation support and not legal representation.']],
+                    ['heading' => 'No Warranty of Continuous Availability', 'points' => ['Website availability may be affected by maintenance windows, network outages, or force majeure events.', 'Tekvista is not liable for indirect losses arising solely from website downtime.']],
+                    ['heading' => 'Third-Party References', 'points' => ['External brand, OEM, and platform names belong to their respective owners.', 'Links to third-party resources are provided for convenience and may change without notice.']],
+                ],
+            ],
+            'security-policy' => [
+                'title' => 'Security Policy',
+                'metaDescription' => 'Security governance commitments for Tekvista Infosolutions covering access control, incident response, and infrastructure hardening.',
+                'metaKeywords' => 'Tekvista security policy, cybersecurity governance, incident response',
+                'summary' => 'Tekvista operates a security-first delivery model with layered controls across identity, infrastructure, endpoint, and operational support processes.',
+                'sections' => [
+                    ['heading' => 'Control Baseline', 'points' => ['Least-privilege access, MFA controls, and role-bound administrative rights.', 'Segmentation, endpoint security, and monitoring workflows for risk reduction.', 'Change-management and approval workflows for production-impacting actions.']],
+                    ['heading' => 'Incident Handling', 'points' => ['Priority-based triage, root-cause documentation, and customer communication cadence.', 'Escalation routing for critical alerts and suspected compromise events.']],
+                    ['heading' => 'Customer Shared Responsibility', 'points' => ['Some controls require customer-side participation such as policy approvals and user training.', 'Final risk acceptance remains with the data owner organization.']],
+                ],
+            ],
+            'safe-harbor' => [
+                'title' => 'Safe Harbor',
+                'metaDescription' => 'Forward-looking statements and implementation assumptions for Tekvista service roadmaps and projected outcomes.',
+                'metaKeywords' => 'Tekvista safe harbor, forward-looking statements, implementation assumptions',
+                'summary' => 'Roadmap statements, estimation references, and performance forecasts are forward-looking and depend on evolving business, technology, and regulatory conditions.',
+                'sections' => [
+                    ['heading' => 'Forward-Looking Nature', 'points' => ['Projected timelines and outcomes are estimates, not guarantees.', 'Dependency changes, third-party delays, and scope shifts can impact plans.']],
+                    ['heading' => 'Decision Responsibility', 'points' => ['Customers should validate strategic decisions with internal legal, finance, and risk stakeholders.', 'Commercial commitments become binding only through executed agreements.']],
+                ],
+            ],
+            'data-processing-agreement' => [
+                'title' => 'Data Processing Agreement',
+                'metaDescription' => 'Data Processing Agreement terms describing controller-processor responsibilities for Tekvista-managed services.',
+                'metaKeywords' => 'Tekvista DPA, data processing agreement, controller processor terms',
+                'summary' => 'This DPA outlines baseline data processing principles when Tekvista processes customer data for managed operations, support, migration, or implementation services.',
+                'sections' => [
+                    ['heading' => 'Roles and Scope', 'points' => ['Customer typically acts as data controller and Tekvista acts as processor for defined service scope.', 'Processing is limited to documented instructions and contractual purpose.']],
+                    ['heading' => 'Security and Subprocessors', 'points' => ['Reasonable technical and organizational safeguards are applied for confidentiality and integrity.', 'Subprocessor use may occur for cloud or tooling dependencies under suitable contractual controls.']],
+                    ['heading' => 'Retention and Deletion', 'points' => ['Data retention is linked to service necessity, legal obligations, and backup-cycle constraints.', 'Upon service closure, deletion or return workflows are handled as contractually agreed.']],
+                ],
+            ],
+            'gdpr-data-subject-rights' => [
+                'title' => 'GDPR Data Subject Rights',
+                'metaDescription' => 'How Tekvista supports GDPR data subject rights requests for access, correction, portability, and deletion where applicable.',
+                'metaKeywords' => 'Tekvista GDPR rights, data subject request, privacy rights support',
+                'summary' => 'Where GDPR applies, Tekvista supports lawful handling of data subject requests in coordination with the responsible customer controller.',
+                'sections' => [
+                    ['heading' => 'Rights We Help Facilitate', 'points' => ['Access, rectification, erasure, restriction, and portability requests.', 'Objection handling and consent-related withdrawal support when applicable.']],
+                    ['heading' => 'How to Submit Requests', 'points' => ['Send request context to alok@tekvista.in with identity and relationship details.', 'Requests may be routed to the customer controller for formal authorization and response.']],
+                    ['heading' => 'Verification and Timelines', 'points' => ['Identity and legal basis checks are required before data disclosure or action.', 'Response windows depend on applicable law and controller instructions.']],
+                ],
+            ],
+            'eula-terms-of-sale' => [
+                'title' => 'EULA Terms of Sale',
+                'metaDescription' => 'Software usage and commercial terms for Tekvista-delivered software licenses, bundles, and integration services.',
+                'metaKeywords' => 'Tekvista EULA, software terms of sale, IT licensing terms',
+                'summary' => 'These terms apply to software licenses, implementation components, and value-added bundles sold or provisioned through Tekvista engagements.',
+                'sections' => [
+                    ['heading' => 'License Grant and Limitations', 'points' => ['Software usage rights are limited to scope permitted by vendor license terms.', 'Unauthorized redistribution, reverse engineering, or misuse is prohibited unless legally permitted.']],
+                    ['heading' => 'Commercial Terms', 'points' => ['Pricing, taxes, and renewal obligations are governed by invoice and signed proposal.', 'Activation or provisioning of software usually marks non-cancellable commitment for that cycle.']],
+                    ['heading' => 'Support Boundary', 'points' => ['Tekvista support scope is defined by plan, SLA, and vendor escalation matrix.', 'Feature roadmaps and upstream bug fixes remain subject to software publisher control.']],
+                ],
+            ],
+            'modern-slavery-csr' => [
+                'title' => 'Modern Slavery CSR',
+                'metaDescription' => 'Tekvista commitment to ethical labor practices, anti-exploitation controls, and responsible procurement.',
+                'metaKeywords' => 'Tekvista modern slavery statement, ethical sourcing, CSR labor policy',
+                'summary' => 'Tekvista does not tolerate forced labor, bonded labor, child exploitation, or unethical workforce practices in our operations and supply interactions.',
+                'sections' => [
+                    ['heading' => 'Core Commitment', 'points' => ['Respect for human rights, fair treatment, and lawful employment practices.', 'Expectation that suppliers and partners adhere to ethical labor principles.']],
+                    ['heading' => 'Risk Controls', 'points' => ['Supplier onboarding checks and contract-level compliance expectations where feasible.', 'Escalation process for reported misconduct or policy violations.']],
+                    ['heading' => 'CSR Linkage', 'points' => ['Our CSR model emphasizes dignity, inclusion, and community-first development outcomes.', 'Concerns can be reported to alok@tekvista.in for review.']],
+                ],
+            ],
+            'accessibility-statement' => [
+                'title' => 'Accessibility Statement',
+                'metaDescription' => 'Accessibility commitment for Tekvista digital experiences, including usability improvements for diverse users.',
+                'metaKeywords' => 'Tekvista accessibility statement, inclusive design, website accessibility',
+                'summary' => 'Tekvista works to improve accessibility and inclusive usability across devices, browsers, and assistive contexts.',
+                'sections' => [
+                    ['heading' => 'Current Accessibility Focus', 'points' => ['Readable typography, semantic headings, alternative text, and responsive layouts.', 'Keyboard-friendly interaction patterns for core navigation and forms.']],
+                    ['heading' => 'Continuous Improvement', 'points' => ['Accessibility refinements are applied as templates and components evolve.', 'User feedback is prioritized when specific blockers are reported.']],
+                    ['heading' => 'Requesting Assistance', 'points' => ['If you face an accessibility issue, email alok@tekvista.in with page URL and issue details.', 'We will aim to provide practical alternatives and remediation guidance.']],
+                ],
+            ],
+            'service-level-agreement' => [
+                'title' => 'Service Level Agreement',
+                'metaDescription' => 'SLA baseline for Tekvista managed services covering response windows, severity levels, and support responsibilities.',
+                'metaKeywords' => 'Tekvista SLA, managed IT response time, support agreement',
+                'summary' => 'SLA commitments are finalized in project contracts, but this page provides the baseline approach for support prioritization and response governance.',
+                'sections' => [
+                    ['heading' => 'Severity and Response', 'points' => ['Critical incidents receive accelerated triage and active communication updates.', 'Standard and low-priority requests are handled by queue-based operational scheduling.']],
+                    ['heading' => 'Coverage Assumptions', 'points' => ['SLA clocks apply during agreed support windows unless contract states 24x7 coverage.', 'Response time and resolution time are distinct metrics and may differ by issue class.']],
+                    ['heading' => 'Customer Responsibilities', 'points' => ['Provide authorized contacts, clear issue details, and required environment access.', 'Coordinate internal approvers for change and remediation actions.']],
+                ],
+            ],
+            'shipping-policy' => [
+                'title' => 'Shipping Policy',
+                'metaDescription' => 'Shipping, dispatch, and delivery policy for hardware and physical items fulfilled through Tekvista Infosolutions.',
+                'metaKeywords' => 'Tekvista shipping policy, IT hardware dispatch, delivery terms',
+                'summary' => 'Shipping terms apply when Tekvista handles procurement and dispatch of physical devices, accessories, or infrastructure components.',
+                'sections' => [
+                    ['heading' => 'Dispatch and Delivery', 'points' => ['Dispatch timelines depend on stock availability, OEM lead times, and commercial clearance.', 'Delivery estimates are indicative and subject to logistics partner performance.']],
+                    ['heading' => 'Delivery Verification', 'points' => ['Recipients should inspect packaging condition at delivery and report issues promptly.', 'Proof-of-delivery and courier status logs are treated as primary delivery evidence.']],
+                    ['heading' => 'Shipping Exceptions', 'points' => ['Remote-zone deliveries, force majeure, or regulatory constraints may delay shipment.', 'Insurance, handling, or expedited freight charges may apply where explicitly agreed.']],
+                ],
+            ],
+            'terms-and-conditions' => [
+                'title' => 'Terms & Conditions',
+                'metaDescription' => 'Master terms and conditions governing Tekvista Infosolutions website usage and service engagement baseline.',
+                'metaKeywords' => 'Tekvista terms and conditions, legal terms, IT services contract baseline',
+                'summary' => 'These Terms & Conditions define the baseline legal framework for using this website and engaging Tekvista services unless superseded by executed agreements.',
+                'sections' => [
+                    ['heading' => 'General Conditions', 'points' => ['Use of this site implies acceptance of lawful-use, policy, and compliance terms.', 'Violations may result in access controls, suspension, or legal recourse.']],
+                    ['heading' => 'Commercial and Legal Priority', 'points' => ['Signed proposals, statements of work, and MSAs take precedence for project-specific commitments.', 'Any conflict between website statements and signed contracts is resolved in favor of signed contracts.']],
+                    ['heading' => 'Jurisdiction', 'points' => ['Unless otherwise agreed in writing, disputes are interpreted under applicable Indian law and jurisdiction.']],
+                ],
+            ],
+        ];
+    }
+
     private function publishedPosts(): Collection
     {
         $dbPosts = Post::query()
@@ -302,6 +500,15 @@ class SiteController extends Controller
                 'Company Status' => 'Active',
                 'Business Activity' => 'Enterprise IT and computer-related services',
             ],
+            'assuranceBadges' => [
+                ['title' => 'ISO/IEC 27001', 'subtitle' => 'Information Security Management', 'note' => 'Security control baseline reference for enterprise engagements.', 'icon' => 'bi-shield-check'],
+                ['title' => 'ISO/IEC 27003', 'subtitle' => 'ISMS Implementation Guidance', 'note' => 'Guidance standard referenced for implementation maturity (non-certifiable standard).', 'icon' => 'bi-diagram-3'],
+                ['title' => 'ISO 9001', 'subtitle' => 'Quality Management', 'note' => 'Quality-process alignment for delivery and support operations.', 'icon' => 'bi-award'],
+            ],
+            'legalPolicies' => collect($this->legalPolicies())
+                ->map(fn (array $policy, string $slug) => ['slug' => $slug, 'title' => $policy['title']])
+                ->values()
+                ->all(),
             'csrPoints' => [
                 'Tekvista supports school infrastructure initiatives at Shree BadriKedar Dhanuka Adarsh Vidya Mandir, Churu.',
                 'CSR focus includes safe and modern classroom environments for long-term student outcomes.',

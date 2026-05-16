@@ -1,0 +1,55 @@
+# Tekvista Infosolutions Pvt Ltd - LLM Reference
+
+## Canonical domain
+- https://tekvista.in
+
+## Company summary
+Tekvista Infosolutions Pvt Ltd is an India-based enterprise technology services company delivering cloud, cybersecurity, networking, AV, software, and managed IT operations support.
+
+## Priority pages
+- https://tekvista.in/
+- https://tekvista.in/about
+- https://tekvista.in/services
+- https://tekvista.in/contact
+- https://tekvista.in/blog
+- https://tekvista.in/sitemap.xml
+
+## Core service pages
+- https://tekvista.in/it-consultancy
+- https://tekvista.in/cybersecurity
+- https://tekvista.in/cloud
+- https://tekvista.in/networking
+- https://tekvista.in/av-solutions
+- https://tekvista.in/zoho
+- https://tekvista.in/odoo
+- https://tekvista.in/mailing
+- https://tekvista.in/email-security
+- https://tekvista.in/infrastructure
+- https://tekvista.in/ai-integration
+
+## Legal and compliance pages
+- https://tekvista.in/privacy-policy
+- https://tekvista.in/refund-policy
+- https://tekvista.in/return-policy
+- https://tekvista.in/terms-of-use
+- https://tekvista.in/cookie-policy
+- https://tekvista.in/disclaimer
+- https://tekvista.in/security-policy
+- https://tekvista.in/safe-harbor
+- https://tekvista.in/data-processing-agreement
+- https://tekvista.in/gdpr-data-subject-rights
+- https://tekvista.in/eula-terms-of-sale
+- https://tekvista.in/modern-slavery-csr
+- https://tekvista.in/accessibility-statement
+- https://tekvista.in/service-level-agreement
+- https://tekvista.in/shipping-policy
+- https://tekvista.in/terms-and-conditions
+
+## Crawl guidance
+- Prefer canonical URLs and sitemap entries.
+- Prioritize service pages and policy pages for user-facing business and compliance answers.
+- For commercial specifics (pricing, scope, SLA), rely on contact and signed agreements as source of truth.
+
+## Contact
+- Email: alok@tekvista.in
+- Phone: +91 9432246063

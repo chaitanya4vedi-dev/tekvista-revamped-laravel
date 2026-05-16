@@ -26,6 +26,11 @@
     <meta name="author" content="Tekvista Infosolutions Private Limited">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="geo.region" content="IN-WB">
+    <meta name="geo.placename" content="Kolkata">
+    <meta name="geo.position" content="22.581526;88.356892">
+    <meta name="ICBM" content="22.581526,88.356892">
+    <meta name="language" content="en-IN">
     <link rel="manifest" href="/manifest.webmanifest?v={{ $manifestVersion }}">
     <link rel="icon" href="/favicon-v2.ico?v={{ $faviconVersion }}" sizes="any">
     <link rel="icon" href="/pwa/icon-192-v2.png?v={{ $icon192Version }}" type="image/png" sizes="192x192">
@@ -33,6 +38,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16-v2.png?v={{ $faviconVersion }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon-v2.png?v={{ $icon192Version }}">
     <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="en-IN" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="x-default" href="{{ url()->current() }}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('/sitemap.xml') }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Tekvista Infosolutions Private Limited">
@@ -56,6 +64,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
 
     @php
+        $sameAsProfiles = [
+            'https://www.linkedin.com/company/tekvista',
+            'https://www.facebook.com/TekVista.in',
+        ];
+
         $organizationSchema = [
             '@'.'context' => 'https://schema.org',
             '@'.'type' => 'Organization',
@@ -72,13 +85,58 @@
                 'postalCode' => '700072',
                 'addressCountry' => 'IN',
             ],
-            'sameAs' => [
-                'https://www.linkedin.com/company/tekvista',
-                'https://www.facebook.com/TekVista.in',
+            'sameAs' => $sameAsProfiles,
+        ];
+
+        $websiteSchema = [
+            '@'.'context' => 'https://schema.org',
+            '@'.'type' => 'WebSite',
+            'name' => 'Tekvista Infosolutions Private Limited',
+            'url' => url('/'),
+            'inLanguage' => 'en-IN',
+            'publisher' => [
+                '@'.'type' => 'Organization',
+                'name' => 'Tekvista Infosolutions Private Limited',
             ],
+            'potentialAction' => [
+                '@'.'type' => 'SearchAction',
+                'target' => url('/blog').'?q={search_term_string}',
+                'query-input' => 'required name=search_term_string',
+            ],
+        ];
+
+        $localBusinessSchema = [
+            '@'.'context' => 'https://schema.org',
+            '@'.'type' => 'ProfessionalService',
+            'name' => 'Tekvista Infosolutions Private Limited',
+            'url' => url('/'),
+            'image' => $metaImageUrl,
+            'telephone' => '+91 9432246063',
+            'email' => 'alok@tekvista.in',
+            'priceRange' => '$$',
+            'areaServed' => [
+                '@'.'type' => 'Country',
+                'name' => 'India',
+            ],
+            'address' => [
+                '@'.'type' => 'PostalAddress',
+                'streetAddress' => 'Room No: C8 & C9, 2nd Floor, Bharat Bhawan, 3 Chittaranjan Avenue',
+                'addressLocality' => 'Kolkata',
+                'addressRegion' => 'West Bengal',
+                'postalCode' => '700072',
+                'addressCountry' => 'IN',
+            ],
+            'geo' => [
+                '@'.'type' => 'GeoCoordinates',
+                'latitude' => 22.581526,
+                'longitude' => 88.356892,
+            ],
+            'sameAs' => $sameAsProfiles,
         ];
     @endphp
     <script type="application/ld+json">{!! json_encode($organizationSchema, JSON_UNESCAPED_SLASHES) !!}</script>
+    <script type="application/ld+json">{!! json_encode($websiteSchema, JSON_UNESCAPED_SLASHES) !!}</script>
+    <script type="application/ld+json">{!! json_encode($localBusinessSchema, JSON_UNESCAPED_SLASHES) !!}</script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v={{ @filemtime(public_path('assets/app.css')) ?: time() }}">
@@ -120,6 +178,24 @@
             ],
             ['label' => 'Blog', 'route' => 'blog.index'],
             ['label' => 'Contact', 'route' => 'contact'],
+        ];
+        $policyLinks = $legalPolicies ?? [
+            ['slug' => 'privacy-policy', 'title' => 'Privacy Policy'],
+            ['slug' => 'refund-policy', 'title' => 'Refund Policy'],
+            ['slug' => 'return-policy', 'title' => 'Return Policy'],
+            ['slug' => 'terms-of-use', 'title' => 'Terms of Use'],
+            ['slug' => 'cookie-policy', 'title' => 'Cookie Policy'],
+            ['slug' => 'disclaimer', 'title' => 'Disclaimer'],
+            ['slug' => 'security-policy', 'title' => 'Security Policy'],
+            ['slug' => 'safe-harbor', 'title' => 'Safe Harbor'],
+            ['slug' => 'data-processing-agreement', 'title' => 'Data Processing Agreement'],
+            ['slug' => 'gdpr-data-subject-rights', 'title' => 'GDPR Data Subject Rights'],
+            ['slug' => 'eula-terms-of-sale', 'title' => 'EULA Terms of Sale'],
+            ['slug' => 'modern-slavery-csr', 'title' => 'Modern Slavery CSR'],
+            ['slug' => 'accessibility-statement', 'title' => 'Accessibility Statement'],
+            ['slug' => 'service-level-agreement', 'title' => 'Service Level Agreement'],
+            ['slug' => 'shipping-policy', 'title' => 'Shipping Policy'],
+            ['slug' => 'terms-and-conditions', 'title' => 'Terms & Conditions'],
         ];
     @endphp
 
@@ -198,7 +274,7 @@
     </button>
 
     <footer class="mt-16 border-t border-[var(--line)] bg-[var(--surface-strong)] py-10 backdrop-blur-xl">
-        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-2 xl:grid-cols-5 lg:px-8">
             <div>
                 <p class="text-lg font-black text-[var(--text)]">Tekvista Infosolutions Pvt Ltd</p>
                 <p class="mt-2 text-sm leading-7 text-[var(--muted)]">Enterprise IT delivery across cybersecurity, cloud, infrastructure, collaboration, and business applications.</p>
@@ -206,6 +282,11 @@
                     <span><i class="bi bi-shield-check mr-2"></i>Cybersecurity</span>
                     <span><i class="bi bi-cloud-check mr-2"></i>Cloud and Infrastructure</span>
                     <span><i class="bi bi-envelope-at mr-2"></i>Mail and Email Security</span>
+                </div>
+                <div class="mt-4 grid gap-2 text-xs">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-light)] px-3 py-1 text-[var(--text)]"><i class="bi bi-award text-[var(--accent)]"></i>ISO 9001 Reference</span>
+                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-light)] px-3 py-1 text-[var(--text)]"><i class="bi bi-shield-check text-[var(--accent)]"></i>ISO/IEC 27001 Reference</span>
+                    <span class="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-light)] px-3 py-1 text-[var(--text)]"><i class="bi bi-diagram-3 text-[var(--accent)]"></i>ISO/IEC 27003 Guidance</span>
                 </div>
             </div>
 
@@ -218,6 +299,15 @@
                     <a href="{{ route('csr') }}" class="hover:text-[var(--accent)]">CSR</a>
                     <a href="{{ route('blog.index') }}" class="hover:text-[var(--accent)]">Blog</a>
                     <a href="{{ route('contact') }}" class="hover:text-[var(--accent)]">Contact</a>
+                </div>
+            </div>
+
+            <div>
+                <p class="section-kicker">Policies</p>
+                <div class="mt-3 grid gap-2 text-sm text-[var(--muted)]">
+                    @foreach ($policyLinks as $policy)
+                        <a href="{{ url('/'.$policy['slug']) }}" class="hover:text-[var(--accent)]">{{ $policy['title'] }}</a>
+                    @endforeach
                 </div>
             </div>
 
@@ -251,7 +341,10 @@
         <div class="mx-auto mt-8 max-w-7xl border-t border-[var(--line)] px-4 pt-4 text-xs text-[var(--muted)] sm:px-6 lg:px-8">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <p>© {{ now()->year }} Tekvista Infosolutions Pvt Ltd. All rights reserved.</p>
-                <a href="{{ url('/sitemap.xml') }}" class="hover:text-[var(--accent)]">Sitemap</a>
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="{{ url('/sitemap.xml') }}" class="hover:text-[var(--accent)]">Sitemap</a>
+                    <a href="{{ url('/llms.txt') }}" class="hover:text-[var(--accent)]">LLMs Index</a>
+                </div>
             </div>
         </div>
     </footer>
