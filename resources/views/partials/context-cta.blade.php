@@ -12,6 +12,7 @@
         'ai-integration' => ['title' => 'Bring AI into Real Business Workflows', 'copy' => 'Move from demos to governed AI implementation with measurable operational outcomes.', 'intent' => 'Plan AI Integration'],
         'av-solutions' => ['title' => 'Design AV for Boardrooms and Campuses', 'copy' => 'Plan conferencing, signage, and control systems for productive collaboration spaces.', 'intent' => 'Discuss AV Solutions Project'],
         'zoho' => ['title' => 'Implement Zoho with Process Clarity', 'copy' => 'We align CRM, mail, and automation around your business workflow.', 'intent' => 'Discuss Zoho Implementation'],
+        'zoho.service' => ['title' => 'Need a Zoho Specialist Workshop?', 'copy' => 'Get product-specific architecture, migration, and rollout guidance from Tekvista.', 'intent' => 'Request Zoho Specialist Workshop'],
         'odoo' => ['title' => 'Roll Out Odoo in Phases', 'copy' => 'Plan module-by-module implementation for lower risk and faster adoption.', 'intent' => 'Book Odoo Discovery Session'],
         'mailing' => ['title' => 'Secure Business Mail for Every Team', 'copy' => 'Set up Microsoft, Google, or Zoho mail with migration and policy controls.', 'intent' => 'Configure Enterprise Mailing Platform'],
         'infrastructure' => ['title' => 'Need Infrastructure Rationalization?', 'copy' => 'Map compute, storage, backup, and network controls into one governable operating model.', 'intent' => 'Review Infrastructure Roadmap'],

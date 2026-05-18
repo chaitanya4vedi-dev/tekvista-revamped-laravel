@@ -92,7 +92,34 @@ class SiteController extends Controller
 
     public function zoho(): View
     {
-        return view('pages.services.zoho', [...$this->pageData(), ...$this->seo('Zoho Solutions', 'Comprehensive Zoho implementation and support for seamless workflows.', 'zoho solutions, zoho one, zoho crm, zoho mail implementation')]);
+        return view('pages.services.zoho', [
+            ...$this->pageData(),
+            ...$this->seo(
+                'Zoho Solutions',
+                'Official Zoho partner services from Tekvista including implementation, migration, automation, governance, and managed support.',
+                'zoho partner india, zoho implementation services, zoho crm partner, zoho one implementation, zoho automation consulting'
+            ),
+            'zohoServices' => $this->zohoServicePages(),
+        ]);
+    }
+
+    public function zohoService(string $zohoPage): View
+    {
+        $zohoServices = $this->zohoServicePages();
+        abort_if(!isset($zohoServices[$zohoPage]), 404);
+
+        $service = $zohoServices[$zohoPage];
+
+        return view('pages.services.zoho-detail', [
+            ...$this->pageData(),
+            ...$this->seo(
+                $service['seoTitle'],
+                $service['seoDescription'],
+                $service['seoKeywords']
+            ),
+            'zohoService' => $service,
+            'zohoServices' => $zohoServices,
+        ]);
     }
 
     public function odoo(): View
@@ -446,6 +473,396 @@ class SiteController extends Controller
         return collect();
     }
 
+    private function zohoServicePages(): array
+    {
+        return [
+            'zoho-one' => [
+                'slug' => 'zoho-one',
+                'name' => 'Zoho One',
+                'cardSummary' => 'Unified business suite strategy across sales, support, finance, HR, and collaboration.',
+                'heroKicker' => 'Zoho One Services',
+                'heroTitle' => 'Run core business operations on one connected Zoho stack.',
+                'heroSummary' => 'Tekvista designs and deploys Zoho One with architecture planning, governance controls, and phased adoption.',
+                'primaryIntent' => 'Plan Zoho One Rollout',
+                'summaryTitle' => 'Enterprise rollout model for Zoho One',
+                'summaryBody' => [
+                    'As an official Zoho partner, Tekvista maps your operating model across departments and aligns each workflow to the right Zoho apps and handoffs.',
+                    'Our implementation combines process architecture, data governance, access controls, integration logic, and user enablement.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Operating Model Blueprint', 'copy' => 'Cross-functional process mapping and app dependency planning.'],
+                    ['title' => 'Identity and Access Governance', 'copy' => 'Role-based permission strategy and admin control standards.'],
+                    ['title' => 'Cross-App Workflow Orchestration', 'copy' => 'Automated handoffs between CRM, finance, support, and internal operations.'],
+                    ['title' => 'Executive Dashboards', 'copy' => 'Unified business visibility for leadership-level tracking and reviews.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Disconnected business tools', 'copy' => 'Consolidate fragmented systems into a governed application ecosystem.'],
+                    ['title' => 'Scaling multi-team operations', 'copy' => 'Standardize processes across business units and locations.'],
+                    ['title' => 'Transformation governance needs', 'copy' => 'Introduce structured rollout with measurable outcomes and controls.'],
+                    ['title' => 'Data visibility gaps', 'copy' => 'Create shared operational context across departments.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Discovery and architecture', 'copy' => 'Current-state audit, target-state design, and dependency mapping.'],
+                    ['title' => 'Foundation setup', 'copy' => 'Org model, admin controls, security baseline, and role provisioning.'],
+                    ['title' => 'Rollout waves', 'copy' => 'Phased implementation by department with validation checkpoints.'],
+                    ['title' => 'Adoption and optimization', 'copy' => 'Training, support, KPI reviews, and iterative improvements.'],
+                ],
+                'governance' => [
+                    'Role-bound permissions with least-privilege access design.',
+                    'Data ownership model for critical records and lifecycle management.',
+                    'Controlled change process for workflows and app configurations.',
+                    'Post-go-live governance reviews with business and IT stakeholders.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Zoho One be deployed in phases?', 'a' => 'Yes. Tekvista typically deploys Zoho One in rollout waves to reduce risk and improve adoption.'],
+                    ['q' => 'Do we need to replace everything at once?', 'a' => 'No. We can prioritize critical workflows first and plan staged migrations.'],
+                    ['q' => 'Will governance controls be included?', 'a' => 'Yes. Access control, approval logic, and admin standards are part of enterprise delivery.'],
+                    ['q' => 'Can Tekvista support us after go-live?', 'a' => 'Yes. We provide post-launch support and optimization engagements.'],
+                ],
+                'related' => ['crm', 'books', 'people', 'desk', 'creator', 'flow', 'workplace'],
+                'seoTitle' => 'Zoho One Implementation Services',
+                'seoDescription' => 'Official Zoho One implementation services by Tekvista for enterprise architecture, automation, and governance.',
+                'seoKeywords' => 'zoho one implementation partner, zoho one consulting india, zoho one rollout services',
+            ],
+            'crm' => [
+                'slug' => 'crm',
+                'name' => 'Zoho CRM',
+                'cardSummary' => 'Pipeline governance, blueprint automation, lead management, and sales visibility.',
+                'heroKicker' => 'Zoho CRM Services',
+                'heroTitle' => 'Build predictable sales operations with Zoho CRM.',
+                'heroSummary' => 'Tekvista implements Zoho CRM with process discipline, automation controls, and connected customer context.',
+                'primaryIntent' => 'Start Zoho CRM Discovery',
+                'summaryTitle' => 'CRM implementation for enterprise sales',
+                'summaryBody' => [
+                    'We design CRM around your real sales lifecycle, not generic templates, including qualification logic, ownership, and approvals.',
+                    'Tekvista configures Zoho CRM as a governed system of action with strong data quality and reporting standards.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Pipeline and Blueprint Design', 'copy' => 'Structured deal stages and mandatory process checkpoints.'],
+                    ['title' => 'Lead Intelligence', 'copy' => 'Lead scoring, routing, and segmentation for faster prioritization.'],
+                    ['title' => 'Workflow Automation', 'copy' => 'Tasking, follow-ups, alerts, and approval-driven progression rules.'],
+                    ['title' => 'Connected Customer View', 'copy' => 'Integration with Zoho apps and selected third-party systems.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Complex B2B deal cycles', 'copy' => 'Track multi-stage, multi-stakeholder opportunities with control.'],
+                    ['title' => 'Lead leakage issues', 'copy' => 'Create SLA-based ownership from inquiry to qualified pipeline.'],
+                    ['title' => 'Revenue forecast gaps', 'copy' => 'Improve forecast reliability with process-standard data capture.'],
+                    ['title' => 'Territory expansion', 'copy' => 'Scale sales workflows across markets and teams consistently.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Sales process audit', 'copy' => 'Assess funnel behavior, ownership, metrics, and reporting pain points.'],
+                    ['title' => 'Configuration and automation', 'copy' => 'Modules, blueprint, workflows, dashboards, and controls setup.'],
+                    ['title' => 'Data migration', 'copy' => 'Field mapping, cleansing, deduplication, and validation before cutover.'],
+                    ['title' => 'Adoption enablement', 'copy' => 'Role-based training for sales reps, managers, and admins.'],
+                ],
+                'governance' => [
+                    'Field governance and structured data-entry standards.',
+                    'Approval checkpoints for exceptions and stage progression.',
+                    'Data hygiene review cadence and ownership accountability.',
+                    'Integration controls for inbound and outbound data flow.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Tekvista migrate from another CRM?', 'a' => 'Yes. We support migration planning, data mapping, testing, and phased cutover.'],
+                    ['q' => 'Do you implement Zoho CRM Blueprint?', 'a' => 'Yes. Blueprint and workflow orchestration are core implementation elements.'],
+                    ['q' => 'Can CRM connect with support and finance tools?', 'a' => 'Yes. We design cross-app integration for full customer context.'],
+                    ['q' => 'Do you setup executive sales dashboards?', 'a' => 'Yes. We configure leadership views for pipeline and conversion oversight.'],
+                ],
+                'related' => ['zoho-one', 'desk', 'flow', 'books', 'workplace'],
+                'seoTitle' => 'Zoho CRM Implementation Services',
+                'seoDescription' => 'Tekvista Zoho CRM services for pipeline design, automation, migration, integration, and adoption.',
+                'seoKeywords' => 'zoho crm implementation partner, zoho crm consulting india, zoho blueprint setup',
+            ],
+            'books' => [
+                'slug' => 'books',
+                'name' => 'Zoho Books',
+                'cardSummary' => 'Accounting process automation, control workflows, and finance visibility.',
+                'heroKicker' => 'Zoho Books Services',
+                'heroTitle' => 'Digitize accounting operations with Zoho Books.',
+                'heroSummary' => 'Tekvista implements Zoho Books for structured finance operations, approvals, and reporting consistency.',
+                'primaryIntent' => 'Discuss Zoho Books Implementation',
+                'summaryTitle' => 'Finance operations delivery approach',
+                'summaryBody' => [
+                    'We align Zoho Books with your chart of accounts, process controls, invoicing and payable cycles, and management reporting needs.',
+                    'Our team designs accounting workflows for scalability and business continuity as transaction volumes grow.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Accounting Foundation Setup', 'copy' => 'Entity structure, ledgers, and process controls.'],
+                    ['title' => 'Billing and Collection Automation', 'copy' => 'Invoice, reminder, and receivable cycle optimization.'],
+                    ['title' => 'Procure-to-Pay Control', 'copy' => 'Vendor approval logic, payable governance, and expense workflow.'],
+                    ['title' => 'Finance Reporting Layer', 'copy' => 'Operational and management dashboards for monthly review.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Manual accounting dependency', 'copy' => 'Reduce repetitive effort and improve processing discipline.'],
+                    ['title' => 'Distributed finance teams', 'copy' => 'Apply standard workflows across branches and units.'],
+                    ['title' => 'Process audit readiness', 'copy' => 'Improve transaction traceability and documentation flow.'],
+                    ['title' => 'Growth-stage scale', 'copy' => 'Prepare finance systems for higher transaction throughput.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Finance process review', 'copy' => 'Map current workflows, approvals, dependencies, and risks.'],
+                    ['title' => 'System configuration', 'copy' => 'Configure templates, tax logic, users, and workflow automation.'],
+                    ['title' => 'Data onboarding', 'copy' => 'Import masters and balances with reconciliation checks.'],
+                    ['title' => 'Stabilization and adoption', 'copy' => 'Go-live support and finance team enablement.'],
+                ],
+                'governance' => [
+                    'Segregation of duties through permission design.',
+                    'Approval hierarchy for sensitive financial events.',
+                    'Voucher naming and entry standardization.',
+                    'Review cadence for reconciliation consistency.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Zoho Books map to our existing accounting process?', 'a' => 'Yes. We configure Books around your process and control structure.'],
+                    ['q' => 'Do you support tax-oriented process setup?', 'a' => 'Yes. We configure tax-relevant flows based on business requirements.'],
+                    ['q' => 'Can we connect finance and sales data?', 'a' => 'Yes. We design integrations for shared business context.'],
+                    ['q' => 'Will finance users be trained?', 'a' => 'Yes. We run practical adoption sessions for finance and reviewers.'],
+                ],
+                'related' => ['zoho-one', 'crm', 'flow', 'workplace'],
+                'seoTitle' => 'Zoho Books Implementation Services',
+                'seoDescription' => 'Tekvista Zoho Books services for finance process automation, governance, and integration.',
+                'seoKeywords' => 'zoho books implementation partner, zoho books consulting india, zoho finance automation',
+            ],
+            'people' => [
+                'slug' => 'people',
+                'name' => 'Zoho People',
+                'cardSummary' => 'Digital HR workflows for lifecycle, attendance, leave, and policy operations.',
+                'heroKicker' => 'Zoho People Services',
+                'heroTitle' => 'Modernize workforce operations with Zoho People.',
+                'heroSummary' => 'Tekvista delivers Zoho People implementation for structured HR workflows and employee lifecycle governance.',
+                'primaryIntent' => 'Plan Zoho People Deployment',
+                'summaryTitle' => 'HRMS rollout model',
+                'summaryBody' => [
+                    'We transform manual HR operations into policy-driven digital workflows across onboarding, attendance, leave, and manager approvals.',
+                    'Implementation is built for role clarity, process auditability, and practical user adoption.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Lifecycle Workflow Automation', 'copy' => 'Onboarding, transitions, confirmations, and separation processes.'],
+                    ['title' => 'Attendance and Leave Governance', 'copy' => 'Policy-driven rules, approvals, and exception controls.'],
+                    ['title' => 'Self-Service HR', 'copy' => 'Employee and manager service workflows with structured approvals.'],
+                    ['title' => 'HR Insights', 'copy' => 'Analytics on attendance behavior and workflow turnaround.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Manual HR coordination', 'copy' => 'Digitize repetitive HR operations and reduce processing delays.'],
+                    ['title' => 'Multi-location workforce', 'copy' => 'Standardize HR process execution across distributed teams.'],
+                    ['title' => 'Policy compliance pressure', 'copy' => 'Embed policy controls directly into approval workflows.'],
+                    ['title' => 'Rapid team growth', 'copy' => 'Scale HR workflows without operational breakdowns.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'HR process mapping', 'copy' => 'Assess lifecycle and attendance policy dependencies.'],
+                    ['title' => 'Configuration setup', 'copy' => 'Rules, structures, permissions, and workflow configuration.'],
+                    ['title' => 'Data onboarding', 'copy' => 'Employee data migration and access validation.'],
+                    ['title' => 'Adoption rollout', 'copy' => 'Enablement for HR, managers, and employee users.'],
+                ],
+                'governance' => [
+                    'Role-based access to sensitive HR records.',
+                    'Policy-controlled approval chains and exceptions.',
+                    'Lifecycle event auditability and ownership clarity.',
+                    'Periodic policy tuning aligned to workforce changes.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can leave and attendance rules be customized?', 'a' => 'Yes. We configure policy logic by role, location, and operation type.'],
+                    ['q' => 'Can HR workflows integrate with other systems?', 'a' => 'Yes. We support integration for approved cross-system data exchange.'],
+                    ['q' => 'Is it suitable for multi-branch organizations?', 'a' => 'Yes. We support centralized governance with localized policies.'],
+                    ['q' => 'Do you provide post-go-live HR support?', 'a' => 'Yes. We can support operations, issue handling, and optimization.'],
+                ],
+                'related' => ['zoho-one', 'flow', 'workplace', 'creator'],
+                'seoTitle' => 'Zoho People Implementation Services',
+                'seoDescription' => 'Tekvista Zoho People implementation services for digital HR operations and policy workflows.',
+                'seoKeywords' => 'zoho people implementation partner, zoho hrms consulting, zoho people setup india',
+            ],
+            'desk' => [
+                'slug' => 'desk',
+                'name' => 'Zoho Desk',
+                'cardSummary' => 'Support workflow automation with SLA governance and ticket operations maturity.',
+                'heroKicker' => 'Zoho Desk Services',
+                'heroTitle' => 'Build reliable customer support operations with Zoho Desk.',
+                'heroSummary' => 'Tekvista implements Zoho Desk for structured ticket lifecycle management, SLA control, and service visibility.',
+                'primaryIntent' => 'Discuss Zoho Desk Rollout',
+                'summaryTitle' => 'Service desk transformation approach',
+                'summaryBody' => [
+                    'We configure Zoho Desk around your support model with queue design, ownership rules, escalation frameworks, and knowledge workflows.',
+                    'Delivery includes practical alignment between support teams, business teams, and customer-facing outcomes.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Ticket Workflow Design', 'copy' => 'Category design, queue logic, and owner accountability setup.'],
+                    ['title' => 'SLA and Escalation Controls', 'copy' => 'Response and resolution standards with automated escalation.'],
+                    ['title' => 'Knowledge and Self-Service', 'copy' => 'Help resources and reuse-friendly support documentation model.'],
+                    ['title' => 'Cross-Team Collaboration', 'copy' => 'Defined handoff paths between support and internal stakeholders.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Inconsistent support quality', 'copy' => 'Standardize support workflows and response governance.'],
+                    ['title' => 'Growing ticket volumes', 'copy' => 'Use routing and automation to protect service delivery.'],
+                    ['title' => 'Escalation chaos', 'copy' => 'Introduce accountable severity and escalation matrix.'],
+                    ['title' => 'Weak reporting visibility', 'copy' => 'Establish service metrics and periodic operational review.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Support model workshop', 'copy' => 'Define ownership, severity, escalation, and queue logic.'],
+                    ['title' => 'Desk configuration', 'copy' => 'Workflow rules, SLA targets, templates, and automations setup.'],
+                    ['title' => 'Integration and testing', 'copy' => 'Validate ticket journeys and cross-app context flows.'],
+                    ['title' => 'Go-live and tuning', 'copy' => 'Agent onboarding, queue monitoring, and workflow refinement.'],
+                ],
+                'governance' => [
+                    'Permission-based agent, lead, and admin role model.',
+                    'Escalation matrix with clear severity ownership.',
+                    'Knowledge base governance with update responsibility.',
+                    'SLA trend review and operational tuning cadence.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Desk be configured for multiple support teams?', 'a' => 'Yes. We support department-wise service structures and ownership models.'],
+                    ['q' => 'Do you define SLA policy during setup?', 'a' => 'Yes. SLA and escalation policy design is part of implementation.'],
+                    ['q' => 'Can Desk be integrated with CRM?', 'a' => 'Yes. We can connect support and customer lifecycle context.'],
+                    ['q' => 'Will support teams get training?', 'a' => 'Yes. We train agents, leads, and administrators by role.'],
+                ],
+                'related' => ['zoho-one', 'crm', 'flow', 'workplace'],
+                'seoTitle' => 'Zoho Desk Implementation Services',
+                'seoDescription' => 'Tekvista Zoho Desk services for service workflows, SLA controls, and support team enablement.',
+                'seoKeywords' => 'zoho desk implementation partner, zoho helpdesk consulting india, zoho desk sla setup',
+            ],
+            'creator' => [
+                'slug' => 'creator',
+                'name' => 'Zoho Creator',
+                'cardSummary' => 'Low-code app development for custom workflows with enterprise governance.',
+                'heroKicker' => 'Zoho Creator Services',
+                'heroTitle' => 'Build custom process apps with Zoho Creator.',
+                'heroSummary' => 'Tekvista engineers low-code solutions on Zoho Creator with architecture discipline and lifecycle controls.',
+                'primaryIntent' => 'Scope Zoho Creator Solution',
+                'summaryTitle' => 'Low-code implementation with enterprise controls',
+                'summaryBody' => [
+                    'We design Creator solutions around business outcomes with clean data models, role controls, and secure integration boundaries.',
+                    'Implementation emphasizes maintainability, controlled releases, and long-term governance.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Application Architecture', 'copy' => 'Entity and module design for scalable custom workflows.'],
+                    ['title' => 'Workflow Automation', 'copy' => 'Rules, approvals, notifications, and exception flows.'],
+                    ['title' => 'System Integration', 'copy' => 'Controlled exchange with Zoho apps and approved third-party tools.'],
+                    ['title' => 'Lifecycle Governance', 'copy' => 'Testing, versioning, release governance, and admin handover.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Spreadsheet-driven operations', 'copy' => 'Replace manual trackers with governed process apps.'],
+                    ['title' => 'Departmental workflow gaps', 'copy' => 'Create purpose-fit apps for operations and control teams.'],
+                    ['title' => 'Fast iteration requirement', 'copy' => 'Launch quickly while retaining process and access governance.'],
+                    ['title' => 'Cross-team data silos', 'copy' => 'Unify workflow records and reporting context.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Requirement blueprinting', 'copy' => 'Capture states, rules, roles, and expected outcomes.'],
+                    ['title' => 'Build and integration', 'copy' => 'Develop forms, logic, workflows, and API integrations.'],
+                    ['title' => 'Validation and hardening', 'copy' => 'Test role behavior, data consistency, and edge cases.'],
+                    ['title' => 'Rollout and enhancement', 'copy' => 'Adoption support and iterative upgrades post-launch.'],
+                ],
+                'governance' => [
+                    'Role-based access architecture for app modules and data.',
+                    'Release controls and test requirements for production changes.',
+                    'Integration boundary definitions and monitoring model.',
+                    'Documentation ownership for long-term maintainability.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Creator support enterprise complexity?', 'a' => 'Yes. With architecture and governance discipline, it supports complex workflows.'],
+                    ['q' => 'Do you build mobile-friendly Creator apps?', 'a' => 'Yes. We design for practical multi-device use cases.'],
+                    ['q' => 'Can existing Zoho apps be extended with Creator?', 'a' => 'Yes. We build extensions for process requirements beyond standard modules.'],
+                    ['q' => 'Do you provide managed enhancement support?', 'a' => 'Yes. We support post-launch enhancements and release governance.'],
+                ],
+                'related' => ['zoho-one', 'flow', 'crm', 'people'],
+                'seoTitle' => 'Zoho Creator Development Services',
+                'seoDescription' => 'Tekvista Zoho Creator services for custom low-code apps, workflow automation, and app governance.',
+                'seoKeywords' => 'zoho creator development partner, zoho creator consulting india, low code workflow automation',
+            ],
+            'flow' => [
+                'slug' => 'flow',
+                'name' => 'Zoho Flow',
+                'cardSummary' => 'Integration orchestration and automation between Zoho and external systems.',
+                'heroKicker' => 'Zoho Flow Services',
+                'heroTitle' => 'Automate cross-system operations with Zoho Flow.',
+                'heroSummary' => 'Tekvista designs event-driven automation with monitoring, error handling, and governance for reliable execution.',
+                'primaryIntent' => 'Design Zoho Flow Automation',
+                'summaryTitle' => 'Integration-first automation model',
+                'summaryBody' => [
+                    'We implement Zoho Flow to eliminate manual handoffs and coordinate data transitions across applications.',
+                    'Flows are engineered with operational resilience including retries, exception paths, and auditable execution visibility.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Flow Architecture', 'copy' => 'Trigger-action design with decision branches and data transformations.'],
+                    ['title' => 'System Integrations', 'copy' => 'Zoho suite and approved external tool integration patterns.'],
+                    ['title' => 'Exception Handling', 'copy' => 'Fallback, retry, and alerting controls for production stability.'],
+                    ['title' => 'Monitoring and Optimization', 'copy' => 'Execution analytics, failure tracking, and flow tuning.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Manual transfer bottlenecks', 'copy' => 'Automate repetitive cross-team and cross-system activities.'],
+                    ['title' => 'Process delays', 'copy' => 'Trigger next-step workflows instantly from business events.'],
+                    ['title' => 'Inconsistent data sync', 'copy' => 'Standardize integration logic with controlled transformation.'],
+                    ['title' => 'Weak integration oversight', 'copy' => 'Establish monitored, accountable automation operations.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Integration discovery', 'copy' => 'Identify source, target, events, and data contracts.'],
+                    ['title' => 'Flow engineering', 'copy' => 'Build workflow logic, transformations, and safeguards.'],
+                    ['title' => 'Validation and launch', 'copy' => 'Scenario testing for success and exception pathways.'],
+                    ['title' => 'Run-state governance', 'copy' => 'Monitor reliability and evolve flows with business change.'],
+                ],
+                'governance' => [
+                    'Credential and connector access governance.',
+                    'Auditability of critical automation runs.',
+                    'Approval process for production flow changes.',
+                    'Fallback strategy for high-impact automation failures.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Flow integrate non-Zoho platforms?', 'a' => 'Yes. We support approved connectors and API-based integrations.'],
+                    ['q' => 'Will exception handling be configured?', 'a' => 'Yes. Production flows include failure logic and operational alerts.'],
+                    ['q' => 'Can we monitor flows after go-live?', 'a' => 'Yes. We configure monitoring and review processes for reliability.'],
+                    ['q' => 'Can Tekvista prioritize which flows to build first?', 'a' => 'Yes. We prioritize by business impact, complexity, and readiness.'],
+                ],
+                'related' => ['zoho-one', 'crm', 'books', 'desk', 'creator'],
+                'seoTitle' => 'Zoho Flow Integration Services',
+                'seoDescription' => 'Tekvista Zoho Flow services for integration automation, resilience, and operational governance.',
+                'seoKeywords' => 'zoho flow implementation partner, zoho integration automation india, zoho flow consulting',
+            ],
+            'workplace' => [
+                'slug' => 'workplace',
+                'name' => 'Zoho Workplace',
+                'cardSummary' => 'Mail and collaboration rollout with governance across teams and data sharing.',
+                'heroKicker' => 'Zoho Workplace Services',
+                'heroTitle' => 'Deploy secure business collaboration with Zoho Workplace.',
+                'heroSummary' => 'Tekvista enables Zoho Workplace for mail, communication, documents, and collaboration governance.',
+                'primaryIntent' => 'Plan Zoho Workplace Migration',
+                'summaryTitle' => 'Collaboration and mail modernization approach',
+                'summaryBody' => [
+                    'We migrate and configure Zoho Workplace with business continuity planning, policy controls, and structured user onboarding.',
+                    'Delivery covers Zoho Mail, team collaboration workflows, and document-sharing governance aligned to enterprise needs.',
+                ],
+                'capabilities' => [
+                    ['title' => 'Mail and Domain Migration', 'copy' => 'Mailbox transition planning, DNS alignment, and cutover controls.'],
+                    ['title' => 'Collaboration Rollout', 'copy' => 'Setup for team messaging, document workflows, and meetings.'],
+                    ['title' => 'Data Sharing Governance', 'copy' => 'Access controls, permission model, and sharing policy standards.'],
+                    ['title' => 'Adoption Enablement', 'copy' => 'Admin handover and user onboarding programs for rapid adoption.'],
+                ],
+                'useCases' => [
+                    ['title' => 'Legacy collaboration stack limits', 'copy' => 'Modernize communication and team productivity workflows.'],
+                    ['title' => 'Mail migration requirement', 'copy' => 'Move to a managed collaboration stack with lower disruption.'],
+                    ['title' => 'Security and control expectations', 'copy' => 'Strengthen access and sharing governance across teams.'],
+                    ['title' => 'Hybrid workforce operations', 'copy' => 'Support distributed teams with consistent collaboration standards.'],
+                ],
+                'deliveryPhases' => [
+                    ['title' => 'Readiness assessment', 'copy' => 'Review mail stack, users, dependencies, and policy requirements.'],
+                    ['title' => 'Foundation setup', 'copy' => 'Configure domains, accounts, controls, and migration mechanics.'],
+                    ['title' => 'Migration and transition', 'copy' => 'Move users in planned waves and validate continuity.'],
+                    ['title' => 'Optimization and governance', 'copy' => 'Adoption reviews, policy tuning, and admin maturity support.'],
+                ],
+                'governance' => [
+                    'Access and sharing policies for communication and files.',
+                    'Admin lifecycle governance for users and groups.',
+                    'Security baseline checks for auth and policy controls.',
+                    'Periodic usage and compliance review process.',
+                ],
+                'faqs' => [
+                    ['q' => 'Can Tekvista migrate our current mailboxes?', 'a' => 'Yes. We support phased mailbox migration with validation checkpoints.'],
+                    ['q' => 'Do you configure collaboration apps and access?', 'a' => 'Yes. We set up team tools with permission and policy governance.'],
+                    ['q' => 'Will teams receive onboarding support?', 'a' => 'Yes. We provide role-based onboarding for users and admins.'],
+                    ['q' => 'Can Workplace connect to our Zoho business apps?', 'a' => 'Yes. We align collaboration and business process workflows together.'],
+                ],
+                'related' => ['zoho-one', 'crm', 'desk', 'flow', 'people'],
+                'seoTitle' => 'Zoho Workplace Implementation Services',
+                'seoDescription' => 'Tekvista Zoho Workplace services for mail migration, collaboration rollout, and governance.',
+                'seoKeywords' => 'zoho workplace migration partner, zoho mail implementation services, zoho collaboration deployment',
+            ],
+        ];
+    }
+
     private function pageData(): array
     {
         $services = [
@@ -456,7 +873,7 @@ class SiteController extends Controller
             ['name' => 'IT Support', 'route' => 'it-support', 'tagline' => 'Business-Continuity IT Operations.', 'summary' => 'SLA-aligned support operations, proactive monitoring, and issue resolution for critical workloads.'],
             ['name' => 'Software Solutions', 'route' => 'software-solutions', 'tagline' => 'Custom Application Engineering.', 'summary' => 'Business software, workflow tools, and integrations designed around operational requirements.'],
             ['name' => 'AV Solutions', 'route' => 'av-solutions', 'tagline' => 'Immersive Collaboration Experiences.', 'summary' => 'Boardroom AV, video conferencing, digital signage, and control systems integrated for enterprise communication.'],
-            ['name' => 'Zoho Solutions', 'route' => 'zoho', 'tagline' => 'Streamlined Business Operations.', 'summary' => 'Comprehensive integration, customization, and support for the full suite of Zoho applications.'],
+            ['name' => 'Zoho Solutions', 'route' => 'zoho', 'tagline' => 'Official Zoho Partner Delivery.', 'summary' => 'Enterprise Zoho consulting, implementation, migration, automation, and managed support across the full application suite.'],
             ['name' => 'Odoo Solutions', 'route' => 'odoo', 'tagline' => 'Enterprise Resource Planning.', 'summary' => 'End-to-end implementation of Odoo ERP, centralizing finance, inventory, manufacturing, and sales into one platform.'],
             ['name' => 'Mailing Solutions', 'route' => 'mailing', 'tagline' => 'Secure Enterprise Communication.', 'summary' => 'Implementing and managing industry-leading mailing platforms, including Microsoft 365, Google Workspace, and Zoho Mail.'],
             ['name' => 'Email Security', 'route' => 'email-security', 'tagline' => 'Threat-Safe Mail Exchange.', 'summary' => 'Phishing defense, secure email gateway deployment, DMARC alignment, and continuous mailbox threat hardening.'],

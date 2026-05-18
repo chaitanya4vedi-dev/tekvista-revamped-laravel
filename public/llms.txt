@@ -21,6 +21,14 @@ Tekvista Infosolutions Pvt Ltd is an India-based enterprise technology services 
 - https://tekvista.in/networking
 - https://tekvista.in/av-solutions
 - https://tekvista.in/zoho
+- https://tekvista.in/zoho/zoho-one
+- https://tekvista.in/zoho/crm
+- https://tekvista.in/zoho/books
+- https://tekvista.in/zoho/people
+- https://tekvista.in/zoho/desk
+- https://tekvista.in/zoho/creator
+- https://tekvista.in/zoho/flow
+- https://tekvista.in/zoho/workplace
 - https://tekvista.in/odoo
 - https://tekvista.in/mailing
 - https://tekvista.in/email-security

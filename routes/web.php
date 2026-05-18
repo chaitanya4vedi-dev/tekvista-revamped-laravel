@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
+$zohoServicePages = ['zoho-one', 'crm', 'books', 'people', 'desk', 'creator', 'flow', 'workplace'];
+
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/services', [SiteController::class, 'services'])->name('services');
@@ -19,6 +21,9 @@ Route::get('/cloud', [SiteController::class, 'cloud'])->name('cloud');
 Route::get('/networking', [SiteController::class, 'networking'])->name('networking');
 Route::get('/av-solutions', [SiteController::class, 'avSolutions'])->name('av-solutions');
 Route::get('/zoho', [SiteController::class, 'zoho'])->name('zoho');
+Route::get('/zoho/{zohoPage}', [SiteController::class, 'zohoService'])
+    ->whereIn('zohoPage', $zohoServicePages)
+    ->name('zoho.service');
 Route::get('/odoo', [SiteController::class, 'odoo'])->name('odoo');
 Route::get('/mailing', [SiteController::class, 'mailing'])->name('mailing');
 Route::get('/email-security', [SiteController::class, 'emailSecurity'])->name('email-security');
@@ -75,7 +80,7 @@ foreach ($policyPages as $slug => $label) {
         ->name("policy.{$slug}");
 }
 
-Route::get('/sitemap.xml', function () use ($policyPages) {
+Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages) {
     $now = now()->toAtomString();
     $staticUrls = [
         ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly', 'lastmod' => $now],
@@ -98,6 +103,12 @@ Route::get('/sitemap.xml', function () use ($policyPages) {
         ['loc' => route('contact'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
         ['loc' => route('blog.index'), 'priority' => '0.9', 'changefreq' => 'daily', 'lastmod' => $now],
     ];
+    $zohoUrls = collect($zohoServicePages)->map(fn (string $slug): array => [
+        'loc' => route('zoho.service', ['zohoPage' => $slug]),
+        'priority' => '0.75',
+        'changefreq' => 'monthly',
+        'lastmod' => $now,
+    ]);
 
     $policyUrls = collect(array_keys($policyPages))->map(
         fn (string $slug): array => [
@@ -136,6 +147,7 @@ Route::get('/sitemap.xml', function () use ($policyPages) {
     }
 
     $urls = collect($staticUrls)
+        ->merge($zohoUrls)
         ->merge($policyUrls)
         ->merge($blogUrls)
         ->values()
