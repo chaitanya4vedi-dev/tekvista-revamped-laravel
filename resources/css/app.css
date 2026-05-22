@@ -246,18 +246,67 @@
     }
 
     @media (min-width: 1024px) and (max-width: 1399px) {
+        .tv-header-inner {
+            gap: .35rem;
+            padding-left: .7rem;
+            padding-right: .7rem;
+        }
+        .tv-header-logo {
+            width: clamp(150px, 14vw, 190px);
+            height: auto !important;
+        }
+        .tv-desktop-nav {
+            gap: .1rem;
+            justify-content: center;
+        }
         .app-header .nav-link {
-            font-size: .81rem;
-            padding: .48rem .58rem;
+            font-size: .75rem;
+            padding: .44rem .46rem;
+            border-radius: .55rem;
         }
         .app-header .nav-link i.bi {
-            font-size: .8rem;
-            margin-right: .25rem !important;
+            font-size: .72rem;
+            margin-right: .12rem !important;
+        }
+        .tv-nav-logo {
+            width: 15px;
+            height: 15px;
+            flex-basis: 15px;
+            padding: 1px;
+        }
+        .tv-nav-logo img {
+            width: 12px;
+            height: 12px;
+            max-width: 12px;
+            max-height: 12px;
+        }
+        .tv-header-actions {
+            gap: .35rem;
         }
         .app-header .btn-secondary,
         .app-header .btn-primary {
-            font-size: .78rem;
-            padding: .6rem .8rem;
+            font-size: .75rem;
+            padding: .54rem .64rem;
+        }
+        .app-header .btn-secondary {
+            width: 2.4rem;
+            height: 2.4rem;
+            justify-content: center;
+            padding: 0;
+        }
+        .app-header .btn-secondary .tv-action-label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .app-header .btn-primary {
+            white-space: nowrap;
         }
     }
 }

@@ -237,12 +237,12 @@
     @endphp
 
     <header class="app-header sticky top-0 z-50">
-        <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-6 lg:px-8">
+        <div class="tv-header-inner mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-6 lg:px-8">
             <a href="{{ route('home') }}" class="mobile-brand flex min-w-0 items-center gap-2.5">
-                <img src="{{ asset('branding/tekvista-logo-header.png') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="h-9 w-auto shrink-0 sm:h-10">
+                <img src="{{ asset('branding/tekvista-logo-header.png') }}?v={{ $wordmarkVersion }}" alt="TekVista Infosolutions" class="tv-header-logo h-9 w-auto shrink-0 sm:h-10">
             </a>
 
-            <nav class="hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">
+            <nav class="tv-desktop-nav hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">
                 @foreach ($navItems as $item)
                     @php
                         $itemRoutePattern = $item['routePattern'] ?? $item['route'];
@@ -282,17 +282,17 @@
                 @endforeach
             </nav>
 
-            <div class="hidden shrink-0 items-center gap-2 lg:flex">
+            <div class="tv-header-actions hidden shrink-0 items-center gap-2 lg:flex">
             @auth
-                <a href="{{ route('blog.manage.index') }}" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-pencil-square"></i>Write</a>
-                <a href="{{ route('profile.edit') }}" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-person-gear"></i>Profile</a>
+                <a href="{{ route('blog.manage.index') }}" class="btn-secondary px-3 py-2 text-sm" title="Write Blog" aria-label="Write Blog"><i class="bi bi-pencil-square"></i><span class="tv-action-label">Write</span></a>
+                <a href="{{ route('profile.edit') }}" class="btn-secondary px-3 py-2 text-sm" title="Profile" aria-label="Profile"><i class="bi bi-person-gear"></i><span class="tv-action-label">Profile</span></a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-box-arrow-right"></i>Logout</button>
+                    <button type="submit" class="btn-secondary px-3 py-2 text-sm" title="Logout" aria-label="Logout"><i class="bi bi-box-arrow-right"></i><span class="tv-action-label">Logout</span></button>
                 </form>
             @else
-                <a href="{{ route('login') }}" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-person"></i>Login</a>
-                <a href="{{ route('register') }}" class="btn-secondary px-3 py-2 text-sm"><i class="bi bi-person-plus"></i>Register</a>
+                <a href="{{ route('login') }}" class="btn-secondary px-3 py-2 text-sm" title="Login" aria-label="Login"><i class="bi bi-person"></i><span class="tv-action-label">Login</span></a>
+                <a href="{{ route('register') }}" class="btn-secondary px-3 py-2 text-sm" title="Register" aria-label="Register"><i class="bi bi-person-plus"></i><span class="tv-action-label">Register</span></a>
             @endauth
             <a href="{{ $whatsAppUrl }}" target="_blank" rel="noopener" class="btn-primary px-4 py-2 text-sm">
                 <i class="bi bi-whatsapp"></i>Talk to Experts
