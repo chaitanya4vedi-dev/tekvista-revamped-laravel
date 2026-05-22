@@ -153,13 +153,35 @@
     @php
         $whatsAppEnterpriseText = rawurlencode('Hello Tekvista Team, we need enterprise IT consultation for our organization. Please reply in English.');
         $whatsAppUrl = "https://wa.me/919051433313?text={$whatsAppEnterpriseText}";
+        $zohoMenuItems = collect($zohoProductLinks ?? [])
+            ->map(fn (array $item): array => [
+                'label' => $item['label'],
+                'route' => 'zoho.service',
+                'params' => ['zohoPage' => $item['slug']],
+                'routePattern' => 'zoho.service',
+                'activeParamKey' => 'zohoPage',
+                'activeParamValue' => $item['slug'],
+            ])
+            ->values()
+            ->all();
+        $odooMenuItems = collect($odooProductLinks ?? [])
+            ->map(fn (array $item): array => [
+                'label' => $item['label'],
+                'route' => 'odoo.service',
+                'params' => ['odooPage' => $item['slug']],
+                'routePattern' => 'odoo.service',
+                'activeParamKey' => 'odooPage',
+                'activeParamValue' => $item['slug'],
+            ])
+            ->values()
+            ->all();
         $navItems = [
             ['label' => 'Home', 'route' => 'home'],
             ['label' => 'About', 'route' => 'about'],
-            ['label' => 'CSR', 'route' => 'csr'],
             [
                 'label' => 'Services',
                 'route' => 'services',
+                'routePattern' => 'services*',
                 'children' => [
                     ['label' => 'IT Consultancy', 'route' => 'it-consultancy'],
                     ['label' => 'Cybersecurity', 'route' => 'cybersecurity'],
@@ -168,17 +190,30 @@
                     ['label' => 'Software Solutions', 'route' => 'software-solutions'],
                     ['label' => 'Networking', 'route' => 'networking'],
                     ['label' => 'AV Solutions', 'route' => 'av-solutions'],
-                    ['label' => 'Zoho Solutions', 'route' => 'zoho'],
-                    ['label' => 'Odoo Solutions', 'route' => 'odoo'],
                     ['label' => 'Mailing Solutions', 'route' => 'mailing'],
                     ['label' => 'Email Security', 'route' => 'email-security'],
                     ['label' => 'Systems & Infra', 'route' => 'infrastructure'],
                     ['label' => 'AI Integration', 'route' => 'ai-integration'],
                 ]
             ],
+            ['label' => 'Zoho', 'route' => 'zoho', 'routePattern' => 'zoho*', 'children' => $zohoMenuItems],
+            ['label' => 'Odoo', 'route' => 'odoo', 'routePattern' => 'odoo*', 'children' => $odooMenuItems],
+            ['label' => 'CSR', 'route' => 'csr'],
             ['label' => 'Blog', 'route' => 'blog.index'],
             ['label' => 'Contact', 'route' => 'contact'],
         ];
+        $isChildActive = function (array $child): bool {
+            $matchesRoute = request()->routeIs($child['routePattern'] ?? $child['route']);
+            if (!$matchesRoute) {
+                return false;
+            }
+
+            if (!isset($child['activeParamKey'], $child['activeParamValue'])) {
+                return true;
+            }
+
+            return request()->route($child['activeParamKey']) === $child['activeParamValue'];
+        };
         $policyLinks = $legalPolicies ?? [
             ['slug' => 'privacy-policy', 'title' => 'Privacy Policy'],
             ['slug' => 'refund-policy', 'title' => 'Refund Policy'],
@@ -207,20 +242,28 @@
 
             <nav class="hidden min-w-0 flex-1 items-center justify-center gap-1 text-sm font-semibold lg:flex">
                 @foreach ($navItems as $item)
+                    @php
+                        $itemRoutePattern = $item['routePattern'] ?? $item['route'];
+                        $itemIsActive = request()->routeIs($itemRoutePattern);
+                        if (!$itemIsActive && isset($item['children'])) {
+                            $itemIsActive = collect($item['children'])->contains(fn (array $child): bool => $isChildActive($child));
+                        }
+                    @endphp
                     @if (isset($item['children']))
                         <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                            <a href="{{ route($item['route']) }}" class="nav-link flex items-center gap-2 {{ request()->routeIs($item['route'].'*') ? 'nav-link-active' : '' }}">
+                            <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link flex items-center gap-2 {{ $itemIsActive ? 'nav-link-active' : '' }}">
                                 {{ $item['label'] }}
                                 <i class="bi bi-chevron-down text-xs"></i>
                             </a>
                             <div x-show="open" x-transition.opacity class="absolute left-0 top-full mt-1 w-60 rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] py-2 shadow-xl backdrop-blur-md" style="display:none;">
                                 @foreach ($item['children'] as $child)
-                                    <a href="{{ route($child['route']) }}" class="block px-4 py-2 text-sm text-[var(--text)] hover:bg-[var(--surface-light)] hover:text-[var(--accent)]">{{ $child['label'] }}</a>
+                                    @php $childIsActive = $isChildActive($child); @endphp
+                                    <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="block px-4 py-2 text-sm text-[var(--text)] hover:bg-[var(--surface-light)] hover:text-[var(--accent)] {{ $childIsActive ? 'bg-[var(--surface-light)] text-[var(--accent)]' : '' }}">{{ $child['label'] }}</a>
                                 @endforeach
                             </div>
                         </div>
                     @else
-                        <a href="{{ route($item['route']) }}" class="nav-link {{ request()->routeIs($item['route']) ? 'nav-link-active' : '' }}">{{ $item['label'] }}</a>
+                        <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link {{ $itemIsActive ? 'nav-link-active' : '' }}">{{ $item['label'] }}</a>
                     @endif
                 @endforeach
             </nav>
@@ -250,7 +293,12 @@
         <div id="mobile-menu" class="hidden border-t border-[var(--line)] bg-[var(--surface-strong)] px-3 py-3 lg:hidden">
             <div class="mobile-menu-scroll mx-auto grid gap-1 text-sm font-semibold">
                 @foreach ($navItems as $item)
-                    <a href="{{ route($item['route']) }}" class="nav-link">{{ $item['label'] }}</a>
+                    <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link">{{ $item['label'] }}</a>
+                    @if (isset($item['children']))
+                        @foreach ($item['children'] as $child)
+                            <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="nav-link pl-6 text-xs text-[var(--muted)]">• {{ $child['label'] }}</a>
+                        @endforeach
+                    @endif
                 @endforeach
                 @auth
                     <a href="{{ route('blog.manage.index') }}" class="nav-link"><i class="bi bi-pencil-square mr-2"></i>Write Blog</a>

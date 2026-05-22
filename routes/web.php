@@ -7,7 +7,38 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
-$zohoServicePages = ['zoho-one', 'crm', 'books', 'people', 'desk', 'creator', 'flow', 'workplace'];
+$zohoServicePages = [
+    'zoho-one',
+    'crm',
+    'books',
+    'people',
+    'desk',
+    'creator',
+    'flow',
+    'workplace',
+    'projects',
+    'inventory',
+    'analytics',
+    'recruit',
+    'sign',
+    'cliq',
+    'mail',
+    'campaigns',
+];
+$odooServicePages = [
+    'crm',
+    'sales',
+    'accounting',
+    'inventory',
+    'manufacturing',
+    'projects',
+    'purchase',
+    'recruitment',
+    'website-ecommerce',
+    'pos',
+    'hr',
+    'maintenance',
+];
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
@@ -25,6 +56,9 @@ Route::get('/zoho/{zohoPage}', [SiteController::class, 'zohoService'])
     ->whereIn('zohoPage', $zohoServicePages)
     ->name('zoho.service');
 Route::get('/odoo', [SiteController::class, 'odoo'])->name('odoo');
+Route::get('/odoo/{odooPage}', [SiteController::class, 'odooService'])
+    ->whereIn('odooPage', $odooServicePages)
+    ->name('odoo.service');
 Route::get('/mailing', [SiteController::class, 'mailing'])->name('mailing');
 Route::get('/email-security', [SiteController::class, 'emailSecurity'])->name('email-security');
 Route::get('/infrastructure', [SiteController::class, 'infrastructure'])->name('infrastructure');
@@ -80,7 +114,7 @@ foreach ($policyPages as $slug => $label) {
         ->name("policy.{$slug}");
 }
 
-Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages) {
+Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages, $odooServicePages) {
     $now = now()->toAtomString();
     $staticUrls = [
         ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly', 'lastmod' => $now],
@@ -105,6 +139,12 @@ Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages) {
     ];
     $zohoUrls = collect($zohoServicePages)->map(fn (string $slug): array => [
         'loc' => route('zoho.service', ['zohoPage' => $slug]),
+        'priority' => '0.75',
+        'changefreq' => 'monthly',
+        'lastmod' => $now,
+    ]);
+    $odooUrls = collect($odooServicePages)->map(fn (string $slug): array => [
+        'loc' => route('odoo.service', ['odooPage' => $slug]),
         'priority' => '0.75',
         'changefreq' => 'monthly',
         'lastmod' => $now,
@@ -148,6 +188,7 @@ Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages) {
 
     $urls = collect($staticUrls)
         ->merge($zohoUrls)
+        ->merge($odooUrls)
         ->merge($policyUrls)
         ->merge($blogUrls)
         ->values()
