@@ -58,6 +58,13 @@
 @layer components {
     .app-header { border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface-strong) 88%, transparent); backdrop-filter: blur(18px); }
     .brand-mark { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--ink); box-shadow: var(--glow); }
+    .tv-header-logo {
+        display: block;
+        width: clamp(148px, 27vw, 210px);
+        max-height: 54px;
+        height: auto;
+        object-fit: contain;
+    }
     .nav-link { display: inline-flex; align-items: center; white-space: nowrap; line-height: 1.1; border: 1px solid transparent; border-radius: .7rem; color: color-mix(in srgb, var(--text) 84%, transparent); padding: .55rem .8rem; transition: 180ms; }
     .nav-link:hover, .nav-link-active { border-color: var(--line); background: var(--surface-light); color: var(--accent); }
     .tv-nav-logo {
@@ -240,7 +247,10 @@
 
     @media (max-width: 430px) {
         .mobile-brand-subtitle { display: none; }
-        .mobile-brand img { height: 2rem; }
+        .tv-header-logo {
+            width: clamp(132px, 52vw, 170px);
+            max-height: 44px;
+        }
         .mobile-brand p { font-size: .78rem; }
         .nav-link { padding: .62rem .72rem; }
     }
@@ -252,8 +262,8 @@
             padding-right: .7rem;
         }
         .tv-header-logo {
-            width: clamp(150px, 14vw, 190px);
-            height: auto !important;
+            width: clamp(136px, 12vw, 165px);
+            max-height: 46px;
         }
         .tv-desktop-nav {
             gap: .1rem;
