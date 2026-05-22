@@ -37,11 +37,11 @@
             <a href="{{ route('zoho.service', ['zohoPage' => $slug]) }}" class="neo-card p-5 transition hover:border-[var(--accent)]">
                 <div class="flex items-center gap-3">
                     @if (!empty($service['logo']))
-                        <div class="grid size-11 place-items-center rounded-xl border border-[var(--line)] bg-white">
-                            <img src="{{ $service['logo'] }}" alt="{{ $service['logoAlt'] ?? $service['name'] }}" class="h-7 w-7 object-contain">
+                        <div class="grid size-12 shrink-0 place-items-center rounded-xl border border-[var(--line)] bg-white p-1 sm:size-14">
+                            <img src="{{ $service['logo'] }}" alt="{{ $service['logoAlt'] ?? $service['name'] }}" class="h-8 w-8 object-contain sm:h-10 sm:w-10">
                         </div>
                     @else
-                        <div class="grid size-11 place-items-center rounded-xl border border-[var(--line)] bg-[var(--surface-light)] text-[var(--accent)]"><i class="bi bi-stars"></i></div>
+                        <div class="grid size-12 shrink-0 place-items-center rounded-xl border border-[var(--line)] bg-[var(--surface-light)] text-[var(--accent)] sm:size-14"><i class="bi bi-stars text-lg"></i></div>
                     @endif
                     <h3 class="text-xl font-black text-[var(--text)]">{{ $service['name'] }}</h3>
                 </div>

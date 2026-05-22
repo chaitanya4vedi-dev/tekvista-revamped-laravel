@@ -1560,11 +1560,11 @@ class SiteController extends Controller
             ],
             'services' => $services,
             'zohoProductLinks' => collect($this->zohoServicePages())
-                ->map(fn (array $service): array => ['slug' => $service['slug'], 'label' => $service['name']])
+                ->map(fn (array $service): array => ['slug' => $service['slug'], 'label' => $service['name'], 'logo' => $service['logo'] ?? null])
                 ->values()
                 ->all(),
             'odooProductLinks' => collect($this->odooServicePages())
-                ->map(fn (array $service): array => ['slug' => $service['slug'], 'label' => $service['name']])
+                ->map(fn (array $service): array => ['slug' => $service['slug'], 'label' => $service['name'], 'logo' => $service['logo'] ?? null])
                 ->values()
                 ->all(),
             'contact' => [
