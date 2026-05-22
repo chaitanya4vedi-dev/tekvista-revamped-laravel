@@ -22,6 +22,7 @@ $zohoServicePages = [
     'recruit',
     'sign',
     'cliq',
+    'bigin',
     'mail',
     'campaigns',
 ];
