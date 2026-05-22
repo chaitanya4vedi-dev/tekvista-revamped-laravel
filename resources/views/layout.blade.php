@@ -255,23 +255,23 @@
                         <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                             <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link flex items-center gap-2 {{ $itemIsActive ? 'nav-link-active' : '' }}">
                                 @if (!empty($item['icon']))
-                                    <span class="grid size-5 shrink-0 place-items-center rounded bg-white/90 p-0.5">
-                                        <img src="{{ $item['icon'] }}" alt="{{ $item['label'] }} logo" class="h-4 w-4 object-contain">
+                                    <span class="tv-nav-logo">
+                                        <img src="{{ $item['icon'] }}" alt="{{ $item['label'] }} logo">
                                     </span>
                                 @endif
                                 {{ $item['label'] }}
                                 <i class="bi bi-chevron-down text-xs"></i>
                             </a>
-                            <div x-show="open" x-transition.opacity class="absolute left-0 top-full mt-1 w-80 max-h-[70vh] overflow-y-auto rounded-xl border border-[var(--line)] bg-[var(--surface-strong)] py-2 shadow-xl backdrop-blur-md" style="display:none;">
+                            <div x-show="open" x-transition.opacity class="tv-product-menu" style="display:none;">
                                 @foreach ($item['children'] as $child)
                                     @php $childIsActive = $isChildActive($child); @endphp
-                                    <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text)] hover:bg-[var(--surface-light)] hover:text-[var(--accent)] {{ $childIsActive ? 'bg-[var(--surface-light)] text-[var(--accent)]' : '' }}">
+                                    <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="tv-product-menu-link {{ $childIsActive ? 'tv-product-menu-link-active' : '' }}">
                                         @if (!empty($child['icon']))
-                                            <span class="grid size-8 shrink-0 place-items-center rounded-md border border-[var(--line)] bg-white p-1">
-                                                <img src="{{ $child['icon'] }}" alt="{{ $child['label'] }} logo" class="h-6 w-6 object-contain">
+                                            <span class="tv-product-menu-logo">
+                                                <img src="{{ $child['icon'] }}" alt="{{ $child['label'] }} logo">
                                             </span>
                                         @endif
-                                        <span class="block min-w-0 truncate">{{ $child['label'] }}</span>
+                                        <span class="tv-product-menu-text">{{ $child['label'] }}</span>
                                     </a>
                                 @endforeach
                             </div>
@@ -310,11 +310,11 @@
                     <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link">{{ $item['label'] }}</a>
                     @if (isset($item['children']))
                         @foreach ($item['children'] as $child)
-                            <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="nav-link flex items-center gap-2 pl-6 text-xs text-[var(--muted)]">
+                            <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="nav-link tv-mobile-product-link">
                                 @if (!empty($child['icon']))
-                                    <img src="{{ $child['icon'] }}" alt="{{ $child['label'] }} logo" class="h-4 w-4 shrink-0 object-contain">
+                                    <img src="{{ $child['icon'] }}" alt="{{ $child['label'] }} logo" class="tv-mobile-product-logo">
                                 @endif
-                                <span class="min-w-0 truncate">{{ $child['label'] }}</span>
+                                <span class="tv-product-menu-text">{{ $child['label'] }}</span>
                             </a>
                         @endforeach
                     @endif

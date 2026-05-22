@@ -22,8 +22,8 @@
 
         <div class="mt-6 flex flex-wrap items-center gap-3">
             @if (!empty($zohoService['logo']))
-                <div class="grid size-14 place-items-center rounded-xl border border-white/30 bg-white p-1.5 sm:size-16">
-                    <img src="{{ $zohoService['logo'] }}" alt="{{ $zohoService['logoAlt'] ?? $zohoService['name'] }}" class="h-10 w-10 object-contain sm:h-12 sm:w-12">
+                <div class="tv-product-hero-logo">
+                    <img src="{{ $zohoService['logo'] }}" alt="{{ $zohoService['logoAlt'] ?? $zohoService['name'] }}">
                 </div>
             @endif
             <p class="section-kicker hero-kicker-readable">{{ $zohoService['heroKicker'] }}</p>
@@ -131,8 +131,8 @@
             <a href="{{ route('zoho.service', ['zohoPage' => $slug]) }}" class="neo-card p-5 transition hover:border-[var(--accent)]">
                 <div class="flex items-center gap-3">
                     @if (!empty($service['logo']))
-                        <div class="grid size-12 shrink-0 place-items-center rounded-xl border border-[var(--line)] bg-white p-1 sm:size-14">
-                            <img src="{{ $service['logo'] }}" alt="{{ $service['logoAlt'] ?? $service['name'] }}" class="h-8 w-8 object-contain sm:h-10 sm:w-10">
+                        <div class="tv-related-product-logo">
+                            <img src="{{ $service['logo'] }}" alt="{{ $service['logoAlt'] ?? $service['name'] }}">
                         </div>
                     @endif
                     <h3 class="text-lg font-black text-[var(--text)]">{{ $service['name'] }}</h3>
