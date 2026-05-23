@@ -7,12 +7,17 @@
 
 <section class="service-hero relative isolate overflow-hidden">
     <img src="{{ $visuals['zoho'] }}" alt="Zoho services by Tekvista" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,7,13,0.86),rgba(5,7,13,0.62),rgba(5,7,13,0.42))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker hero-kicker-readable">Zoho Services by Tekvista</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Simple, practical Zoho setup for real business teams.</h1>
-        <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">We help you choose the right Zoho products, set them up the right way, and support your team after go live. From CRM and finance to HR and operations, we keep things clear and easy to use.</p>
-        <div class="mt-7 flex flex-wrap gap-3">
+        <div class="flex flex-col items-center text-center">
+            <div class="tv-product-hero-logo">
+                <img src="{{ asset('images/tekvista/logos/zoho.svg') }}" alt="Zoho color logo">
+            </div>
+            <p class="mt-5 section-kicker hero-kicker-readable">Zoho Services by Tekvista</p>
+            <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Simple, practical Zoho setup for real business teams.</h1>
+            <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">We help you choose the right Zoho products, set them up the right way, and support your team after go live. From CRM and finance to HR and operations, we keep things clear and easy to use.</p>
+        </div>
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
             <a href="{{ route('contact', ['intent' => 'Discuss Zoho services']) }}" class="btn-primary">
                 <i class="bi bi-send-check-fill"></i>Book a Zoho Call
             </a>

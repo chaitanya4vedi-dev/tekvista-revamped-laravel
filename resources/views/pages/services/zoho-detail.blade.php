@@ -13,25 +13,26 @@
 @endphp
 
 <section class="service-hero relative isolate overflow-hidden">
-    <img src="{{ $visuals['zoho'] }}" alt="{{ $zohoService['name'] }} service by Tekvista" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
+    <img src="{{ $zohoService['heroImage'] ?? $visuals['zoho'] }}" alt="{{ $zohoService['name'] }} service by Tekvista" class="absolute inset-0 -z-20 h-full w-full object-cover">
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,7,13,0.86),rgba(5,7,13,0.62),rgba(5,7,13,0.42))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <a href="{{ route('zoho') }}" class="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold tracking-wider text-[#def2ff]">
             <i class="bi bi-arrow-left mr-2"></i>Back to Zoho pages
         </a>
 
-        <div class="mt-6 flex flex-wrap items-center gap-3">
+        <div class="mt-7 flex flex-col items-center text-center">
             @if (!empty($zohoService['logo']))
                 <div class="tv-product-hero-logo">
                     <img src="{{ $zohoService['logo'] }}" alt="{{ $zohoService['logoAlt'] ?? $zohoService['name'] }}">
                 </div>
             @endif
-            <p class="section-kicker hero-kicker-readable">{{ $zohoService['heroKicker'] }}</p>
+
+            <p class="mt-5 section-kicker hero-kicker-readable">{{ $zohoService['heroKicker'] }}</p>
+            <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">{{ $zohoService['heroTitle'] }}</h1>
+            <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">{{ $zohoService['heroSummary'] }}</p>
         </div>
 
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">{{ $zohoService['heroTitle'] }}</h1>
-        <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">{{ $zohoService['heroSummary'] }}</p>
-        <div class="mt-7 flex flex-wrap gap-3">
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
             <a href="{{ route('contact', ['intent' => $zohoService['primaryIntent']]) }}" class="btn-primary">
                 <i class="bi bi-send-check-fill"></i>{{ $zohoService['primaryIntent'] }}
             </a>

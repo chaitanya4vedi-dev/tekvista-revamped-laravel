@@ -159,14 +159,15 @@
     .tv-product-hero-logo {
         display: grid;
         place-items: center;
-        width: 62px;
-        height: 62px;
-        padding: 8px;
+        width: 84px;
+        height: 84px;
+        padding: 11px;
         border: 1px solid rgba(255, 255, 255, .38);
-        border-radius: .9rem;
+        border-radius: 1.15rem;
         background: #fff;
+        box-shadow: 0 18px 46px rgba(0, 0, 0, .22);
     }
-    .tv-product-hero-logo img { width: 46px; height: 46px; max-width: 46px; max-height: 46px; object-fit: contain; }
+    .tv-product-hero-logo img { width: 62px; height: 62px; max-width: 62px; max-height: 62px; object-fit: contain; }
 
     .neo-card {
         border: 1px solid var(--line);
@@ -230,8 +231,8 @@
         .logo-chip img { max-height: 58px; }
         .tv-product-card-logo { width: 58px; height: 58px; padding: 8px; }
         .tv-product-card-logo img { width: 42px; height: 42px; max-width: 42px; max-height: 42px; }
-        .tv-product-hero-logo { width: 70px; height: 70px; padding: 9px; }
-        .tv-product-hero-logo img { width: 52px; height: 52px; max-width: 52px; max-height: 52px; }
+        .tv-product-hero-logo { width: 108px; height: 108px; padding: 14px; border-radius: 1.35rem; }
+        .tv-product-hero-logo img { width: 80px; height: 80px; max-width: 80px; max-height: 80px; }
     }
     .light-panel { border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(145deg, rgba(255,255,255,.95), rgba(233,248,240,.86)); color: #11322b; box-shadow: var(--shadow); }
     .input-field { border: 1px solid var(--line); border-radius: .75rem; background: #fff; color: var(--text); outline: none; padding: .76rem 1rem; }

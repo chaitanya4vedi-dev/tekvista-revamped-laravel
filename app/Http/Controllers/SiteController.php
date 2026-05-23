@@ -520,6 +520,7 @@ class SiteController extends Controller
             'zoho-one' => [
                 'name' => 'Zoho One',
                 'logo' => asset('images/tekvista/logos/zoho/zoho-one.svg'),
+                'heroImage' => 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1600',
                 'cardSummary' => 'One connected suite for sales, finance, HR, and support teams.',
                 'heroTitle' => 'Run key teams on one connected Zoho setup.',
                 'heroSummary' => 'Tekvista helps you plan and launch Zoho One so your teams can work together without tool confusion.',
@@ -552,6 +553,7 @@ class SiteController extends Controller
             'crm' => [
                 'name' => 'Zoho CRM',
                 'logo' => asset('images/tekvista/logos/zoho/crm.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Track leads and deals clearly with better sales follow up.',
                 'heroTitle' => 'Make sales tracking easier with Zoho CRM.',
                 'heroSummary' => 'We build a clear sales pipeline in Zoho CRM so your team can follow leads and close deals faster.',
@@ -584,6 +586,7 @@ class SiteController extends Controller
             'books' => [
                 'name' => 'Zoho Books',
                 'logo' => asset('images/tekvista/logos/zoho/books.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Simple accounting, invoicing, and finance approvals in one place.',
                 'heroTitle' => 'Improve accounting flow with Zoho Books.',
                 'heroSummary' => 'We set up Zoho Books so billing, vendor payments, and basic finance controls are easier to run.',
@@ -616,6 +619,7 @@ class SiteController extends Controller
             'people' => [
                 'name' => 'Zoho People',
                 'logo' => asset('images/tekvista/logos/zoho/people.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Digital HR for onboarding, attendance, leave, and employee records.',
                 'heroTitle' => 'Manage HR tasks in a simpler way with Zoho People.',
                 'heroSummary' => 'We help your HR team move from spreadsheets to clear workflows for attendance, leave, and employee lifecycle.',
@@ -648,6 +652,7 @@ class SiteController extends Controller
             'desk' => [
                 'name' => 'Zoho Desk',
                 'logo' => asset('images/tekvista/logos/zoho/desk.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Ticket based customer support with SLA tracking and escalation.',
                 'heroTitle' => 'Give your support team a clear ticket workflow with Zoho Desk.',
                 'heroSummary' => 'We configure Zoho Desk for ticket routing, SLA rules, escalation, and support reporting.',
@@ -680,6 +685,7 @@ class SiteController extends Controller
             'creator' => [
                 'name' => 'Zoho Creator',
                 'logo' => asset('images/tekvista/logos/zoho/creator.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Low code custom apps for business workflows and approvals.',
                 'heroTitle' => 'Build custom business apps quickly with Zoho Creator.',
                 'heroSummary' => 'Tekvista builds low code apps in Zoho Creator for workflows that standard modules cannot fully cover.',
@@ -712,6 +718,7 @@ class SiteController extends Controller
             'flow' => [
                 'name' => 'Zoho Flow',
                 'logo' => asset('images/tekvista/logos/zoho/flow.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Automate tasks between Zoho apps and external software.',
                 'heroTitle' => 'Connect apps and reduce manual work with Zoho Flow.',
                 'heroSummary' => 'We build reliable automation between systems so teams do less copy paste and fewer repetitive tasks.',
@@ -744,6 +751,7 @@ class SiteController extends Controller
             'workplace' => [
                 'name' => 'Zoho Workplace',
                 'logo' => asset('images/tekvista/logos/zoho/workplace.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Business email and team collaboration in one secure suite.',
                 'heroTitle' => 'Set up secure email and collaboration with Zoho Workplace.',
                 'heroSummary' => 'We help you move to Zoho Workplace with mailbox migration, user setup, and collaboration best practices.',
@@ -776,6 +784,7 @@ class SiteController extends Controller
             'projects' => [
                 'name' => 'Zoho Projects',
                 'logo' => asset('images/tekvista/logos/zoho/projects.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Project planning, task tracking, and team accountability in one view.',
                 'heroTitle' => 'Track project work clearly with Zoho Projects.',
                 'heroSummary' => 'We set up Zoho Projects so teams can plan tasks, deadlines, and collaboration without confusion.',
@@ -808,6 +817,7 @@ class SiteController extends Controller
             'inventory' => [
                 'name' => 'Zoho Inventory',
                 'logo' => asset('images/tekvista/logos/zoho/inventory.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Stock, order, and shipment visibility for better operations control.',
                 'heroTitle' => 'Control stock and orders better with Zoho Inventory.',
                 'heroSummary' => 'We configure Zoho Inventory for item management, order workflows, and warehouse level visibility.',
@@ -840,6 +850,7 @@ class SiteController extends Controller
             'analytics' => [
                 'name' => 'Zoho Analytics',
                 'logo' => asset('images/tekvista/logos/zoho/analytics.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Business dashboards and reports from your Zoho and external data.',
                 'heroTitle' => 'Make better decisions with clear Zoho Analytics dashboards.',
                 'heroSummary' => 'We build reporting layers in Zoho Analytics so leadership and teams can track the right numbers.',
@@ -872,6 +883,7 @@ class SiteController extends Controller
             'recruit' => [
                 'name' => 'Zoho Recruit',
                 'logo' => asset('images/tekvista/logos/zoho/recruit.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Hiring workflow for sourcing, screening, and candidate communication.',
                 'heroTitle' => 'Speed up hiring with Zoho Recruit workflows.',
                 'heroSummary' => 'We set up Zoho Recruit for job openings, candidate tracking, and hiring team collaboration.',
@@ -904,6 +916,7 @@ class SiteController extends Controller
             'sign' => [
                 'name' => 'Zoho Sign',
                 'logo' => asset('images/tekvista/logos/zoho/sign.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Digital signatures for contracts, approvals, and faster document closure.',
                 'heroTitle' => 'Close approvals faster with Zoho Sign.',
                 'heroSummary' => 'We set up Zoho Sign for secure digital signing workflows across sales, HR, legal, and operations.',
@@ -936,6 +949,7 @@ class SiteController extends Controller
             'cliq' => [
                 'name' => 'Zoho Cliq',
                 'logo' => asset('images/tekvista/logos/zoho/cliq.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Team chat and quick collaboration for faster internal communication.',
                 'heroTitle' => 'Improve team communication with Zoho Cliq.',
                 'heroSummary' => 'We set up Zoho Cliq channels, team structure, and app connections so communication stays organized.',
@@ -968,6 +982,7 @@ class SiteController extends Controller
             'bigin' => [
                 'name' => 'Bigin by Zoho CRM',
                 'logo' => asset('images/tekvista/logos/zoho/bigin.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Simple CRM for small and growing sales teams.',
                 'heroTitle' => 'Start sales tracking quickly with Bigin by Zoho CRM.',
                 'heroSummary' => 'We set up Bigin for teams that need a simple CRM with pipeline tracking, follow ups, and visibility without heavy complexity.',
@@ -1000,6 +1015,7 @@ class SiteController extends Controller
             'mail' => [
                 'name' => 'Zoho Mail',
                 'logo' => asset('images/tekvista/logos/zoho/mail.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Business email setup, migration, and policy controls for secure communication.',
                 'heroTitle' => 'Set up reliable business email with Zoho Mail.',
                 'heroSummary' => 'We migrate mailboxes, configure domains, and apply security policies for day to day email operations.',
@@ -1032,6 +1048,7 @@ class SiteController extends Controller
             'campaigns' => [
                 'name' => 'Zoho Campaigns',
                 'logo' => asset('images/tekvista/logos/zoho/campaigns.svg'),
+                'heroImage' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Email marketing journeys, list management, and campaign performance tracking.',
                 'heroTitle' => 'Run better email marketing with Zoho Campaigns.',
                 'heroSummary' => 'We set up Zoho Campaigns for list hygiene, campaign journeys, and clear performance reporting.',
@@ -1072,6 +1089,7 @@ class SiteController extends Controller
                     'name' => $name,
                     'logo' => $service['logo'],
                     'logoAlt' => $name.' color logo',
+                    'heroImage' => $service['heroImage'] ?? null,
                     'cardSummary' => $service['cardSummary'],
                     'heroKicker' => $name.' Services',
                     'heroTitle' => $service['heroTitle'],
@@ -1504,6 +1522,7 @@ class SiteController extends Controller
                     'name' => $name,
                     'logo' => $service['logo'],
                     'logoAlt' => $name.' color icon',
+                    'heroImage' => $service['heroImage'] ?? null,
                     'cardSummary' => $service['cardSummary'],
                     'heroKicker' => $name.' Services',
                     'heroTitle' => $service['heroTitle'],

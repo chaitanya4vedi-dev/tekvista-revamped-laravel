@@ -7,12 +7,17 @@
 
 <section class="service-hero relative isolate overflow-hidden">
     <img src="{{ $visuals['odoo'] }}" alt="Odoo services by Tekvista" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,7,13,0.86),rgba(5,7,13,0.62),rgba(5,7,13,0.42))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker hero-kicker-readable">Odoo Services by Tekvista</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Odoo modules set up in plain and practical way.</h1>
-        <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">We implement Odoo for sales, accounting, inventory, production, HR, and more. Our focus is simple workflows your team can actually use every day.</p>
-        <div class="mt-7 flex flex-wrap gap-3">
+        <div class="flex flex-col items-center text-center">
+            <div class="tv-product-hero-logo">
+                <img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo color logo">
+            </div>
+            <p class="mt-5 section-kicker hero-kicker-readable">Odoo Services by Tekvista</p>
+            <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Odoo modules set up in plain and practical way.</h1>
+            <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">We implement Odoo for sales, accounting, inventory, production, HR, and more. Our focus is simple workflows your team can actually use every day.</p>
+        </div>
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
             <a href="{{ route('contact', ['intent' => 'Discuss Odoo services']) }}" class="btn-primary">
                 <i class="bi bi-send-check-fill"></i>Book an Odoo Call
             </a>
