@@ -3,12 +3,12 @@
 @section('content')
 <section class="hero-shell">
     <img src="{{ $visuals['av'] }}" alt="Enterprise AV solutions setup" class="absolute inset-0 -z-20 h-full w-full object-cover">
-    <div class="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(247,255,251,0.92),rgba(241,253,247,0.82),rgba(231,248,239,0.52))]"></div>
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(5,11,20,0.84),rgba(5,11,20,0.58),rgba(5,11,20,0.18))]"></div>
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <p class="section-kicker">AV Solutions</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Transforming spaces with cutting-edge enterprise AV technology.</h1>
-        <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">Tekvista Infosolutions delivers end-to-end AV solutions, from system design to integration and managed support, for boardrooms, training rooms, campuses, and event spaces.</p>
+        <p class="section-kicker hero-kicker-readable">AV Solutions</p>
+        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Transforming spaces with cutting-edge enterprise AV technology.</h1>
+        <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Tekvista Infosolutions delivers end-to-end AV solutions, from system design to integration and managed support, for boardrooms, training rooms, campuses, and event spaces.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Discuss AV Solutions Project']) }}" class="btn-primary">
                 <i class="bi bi-send-check-fill"></i>Contact Us

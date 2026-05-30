@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="service-hero">
-    <img src="{{ $visuals['mail'] }}" alt="Enterprise email security operations" class="absolute inset-0 -z-20 h-full w-full object-cover">
+    <img src="{{ $visuals['emailSecurity'] }}" alt="Enterprise email security and phishing protection" class="absolute inset-0 -z-20 h-full w-full object-cover">
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">Email Security</p>

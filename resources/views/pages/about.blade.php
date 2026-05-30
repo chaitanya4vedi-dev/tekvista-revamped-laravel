@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="relative isolate overflow-hidden">
-    <img src="{{ $visuals['ops'] }}" alt="India-based professionals in a modern office meeting" class="absolute inset-0 -z-20 h-full w-full object-cover">
+    <img src="{{ $visuals['about'] }}" alt="Tekvista business partnerships and global technology network" class="absolute inset-0 -z-20 h-full w-full object-cover">
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,7,13,0.86),rgba(5,7,13,0.62),rgba(5,7,13,0.28))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">About Tekvista</p>

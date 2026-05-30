@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="hero-shell">
-    <img src="{{ $visuals['ops'] }}" alt="AI integration for enterprise operations" class="absolute inset-0 -z-20 h-full w-full object-cover">
+    <img src="{{ $visuals['ai'] }}" alt="AI integration and intelligent business workflows" class="absolute inset-0 -z-20 h-full w-full object-cover">
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(95deg,rgba(5,11,20,0.8),rgba(5,11,20,0.58),rgba(5,11,20,0.26))]"></div>
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">

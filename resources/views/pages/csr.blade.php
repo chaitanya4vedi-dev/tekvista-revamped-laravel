@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="hero-shell">
-    <img src="{{ $visuals['ops'] }}" alt="Tekvista CSR and community initiatives" class="absolute inset-0 -z-20 h-full w-full object-cover">
+    <img src="{{ $visuals['csr'] }}" alt="Tekvista CSR and community growth initiatives" class="absolute inset-0 -z-20 h-full w-full object-cover">
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(247,255,251,0.94),rgba(241,253,247,0.84),rgba(231,248,239,0.58))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">Corporate Social Responsibility</p>
