@@ -6,7 +6,7 @@
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">Cloud Solutions</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">One enterprise cloud platform for workloads, applications, and business continuity.</h1>
+        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">One enterprise cloud platform for workloads, applications, and business continuity</h1>
         <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">TekVista delivers Tally on Cloud, Zoho, Odoo, Microsoft Azure, Google Cloud Platform (GCP), Amazon Web Services (AWS), and CtrlS datacenter-backed hosting through one integrated cloud delivery model.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Plan Cloud and Tally Hosting Rollout']) }}" class="btn-primary">
@@ -41,7 +41,7 @@
 <section class="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="neo-card p-6 sm:p-8">
         <p class="section-kicker">What We Deliver</p>
-        <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Enterprise cloud lifecycle coverage from onboarding to operations.</h2>
+        <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Enterprise cloud lifecycle coverage from onboarding to operations</h2>
         <div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-cloud-arrow-up-fill mr-2 text-[var(--accent)]"></i>Cloud readiness and migration wave planning</div>
             <div class="rounded-xl border border-[var(--line)] bg-[var(--surface-light)] p-4 text-sm text-[var(--text)]"><i class="bi bi-calculator-fill mr-2 text-[var(--accent)]"></i>Tally on Cloud onboarding with multi-user enablement</div>
@@ -58,7 +58,7 @@
         <p class="section-kicker">Operating Model</p>
         <div class="grid gap-6 md:grid-cols-2">
             <article>
-                <h2 class="text-2xl font-black text-[var(--text)]">Tally, Zoho, and Odoo in cloud-ready architecture.</h2>
+                <h2 class="text-2xl font-black text-[var(--text)]">Tally, Zoho, and Odoo in cloud-ready architecture</h2>
                 <p class="mt-3 text-sm leading-7 text-[var(--muted)]">We design application hosting and integration patterns so your finance, operations, CRM, and collaboration workloads can run with predictable uptime, secure access, and clean data flow between systems.</p>
                 <ul class="mt-4 space-y-2 text-sm text-[var(--text)]">
                     <li><i class="bi bi-check2-circle mr-2 text-[var(--accent)]"></i>Concurrent user access with role-bound privileges</li>
@@ -67,7 +67,7 @@
                 </ul>
             </article>
             <article>
-                <h2 class="text-2xl font-black text-[var(--text)]">Clear backup policy and accountability boundary.</h2>
+                <h2 class="text-2xl font-black text-[var(--text)]">Clear backup policy and accountability boundary</h2>
                 <p class="mt-3 text-sm leading-7 text-[var(--muted)]">We sincerely provide managed cloud data backup, retention planning, and restore support. Final data ownership, audit confirmation, and business-level liability remain with the customer organization and its authorized stakeholders.</p>
                 <ul class="mt-4 space-y-2 text-sm text-[var(--text)]">
                     <li><i class="bi bi-check2-circle mr-2 text-[var(--accent)]"></i>Automated backup schedules with restore checkpoints</li>

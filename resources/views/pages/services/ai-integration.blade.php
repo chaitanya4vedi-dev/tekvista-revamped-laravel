@@ -7,7 +7,7 @@
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">AI Integration</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Practical AI integration for enterprise teams.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Practical AI integration for enterprise teams</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#def2ff]">We help organizations adopt AI where it creates measurable value: service operations, internal workflows, analytics, and assisted decision systems.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Plan AI Integration']) }}" class="btn-primary">

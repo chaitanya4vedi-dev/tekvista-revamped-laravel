@@ -7,7 +7,7 @@
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">IT Consultancy</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Enterprise IT consulting for measurable business outcomes.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Enterprise IT consulting for measurable business outcomes</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#def2ff]">From technology roadmaps to architecture decisions, Tekvista helps leadership teams align IT investments with operational and growth priorities.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Book IT Consultancy Session']) }}" class="btn-primary">

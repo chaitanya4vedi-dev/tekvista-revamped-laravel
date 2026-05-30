@@ -9,7 +9,7 @@
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,7,13,0.84),rgba(5,7,13,0.6),rgba(5,7,13,0.24))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">IT intake console</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Start with the fastest path: form, phone or WhatsApp.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Start with the fastest path: form, phone or WhatsApp</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Share your requirement and Tekvista can route it into consulting, infrastructure, cybersecurity, cloud, software or support follow-up.</p>
     </div>
 </section>
@@ -36,7 +36,7 @@
             <div class="flex items-center justify-between gap-4 border-b border-[var(--line)] pb-4">
                 <div>
                     <p class="section-kicker">Request payload</p>
-                    <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Tell us what needs to work better.</h2>
+                    <h2 class="mt-2 text-2xl font-black text-[var(--text)]">Tell us what needs to work better</h2>
                 </div>
                 <span class="hidden rounded-full bg-[var(--accent)]/14 px-3 py-1 font-mono text-xs font-bold text-[var(--accent)] sm:inline-flex">DB + WhatsApp</span>
             </div>

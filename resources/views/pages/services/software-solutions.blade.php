@@ -7,7 +7,7 @@
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">Software Solutions</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Custom software aligned with enterprise workflows.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Custom software aligned with enterprise workflows</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#def2ff]">We design and implement business software that integrates with your cloud, ERP, CRM, and productivity systems for better control and execution speed.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Scope Software Solution Project']) }}" class="btn-primary">

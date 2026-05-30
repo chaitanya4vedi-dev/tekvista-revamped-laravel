@@ -14,7 +14,7 @@
                 <img src="{{ asset('images/tekvista/logos/odoo.svg') }}" alt="Odoo color logo">
             </div>
             <p class="mt-5 section-kicker hero-kicker-readable">Odoo Services by Tekvista</p>
-            <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Odoo modules set up in plain and practical way.</h1>
+            <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Odoo modules set up in plain and practical way</h1>
             <p class="mt-5 max-w-4xl text-base leading-8 text-[#d5edf6]">We implement Odoo for sales, accounting, inventory, production, HR, and more. Our focus is simple workflows your team can actually use every day.</p>
         </div>
         <div class="mt-7 flex flex-wrap justify-center gap-3">

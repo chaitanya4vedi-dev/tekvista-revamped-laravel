@@ -56,7 +56,7 @@
 }
 
 @layer components {
-    .app-header { border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface-strong) 88%, transparent); backdrop-filter: blur(18px); }
+    .app-header { border-bottom: 1px solid var(--line); background: var(--surface-strong); background: color-mix(in srgb, var(--surface-strong) 88%, transparent); backdrop-filter: blur(18px); }
     .brand-mark { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--ink); box-shadow: var(--glow); }
     .tv-header-logo {
         display: block;
@@ -66,7 +66,13 @@
         object-fit: contain;
     }
     .nav-link { display: inline-flex; align-items: center; white-space: nowrap; line-height: 1.1; border: 1px solid transparent; border-radius: .7rem; color: color-mix(in srgb, var(--text) 84%, transparent); padding: .55rem .8rem; transition: 180ms; }
-    .nav-link:hover, .nav-link-active { border-color: var(--line); background: var(--surface-light); color: var(--accent); }
+    .nav-link:hover { border-color: var(--line); background: var(--surface-light); color: var(--accent); }
+    .nav-link-active {
+        border-color: color-mix(in srgb, var(--accent) 52%, var(--line));
+        background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 13%, #fff), color-mix(in srgb, var(--accent-3) 9%, #fff));
+        color: color-mix(in srgb, var(--accent) 78%, #07372e);
+        box-shadow: inset 0 -2px 0 var(--accent), 0 10px 24px rgba(11, 184, 132, 0.13);
+    }
     .tv-nav-logo {
         display: grid;
         place-items: center;
@@ -106,6 +112,7 @@
         gap: .65rem;
         min-height: 38px;
         padding: .42rem .55rem;
+        border: 1px solid transparent;
         border-radius: .55rem;
         color: var(--text);
         font-size: .86rem;
@@ -114,7 +121,8 @@
     }
     .tv-product-menu-link:hover,
     .tv-product-menu-link-active {
-        background: var(--surface-light);
+        border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+        background: color-mix(in srgb, var(--accent) 12%, #fff);
         color: var(--accent);
     }
     .tv-product-menu-logo {
@@ -142,6 +150,13 @@
         white-space: nowrap;
     }
     .tv-mobile-product-link { display: flex; align-items: center; gap: .5rem; padding-left: 1.5rem; font-size: .78rem; color: var(--muted); }
+    .tv-mobile-active-parent { font-weight: 900; }
+    .tv-mobile-product-link-active {
+        border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+        background: color-mix(in srgb, var(--accent) 11%, #fff);
+        color: color-mix(in srgb, var(--accent) 80%, #07372e);
+        font-weight: 900;
+    }
     .tv-mobile-product-logo { width: 16px; height: 16px; flex: 0 0 16px; object-fit: contain; }
     .tv-product-card-logo,
     .tv-related-product-logo {
@@ -183,6 +198,7 @@
     .btn-secondary-on-dark { border-color: rgba(220, 247, 234, 0.45); color: #def7ea; background: rgba(212, 245, 230, 0.16); }
     .btn-secondary-on-dark:hover { background: rgba(212, 245, 230, 0.24); }
 
+    .service-hero { min-height: clamp(480px, 66vh, 720px); }
     .hero-shell { position: relative; overflow: hidden; }
     .hero-shell::after {
         content: '';
@@ -226,6 +242,21 @@
         color: #d6f8ff;
         text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
     }
+    .tv-hero-focus-security { object-position: 68% center; }
+    .tv-industry-hero-gradient {
+        background:
+            radial-gradient(circle at 82% 20%, rgba(20, 184, 166, 0.24), transparent 25rem),
+            radial-gradient(circle at 14% 72%, rgba(59, 130, 246, 0.28), transparent 30rem),
+            linear-gradient(112deg, rgba(2, 6, 23, 0.96) 0%, rgba(3, 20, 43, 0.86) 43%, rgba(8, 92, 95, 0.54) 72%, rgba(2, 6, 23, 0.38) 100%);
+    }
+    .tv-industry-hero-mesh {
+        opacity: .42;
+        background-image:
+            linear-gradient(rgba(125, 221, 159, 0.18) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(80, 190, 255, 0.15) 1px, transparent 1px);
+        background-size: 46px 46px;
+        mask-image: radial-gradient(circle at 65% 50%, #000 0%, transparent 70%);
+    }
     @media (min-width: 1024px) {
         .logo-chip { min-height: 122px; }
         .logo-chip img { max-height: 58px; }
@@ -237,7 +268,58 @@
     .light-panel { border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(145deg, rgba(255,255,255,.95), rgba(233,248,240,.86)); color: #11322b; box-shadow: var(--shadow); }
     .input-field { border: 1px solid var(--line); border-radius: .75rem; background: #fff; color: var(--text); outline: none; padding: .76rem 1rem; }
     .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
-    .mobile-menu-scroll { max-height: min(72vh, 520px); overflow-y: auto; padding-right: .1rem; }
+    .mobile-menu-frame {
+        position: relative;
+        max-width: 28rem;
+    }
+    .mobile-menu-scroll {
+        max-height: min(72vh, 520px);
+        overflow-y: auto;
+        padding-right: .45rem;
+        padding-bottom: 3.1rem;
+        scrollbar-color: var(--accent) color-mix(in srgb, var(--line) 35%, transparent);
+        scrollbar-width: thin;
+        mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 4rem), rgba(0, 0, 0, 0.08) 100%);
+    }
+    .mobile-menu-scroll::-webkit-scrollbar { width: .45rem; }
+    .mobile-menu-scroll::-webkit-scrollbar-track { background: color-mix(in srgb, var(--line) 30%, transparent); border-radius: 999px; }
+    .mobile-menu-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; }
+    .mobile-menu-scroll-hint {
+        position: absolute;
+        right: .45rem;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: .45rem;
+        height: 3.4rem;
+        padding-bottom: .45rem;
+        background: linear-gradient(to bottom, rgba(252, 255, 253, 0), var(--surface-strong) 56%, var(--surface-strong));
+        background: linear-gradient(to bottom, rgba(252, 255, 253, 0), color-mix(in srgb, var(--surface-strong) 88%, transparent) 56%, color-mix(in srgb, var(--surface-strong) 88%, transparent));
+        backdrop-filter: blur(18px);
+        color: var(--accent);
+        font-size: .68rem;
+        font-weight: 900;
+        letter-spacing: .13em;
+        pointer-events: none;
+        text-transform: uppercase;
+        transition: opacity 180ms ease, transform 180ms ease;
+    }
+    .mobile-menu-scroll-hint::before {
+        content: '';
+        width: 1.9rem;
+        height: .18rem;
+        margin-bottom: .37rem;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 18px rgba(11, 184, 132, 0.35);
+    }
+    #mobile-menu.is-scroll-end .mobile-menu-scroll-hint,
+    #mobile-menu:not(.is-scrollable) .mobile-menu-scroll-hint {
+        opacity: 0;
+        transform: translateY(.35rem);
+    }
     #install-app {
         background: linear-gradient(135deg, #0bb884, #3aa86b);
         color: #f7fff9;
@@ -254,6 +336,7 @@
         }
         .mobile-brand p { font-size: .78rem; }
         .nav-link { padding: .62rem .72rem; }
+        .tv-hero-focus-security { object-position: 72% center; }
     }
 
     @media (min-width: 1024px) and (max-width: 1399px) {

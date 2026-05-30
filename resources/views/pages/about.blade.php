@@ -6,7 +6,7 @@
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,7,13,0.86),rgba(5,7,13,0.62),rgba(5,7,13,0.28))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">About Tekvista</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Enterprise technology delivery built in Kolkata, scaled for modern business.</h1>
+        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Enterprise technology delivery built in Kolkata, scaled for modern business</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Tekvista Infosolutions Private Limited helps organizations modernize cloud, security, collaboration, and infrastructure with disciplined execution, measurable outcomes, and long-term operational support.</p>
     </div>
 </section>
@@ -50,7 +50,7 @@
     <div class="grid gap-6 lg:grid-cols-3">
         <article class="light-panel p-6 lg:col-span-2">
             <p class="section-kicker text-[#0b8f9a]">Founder Journey</p>
-            <h2 class="mt-2 text-2xl font-black text-[#0d283d]">From relationship-led IT support to structured enterprise transformation.</h2>
+            <h2 class="mt-2 text-2xl font-black text-[#0d283d]">From relationship-led IT support to structured enterprise transformation</h2>
             <div class="mt-4 grid gap-4 text-sm leading-7 text-[#244761]">
                 <p>Tekvista grew from practical IT problem-solving for fast-moving businesses into a full enterprise services practice. The founder journey has remained focused on one operating principle: every implementation must be supportable in the real world, not just impressive on launch day.</p>
                 <p>That approach shaped the company into a cross-functional delivery team spanning cybersecurity, cloud, networking, collaboration, and business applications. Today, the same founder-led culture drives execution quality, ownership, and long-term client trust across projects.</p>

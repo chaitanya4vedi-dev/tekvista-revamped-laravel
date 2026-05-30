@@ -177,6 +177,41 @@
             ])
             ->values()
             ->all();
+        $productPartnerMenuItems = collect($productPartnerLinks ?? [
+                ['slug' => 'sophos', 'label' => 'Sophos', 'logo' => asset('images/tekvista/logos/sophos.svg')],
+                ['slug' => 'fortinet', 'label' => 'Fortinet', 'logo' => asset('images/tekvista/logos/fortinet.svg')],
+                ['slug' => 'seqrite', 'label' => 'Seqrite', 'logo' => asset('images/tekvista/logos/seqrite.png')],
+                ['slug' => 'microsoft', 'label' => 'Microsoft', 'logo' => asset('images/tekvista/logos/microsoft.svg')],
+            ])
+            ->map(fn (array $item): array => [
+                'label' => $item['label'],
+                'route' => 'product.partner',
+                'params' => ['vendor' => $item['slug']],
+                'routePattern' => 'product.partner',
+                'activeParamKey' => 'vendor',
+                'activeParamValue' => $item['slug'],
+                'icon' => $item['logo'] ?? null,
+            ])
+            ->values()
+            ->all();
+        $industryMenuItems = collect($industryLinks ?? [
+                ['slug' => 'finance-bfsi', 'label' => 'Finance and BFSI'],
+                ['slug' => 'healthcare', 'label' => 'Healthcare'],
+                ['slug' => 'education', 'label' => 'Education'],
+                ['slug' => 'manufacturing', 'label' => 'Manufacturing'],
+                ['slug' => 'retail-distribution', 'label' => 'Retail and Distribution'],
+                ['slug' => 'professional-services', 'label' => 'Professional Services'],
+            ])
+            ->map(fn (array $item): array => [
+                'label' => $item['label'],
+                'route' => 'industry.show',
+                'params' => ['industry' => $item['slug']],
+                'routePattern' => 'industry.show',
+                'activeParamKey' => 'industry',
+                'activeParamValue' => $item['slug'],
+            ])
+            ->values()
+            ->all();
         $navItems = [
             ['label' => 'Home', 'route' => 'home'],
             ['label' => 'About', 'route' => 'about'],
@@ -198,6 +233,8 @@
                     ['label' => 'AI Integration', 'route' => 'ai-integration'],
                 ]
             ],
+            ['label' => 'Products', 'route' => 'products', 'routePattern' => 'product*', 'children' => $productPartnerMenuItems],
+            ['label' => 'By Industry', 'route' => 'industries', 'routePattern' => 'industr*', 'children' => $industryMenuItems],
             ['label' => 'Zoho', 'route' => 'zoho', 'routePattern' => 'zoho*', 'icon' => asset('images/tekvista/logos/zoho.svg'), 'children' => $zohoMenuItems],
             ['label' => 'Odoo', 'route' => 'odoo', 'routePattern' => 'odoo*', 'icon' => asset('images/tekvista/logos/odoo.svg'), 'children' => $odooMenuItems],
             ['label' => 'CSR', 'route' => 'csr'],
@@ -305,12 +342,26 @@
         </div>
 
         <div id="mobile-menu" class="hidden border-t border-[var(--line)] bg-[var(--surface-strong)] px-3 py-3 lg:hidden">
-            <div class="mobile-menu-scroll mx-auto grid gap-1 text-sm font-semibold">
+            <div class="mobile-menu-frame mx-auto">
+            <div class="mobile-menu-scroll grid gap-1 text-sm font-semibold">
                 @foreach ($navItems as $item)
-                    <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link">{{ $item['label'] }}</a>
+                    @php
+                        $itemRoutePattern = $item['routePattern'] ?? $item['route'];
+                        $itemIsActive = request()->routeIs($itemRoutePattern);
+                        if (!$itemIsActive && isset($item['children'])) {
+                            $itemIsActive = collect($item['children'])->contains(fn (array $child): bool => $isChildActive($child));
+                        }
+                    @endphp
+                    <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-link {{ $itemIsActive ? 'nav-link-active tv-mobile-active-parent' : '' }}">
+                        @if (!empty($item['icon']))
+                            <img src="{{ $item['icon'] }}" alt="{{ $item['label'] }} logo" class="tv-mobile-product-logo mr-1">
+                        @endif
+                        {{ $item['label'] }}
+                    </a>
                     @if (isset($item['children']))
                         @foreach ($item['children'] as $child)
-                            <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="nav-link tv-mobile-product-link">
+                            @php $childIsActive = $isChildActive($child); @endphp
+                            <a href="{{ route($child['route'], $child['params'] ?? []) }}" class="nav-link tv-mobile-product-link {{ $childIsActive ? 'tv-mobile-product-link-active' : '' }}">
                                 @if (!empty($child['icon']))
                                     <img src="{{ $child['icon'] }}" alt="{{ $child['label'] }} logo" class="tv-mobile-product-logo">
                                 @endif
@@ -330,6 +381,8 @@
                     <a href="{{ route('login') }}" class="nav-link"><i class="bi bi-person mr-2"></i>Login</a>
                     <a href="{{ route('register') }}" class="nav-link"><i class="bi bi-person-plus mr-2"></i>Register</a>
                 @endauth
+            </div>
+            <div class="mobile-menu-scroll-hint" aria-hidden="true">Scroll for more</div>
             </div>
         </div>
     </header>

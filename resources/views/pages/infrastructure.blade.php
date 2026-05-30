@@ -6,7 +6,7 @@
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,7,13,0.82),rgba(5,7,13,0.56),rgba(5,7,13,0.22))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">Infrastructure command</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Networks, servers, cloud and security engineered as one operating layer.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Networks, servers, cloud and security engineered as one operating layer</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">From office connectivity to hybrid cloud, Tekvista designs resilient systems that can be monitored, supported and improved without chaos.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Review Systems and Infrastructure Plan']) }}" class="btn-primary">

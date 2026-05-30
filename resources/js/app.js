@@ -31,12 +31,32 @@ themeToggle?.addEventListener('click', () => {
 });
 
 if (menuButton && mobileMenu) {
+    const mobileMenuScroll = mobileMenu.querySelector('.mobile-menu-scroll');
+    const updateMobileMenuScrollHint = () => {
+        if (!mobileMenuScroll || mobileMenu.classList.contains('hidden')) {
+            return;
+        }
+
+        const isScrollable = mobileMenuScroll.scrollHeight > mobileMenuScroll.clientHeight + 6;
+        const isAtEnd = mobileMenuScroll.scrollTop + mobileMenuScroll.clientHeight >= mobileMenuScroll.scrollHeight - 8;
+
+        mobileMenu.classList.toggle('is-scrollable', isScrollable);
+        mobileMenu.classList.toggle('is-scroll-end', !isScrollable || isAtEnd);
+    };
+
     menuButton.addEventListener('click', () => {
         const isOpen = !mobileMenu.classList.contains('hidden');
 
         mobileMenu.classList.toggle('hidden', isOpen);
         menuButton.setAttribute('aria-expanded', String(!isOpen));
+
+        if (!isOpen) {
+            requestAnimationFrame(updateMobileMenuScrollHint);
+        }
     });
+
+    mobileMenuScroll?.addEventListener('scroll', updateMobileMenuScrollHint, { passive: true });
+    window.addEventListener('resize', updateMobileMenuScrollHint);
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {

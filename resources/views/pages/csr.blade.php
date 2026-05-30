@@ -6,7 +6,7 @@
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(247,255,251,0.94),rgba(241,253,247,0.84),rgba(231,248,239,0.58))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">Corporate Social Responsibility</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Building community impact through education-focused CSR initiatives.</h1>
+        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Building community impact through education-focused CSR initiatives</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">Tekvista Infosolutions supports practical social impact projects with a focus on safer learning environments, educational infrastructure, and long-term community value.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Discuss CSR Collaboration with Tekvista']) }}" class="btn-primary">

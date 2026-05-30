@@ -164,6 +164,62 @@ class SiteController extends Controller
         return view('pages.services.email-security', [...$this->pageData(), ...$this->seo('Email Security', 'Enterprise email security services for phishing defense, policy enforcement, and continuity planning.', 'email security services, barracuda, fortimail, sophos email, anti phishing gateway, dmarc implementation')]);
     }
 
+    public function products(): View
+    {
+        return view('pages.products.index', [
+            ...$this->pageData(),
+            ...$this->seo(
+                'Authorised Product Services',
+                'Tekvista authorised seller pages for Sophos, Fortinet, Seqrite, Microsoft, and related product deployment services.',
+                'authorised product seller, Sophos seller, Fortinet seller, Seqrite seller, Microsoft authorised seller'
+            ),
+            'productPartners' => $this->productPartnerPages(),
+        ]);
+    }
+
+    public function productPartner(string $vendor): View
+    {
+        $partners = $this->productPartnerPages();
+        abort_if(!isset($partners[$vendor]), 404);
+
+        $partner = $partners[$vendor];
+
+        return view('pages.products.detail', [
+            ...$this->pageData(),
+            ...$this->seo($partner['seoTitle'], $partner['seoDescription'], $partner['seoKeywords']),
+            'partner' => $partner,
+            'productPartners' => $partners,
+        ]);
+    }
+
+    public function industries(): View
+    {
+        return view('pages.industries.index', [
+            ...$this->pageData(),
+            ...$this->seo(
+                'Industry Wise IT Solutions',
+                'Industry wise Tekvista IT services for finance, healthcare, education, manufacturing, retail, and professional services.',
+                'industry wise IT services, Tekvista industry solutions, cybersecurity by industry, cloud services by industry'
+            ),
+            'industryPages' => $this->industryPages(),
+        ]);
+    }
+
+    public function industry(string $industry): View
+    {
+        $industries = $this->industryPages();
+        abort_if(!isset($industries[$industry]), 404);
+
+        $industryPage = $industries[$industry];
+
+        return view('pages.industries.detail', [
+            ...$this->pageData(),
+            ...$this->seo($industryPage['seoTitle'], $industryPage['seoDescription'], $industryPage['seoKeywords']),
+            'industryPage' => $industryPage,
+            'industryPages' => $industries,
+        ]);
+    }
+
     public function infrastructure(): View
     {
         return view('pages.infrastructure', [...$this->pageData(), ...$this->seo('Infrastructure', 'Infrastructure architecture, deployment and operations support by Tekvista Infosolutions.', 'IT infrastructure services, server setup, virtualization, data center operations')]);
@@ -522,7 +578,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/zoho-one.svg'),
                 'heroImage' => 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1600',
                 'cardSummary' => 'One connected suite for sales, finance, HR, and support teams.',
-                'heroTitle' => 'Run key teams on one connected Zoho setup.',
+                'heroTitle' => 'Run key teams on one connected Zoho setup',
                 'heroSummary' => 'Tekvista helps you plan and launch Zoho One so your teams can work together without tool confusion.',
                 'summaryTitle' => 'What we do in Zoho One projects',
                 'summaryBody' => [
@@ -555,7 +611,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/crm.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Track leads and deals clearly with better sales follow up.',
-                'heroTitle' => 'Make sales tracking easier with Zoho CRM.',
+                'heroTitle' => 'Make sales tracking easier with Zoho CRM',
                 'heroSummary' => 'We build a clear sales pipeline in Zoho CRM so your team can follow leads and close deals faster.',
                 'summaryTitle' => 'How we set up Zoho CRM',
                 'summaryBody' => [
@@ -588,7 +644,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/books.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Simple accounting, invoicing, and finance approvals in one place.',
-                'heroTitle' => 'Improve accounting flow with Zoho Books.',
+                'heroTitle' => 'Improve accounting flow with Zoho Books',
                 'heroSummary' => 'We set up Zoho Books so billing, vendor payments, and basic finance controls are easier to run.',
                 'summaryTitle' => 'Our Zoho Books approach',
                 'summaryBody' => [
@@ -621,7 +677,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/people.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Digital HR for onboarding, attendance, leave, and employee records.',
-                'heroTitle' => 'Manage HR tasks in a simpler way with Zoho People.',
+                'heroTitle' => 'Manage HR tasks in a simpler way with Zoho People',
                 'heroSummary' => 'We help your HR team move from spreadsheets to clear workflows for attendance, leave, and employee lifecycle.',
                 'summaryTitle' => 'What we deliver for HR teams',
                 'summaryBody' => [
@@ -654,7 +710,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/desk.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Ticket based customer support with SLA tracking and escalation.',
-                'heroTitle' => 'Give your support team a clear ticket workflow with Zoho Desk.',
+                'heroTitle' => 'Give your support team a clear ticket workflow with Zoho Desk',
                 'heroSummary' => 'We configure Zoho Desk for ticket routing, SLA rules, escalation, and support reporting.',
                 'summaryTitle' => 'Support operations made practical',
                 'summaryBody' => [
@@ -687,7 +743,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/creator.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Low code custom apps for business workflows and approvals.',
-                'heroTitle' => 'Build custom business apps quickly with Zoho Creator.',
+                'heroTitle' => 'Build custom business apps quickly with Zoho Creator',
                 'heroSummary' => 'Tekvista builds low code apps in Zoho Creator for workflows that standard modules cannot fully cover.',
                 'summaryTitle' => 'Custom apps with maintainable setup',
                 'summaryBody' => [
@@ -720,7 +776,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/flow.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Automate tasks between Zoho apps and external software.',
-                'heroTitle' => 'Connect apps and reduce manual work with Zoho Flow.',
+                'heroTitle' => 'Connect apps and reduce manual work with Zoho Flow',
                 'heroSummary' => 'We build reliable automation between systems so teams do less copy paste and fewer repetitive tasks.',
                 'summaryTitle' => 'Smart integration done safely',
                 'summaryBody' => [
@@ -753,7 +809,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/workplace.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Business email and team collaboration in one secure suite.',
-                'heroTitle' => 'Set up secure email and collaboration with Zoho Workplace.',
+                'heroTitle' => 'Set up secure email and collaboration with Zoho Workplace',
                 'heroSummary' => 'We help you move to Zoho Workplace with mailbox migration, user setup, and collaboration best practices.',
                 'summaryTitle' => 'Simple collaboration rollout',
                 'summaryBody' => [
@@ -786,7 +842,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/projects.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Project planning, task tracking, and team accountability in one view.',
-                'heroTitle' => 'Track project work clearly with Zoho Projects.',
+                'heroTitle' => 'Track project work clearly with Zoho Projects',
                 'heroSummary' => 'We set up Zoho Projects so teams can plan tasks, deadlines, and collaboration without confusion.',
                 'summaryTitle' => 'Practical project management setup',
                 'summaryBody' => [
@@ -819,7 +875,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/inventory.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Stock, order, and shipment visibility for better operations control.',
-                'heroTitle' => 'Control stock and orders better with Zoho Inventory.',
+                'heroTitle' => 'Control stock and orders better with Zoho Inventory',
                 'heroSummary' => 'We configure Zoho Inventory for item management, order workflows, and warehouse level visibility.',
                 'summaryTitle' => 'Inventory operations made easier',
                 'summaryBody' => [
@@ -852,7 +908,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/analytics.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Business dashboards and reports from your Zoho and external data.',
-                'heroTitle' => 'Make better decisions with clear Zoho Analytics dashboards.',
+                'heroTitle' => 'Make better decisions with clear Zoho Analytics dashboards',
                 'heroSummary' => 'We build reporting layers in Zoho Analytics so leadership and teams can track the right numbers.',
                 'summaryTitle' => 'Reporting that people can actually use',
                 'summaryBody' => [
@@ -885,7 +941,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/recruit.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Hiring workflow for sourcing, screening, and candidate communication.',
-                'heroTitle' => 'Speed up hiring with Zoho Recruit workflows.',
+                'heroTitle' => 'Speed up hiring with Zoho Recruit workflows',
                 'heroSummary' => 'We set up Zoho Recruit for job openings, candidate tracking, and hiring team collaboration.',
                 'summaryTitle' => 'Simple hiring process digitization',
                 'summaryBody' => [
@@ -918,7 +974,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/sign.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Digital signatures for contracts, approvals, and faster document closure.',
-                'heroTitle' => 'Close approvals faster with Zoho Sign.',
+                'heroTitle' => 'Close approvals faster with Zoho Sign',
                 'heroSummary' => 'We set up Zoho Sign for secure digital signing workflows across sales, HR, legal, and operations.',
                 'summaryTitle' => 'Digital signing that fits daily operations',
                 'summaryBody' => [
@@ -951,7 +1007,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/cliq.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Team chat and quick collaboration for faster internal communication.',
-                'heroTitle' => 'Improve team communication with Zoho Cliq.',
+                'heroTitle' => 'Improve team communication with Zoho Cliq',
                 'heroSummary' => 'We set up Zoho Cliq channels, team structure, and app connections so communication stays organized.',
                 'summaryTitle' => 'Team messaging with better structure',
                 'summaryBody' => [
@@ -984,7 +1040,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/bigin.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Simple CRM for small and growing sales teams.',
-                'heroTitle' => 'Start sales tracking quickly with Bigin by Zoho CRM.',
+                'heroTitle' => 'Start sales tracking quickly with Bigin by Zoho CRM',
                 'heroSummary' => 'We set up Bigin for teams that need a simple CRM with pipeline tracking, follow ups, and visibility without heavy complexity.',
                 'summaryTitle' => 'Lightweight CRM setup that teams can use fast',
                 'summaryBody' => [
@@ -1017,7 +1073,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/mail.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Business email setup, migration, and policy controls for secure communication.',
-                'heroTitle' => 'Set up reliable business email with Zoho Mail.',
+                'heroTitle' => 'Set up reliable business email with Zoho Mail',
                 'heroSummary' => 'We migrate mailboxes, configure domains, and apply security policies for day to day email operations.',
                 'summaryTitle' => 'Email migration with fewer surprises',
                 'summaryBody' => [
@@ -1050,7 +1106,7 @@ class SiteController extends Controller
                 'logo' => asset('images/tekvista/logos/zoho/campaigns.svg'),
                 'heroImage' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80',
                 'cardSummary' => 'Email marketing journeys, list management, and campaign performance tracking.',
-                'heroTitle' => 'Run better email marketing with Zoho Campaigns.',
+                'heroTitle' => 'Run better email marketing with Zoho Campaigns',
                 'heroSummary' => 'We set up Zoho Campaigns for list hygiene, campaign journeys, and clear performance reporting.',
                 'summaryTitle' => 'Marketing campaigns with clear execution',
                 'summaryBody' => [
@@ -1132,7 +1188,7 @@ class SiteController extends Controller
                 'name' => 'Odoo CRM',
                 'logo' => asset('images/tekvista/logos/odoo/crm.png'),
                 'cardSummary' => 'Lead and opportunity tracking with clean sales stages.',
-                'heroTitle' => 'Manage leads and deals with Odoo CRM.',
+                'heroTitle' => 'Manage leads and deals with Odoo CRM',
                 'heroSummary' => 'Tekvista sets up Odoo CRM so your sales process becomes easier to track and improve.',
                 'summaryTitle' => 'Odoo CRM in plain and practical setup',
                 'summaryBody' => [
@@ -1164,7 +1220,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Sales',
                 'logo' => asset('images/tekvista/logos/odoo/sales.png'),
                 'cardSummary' => 'Quotation to order workflow with approvals and pricing control.',
-                'heroTitle' => 'Streamline your quote to order process with Odoo Sales.',
+                'heroTitle' => 'Streamline your quote to order process with Odoo Sales',
                 'heroSummary' => 'We configure Odoo Sales to make quotation, order, and approval steps easier for your team.',
                 'summaryTitle' => 'Simple and controlled sales operations',
                 'summaryBody' => [
@@ -1196,7 +1252,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Accounting',
                 'logo' => asset('images/tekvista/logos/odoo/accounting.png'),
                 'cardSummary' => 'Accounting workflows for invoices, payments, and monthly close.',
-                'heroTitle' => 'Simplify accounting operations with Odoo Accounting.',
+                'heroTitle' => 'Simplify accounting operations with Odoo Accounting',
                 'heroSummary' => 'We configure Odoo Accounting for clean finance processes and easier monthly reporting.',
                 'summaryTitle' => 'Finance process setup for daily clarity',
                 'summaryBody' => [
@@ -1228,7 +1284,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Inventory',
                 'logo' => asset('images/tekvista/logos/odoo/inventory.png'),
                 'cardSummary' => 'Inventory control across items, locations, and stock movement.',
-                'heroTitle' => 'Manage stock movement better with Odoo Inventory.',
+                'heroTitle' => 'Manage stock movement better with Odoo Inventory',
                 'heroSummary' => 'We set up Odoo Inventory for item tracking, warehouse operations, and order fulfillment visibility.',
                 'summaryTitle' => 'Warehouse flow with clear tracking',
                 'summaryBody' => [
@@ -1260,7 +1316,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Manufacturing',
                 'logo' => asset('images/tekvista/logos/odoo/manufacturing.png'),
                 'cardSummary' => 'Production planning, BOM setup, and manufacturing order control.',
-                'heroTitle' => 'Run production flow better with Odoo Manufacturing.',
+                'heroTitle' => 'Run production flow better with Odoo Manufacturing',
                 'heroSummary' => 'We configure Odoo Manufacturing for BOM management, work orders, and production visibility.',
                 'summaryTitle' => 'Production process in a clear system',
                 'summaryBody' => [
@@ -1291,7 +1347,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Projects',
                 'logo' => asset('images/tekvista/logos/odoo/projects.png'),
                 'cardSummary' => 'Project tasks, timelines, and delivery tracking in one workspace.',
-                'heroTitle' => 'Track project execution clearly with Odoo Projects.',
+                'heroTitle' => 'Track project execution clearly with Odoo Projects',
                 'heroSummary' => 'We set up Odoo Projects for planning, task ownership, and delivery progress tracking.',
                 'summaryTitle' => 'Project management without complexity',
                 'summaryBody' => [
@@ -1323,7 +1379,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Purchase',
                 'logo' => asset('images/tekvista/logos/odoo/purchase.png'),
                 'cardSummary' => 'Purchase requests, vendor orders, and approval control.',
-                'heroTitle' => 'Improve procurement flow with Odoo Purchase.',
+                'heroTitle' => 'Improve procurement flow with Odoo Purchase',
                 'heroSummary' => 'We configure Odoo Purchase for requisition, approvals, and vendor order tracking.',
                 'summaryTitle' => 'Procurement with better process control',
                 'summaryBody' => [
@@ -1355,7 +1411,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Recruitment',
                 'logo' => asset('images/tekvista/logos/odoo/recruitment.png'),
                 'cardSummary' => 'Hiring process from job posting to offer workflow.',
-                'heroTitle' => 'Organize hiring better with Odoo Recruitment.',
+                'heroTitle' => 'Organize hiring better with Odoo Recruitment',
                 'heroSummary' => 'We set up Odoo Recruitment for candidate stages, interview flow, and hiring visibility.',
                 'summaryTitle' => 'Hiring process in one structured system',
                 'summaryBody' => [
@@ -1387,7 +1443,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Website and eCommerce',
                 'logo' => asset('images/tekvista/logos/odoo/website-ecommerce.png'),
                 'cardSummary' => 'Website and online store setup connected with Odoo operations.',
-                'heroTitle' => 'Launch connected online selling with Odoo Website and eCommerce.',
+                'heroTitle' => 'Launch connected online selling with Odoo Website and eCommerce',
                 'heroSummary' => 'We set up Odoo website and store flows linked with product, stock, and order operations.',
                 'summaryTitle' => 'Online experience with backend connection',
                 'summaryBody' => [
@@ -1419,7 +1475,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Point of Sale',
                 'logo' => asset('images/tekvista/logos/odoo/pos.png'),
                 'cardSummary' => 'Retail POS setup with billing, products, and store level tracking.',
-                'heroTitle' => 'Run store billing smoothly with Odoo POS.',
+                'heroTitle' => 'Run store billing smoothly with Odoo POS',
                 'heroSummary' => 'We configure Odoo POS for products, counters, billing, and daily sales visibility.',
                 'summaryTitle' => 'Fast POS operations with better control',
                 'summaryBody' => [
@@ -1451,7 +1507,7 @@ class SiteController extends Controller
                 'name' => 'Odoo HR',
                 'logo' => asset('images/tekvista/logos/odoo/hr.png'),
                 'cardSummary' => 'Employee records, leave, attendance, and HR process tracking.',
-                'heroTitle' => 'Manage HR operations clearly with Odoo HR.',
+                'heroTitle' => 'Manage HR operations clearly with Odoo HR',
                 'heroSummary' => 'We set up Odoo HR so employee lifecycle and policy workflows are easier to manage.',
                 'summaryTitle' => 'HR workflows in one practical platform',
                 'summaryBody' => [
@@ -1483,7 +1539,7 @@ class SiteController extends Controller
                 'name' => 'Odoo Maintenance',
                 'logo' => asset('images/tekvista/logos/odoo/maintenance.png'),
                 'cardSummary' => 'Asset and maintenance requests with planned service tracking.',
-                'heroTitle' => 'Track equipment maintenance with Odoo Maintenance.',
+                'heroTitle' => 'Track equipment maintenance with Odoo Maintenance',
                 'heroSummary' => 'We set up Odoo Maintenance for preventive tasks, breakdown requests, and service records.',
                 'summaryTitle' => 'Asset uptime with simple maintenance workflows',
                 'summaryBody' => [
@@ -1543,6 +1599,271 @@ class SiteController extends Controller
             ];
         })->all();
     }
+
+    private function productPartnerPages(): array
+    {
+        return [
+            'sophos' => [
+                'slug' => 'sophos',
+                'name' => 'Sophos',
+                'logo' => asset('images/tekvista/logos/sophos.svg'),
+                'heroImage' => asset('images/tekvista/Cybersecurity.png'),
+                'heroKicker' => 'Sophos Products and Services',
+                'heroTitle' => 'Sophos security products supplied, deployed, and supported by Tekvista',
+                'heroSummary' => 'Tekvista is an authorised seller of Sophos products and helps customers choose, procure, deploy, and operate the right Sophos security stack for their environment.',
+                'overviewTitle' => 'What Tekvista offers for Sophos customers',
+                'overviewBody' => [
+                    'We support Sophos product selection, licensing, renewal planning, configuration, migration, and day-to-day security operations.',
+                    'Our focus is practical protection: clear policies, usable dashboards, clean escalation paths, and support your IT team can rely on after purchase.',
+                ],
+                'products' => [
+                    ['title' => 'Sophos Firewall', 'copy' => 'Firewall sizing, HA planning, VPN setup, SD-WAN rules, web filtering, and policy hardening.'],
+                    ['title' => 'Sophos Endpoint', 'copy' => 'Endpoint rollout, ransomware protection settings, user groups, exclusions, and update monitoring.'],
+                    ['title' => 'Sophos MDR and XDR', 'copy' => 'Managed detection planning, alert workflow alignment, response ownership, and executive reporting.'],
+                    ['title' => 'Sophos Email Security', 'copy' => 'Anti-phishing, impersonation protection, mailbox policy tuning, and quarantine workflows.'],
+                    ['title' => 'Sophos Central', 'copy' => 'Central console setup, admin access, policy structure, reporting, and handover documentation.'],
+                    ['title' => 'License and Renewal Support', 'copy' => 'New purchase, renewal, upgrade, and co-term planning for predictable security budgeting.'],
+                ],
+                'delivery' => [
+                    'Requirement review and product fitment',
+                    'License procurement and renewal guidance',
+                    'Deployment, policy configuration, and testing',
+                    'Admin handover with simple documentation',
+                    'Ongoing support, tuning, and escalation assistance',
+                ],
+                'relatedRoutes' => [
+                    ['label' => 'Cybersecurity Services', 'route' => 'cybersecurity'],
+                    ['label' => 'Email Security', 'route' => 'email-security'],
+                ],
+                'primaryIntent' => 'Discuss Sophos Products',
+                'seoTitle' => 'Sophos Products and Services | Tekvista',
+                'seoDescription' => 'Tekvista authorised Sophos seller services for firewall, endpoint, MDR, XDR, email security, deployment, renewal, and support.',
+                'seoKeywords' => 'Sophos seller Kolkata, Sophos firewall services, Sophos endpoint deployment, Sophos MDR support',
+            ],
+            'fortinet' => [
+                'slug' => 'fortinet',
+                'name' => 'Fortinet',
+                'logo' => asset('images/tekvista/logos/fortinet.svg'),
+                'heroImage' => asset('images/tekvista/Cybersecurity.png'),
+                'heroKicker' => 'Fortinet Products and Services',
+                'heroTitle' => 'Fortinet security products for firewall, mail, VPN, and branch protection',
+                'heroSummary' => 'Tekvista is an authorised seller of Fortinet products and provides Fortinet sizing, supply, deployment, hardening, and support for business security environments.',
+                'overviewTitle' => 'Fortinet support with implementation discipline',
+                'overviewBody' => [
+                    'We help customers plan Fortinet purchases around real traffic, user count, branch design, mail security needs, and future growth.',
+                    'After procurement, we configure the platform with clean rules, secure access, documented policies, and practical support workflows.',
+                ],
+                'products' => [
+                    ['title' => 'FortiGate Firewall', 'copy' => 'NGFW sizing, rule-base cleanup, VPN, SD-WAN, segmentation, HA, and reporting setup.'],
+                    ['title' => 'FortiMail', 'copy' => 'Secure email gateway deployment, anti-spam, anti-phishing, sandboxing flow, and mail policy governance.'],
+                    ['title' => 'FortiAnalyzer and FortiManager', 'copy' => 'Central logging, reporting, change governance, and multi-device management support.'],
+                    ['title' => 'FortiClient and EMS', 'copy' => 'Endpoint VPN, endpoint compliance, telemetry alignment, and remote-user controls.'],
+                    ['title' => 'FortiSwitch and FortiAP', 'copy' => 'Secure branch networking with firewall-led visibility across switching and wireless.'],
+                    ['title' => 'Renewal and Lifecycle Support', 'copy' => 'License renewal, subscription mapping, firmware planning, backup, and change support.'],
+                ],
+                'delivery' => [
+                    'Current firewall and network baseline review',
+                    'Model selection, subscription mapping, and procurement',
+                    'Secure deployment with migration planning',
+                    'Policy tuning and operational handover',
+                    'Managed support for changes, renewals, and escalations',
+                ],
+                'relatedRoutes' => [
+                    ['label' => 'Cybersecurity Services', 'route' => 'cybersecurity'],
+                    ['label' => 'Email Security', 'route' => 'email-security'],
+                    ['label' => 'Networking', 'route' => 'networking'],
+                ],
+                'primaryIntent' => 'Discuss Fortinet Products',
+                'seoTitle' => 'Fortinet Products and Services | Tekvista',
+                'seoDescription' => 'Tekvista authorised Fortinet seller services for FortiGate, FortiMail, FortiAnalyzer, FortiManager, FortiClient, and secure branch rollout.',
+                'seoKeywords' => 'Fortinet seller Kolkata, FortiGate firewall services, FortiMail deployment, Fortinet support',
+            ],
+            'seqrite' => [
+                'slug' => 'seqrite',
+                'name' => 'Seqrite',
+                'logo' => asset('images/tekvista/logos/seqrite.png'),
+                'heroImage' => asset('images/tekvista/Email-Security.png'),
+                'heroKicker' => 'Seqrite Products and Services',
+                'heroTitle' => 'Seqrite endpoint and business security products for Indian organizations',
+                'heroSummary' => 'Tekvista is an authorised seller of Seqrite products and supports endpoint protection, advanced threat defense, deployment, renewal, and operational tuning.',
+                'overviewTitle' => 'Seqrite services tailored for business teams',
+                'overviewBody' => [
+                    'We help teams buy the correct Seqrite edition, deploy it across users and devices, and maintain clear protection policies over time.',
+                    'Our delivery includes endpoint grouping, update checks, reporting, admin training, and support for security operations after rollout.',
+                ],
+                'products' => [
+                    ['title' => 'Seqrite Endpoint Security', 'copy' => 'Endpoint protection deployment, policy groups, scan schedules, update governance, and reporting.'],
+                    ['title' => 'Seqrite EDR and XDR Support', 'copy' => 'Threat visibility planning, alert workflow setup, response guidance, and management reporting.'],
+                    ['title' => 'Seqrite UTM and Gateway Security', 'copy' => 'Network gateway security support, filtering, access rules, and branch security assistance.'],
+                    ['title' => 'Data and Device Controls', 'copy' => 'USB/device controls, data protection policies, and safer endpoint operating standards.'],
+                    ['title' => 'Patch and Hygiene Support', 'copy' => 'Security posture checks, update monitoring, and endpoint hygiene review.'],
+                    ['title' => 'License and Renewal Support', 'copy' => 'New license procurement, renewals, user-count planning, and renewal reminders.'],
+                ],
+                'delivery' => [
+                    'Endpoint inventory and requirement review',
+                    'License selection and procurement assistance',
+                    'Deployment with policy baseline and testing',
+                    'Admin training and documentation',
+                    'Ongoing monitoring, support, and renewal planning',
+                ],
+                'relatedRoutes' => [
+                    ['label' => 'Cybersecurity Services', 'route' => 'cybersecurity'],
+                    ['label' => 'IT Support', 'route' => 'it-support'],
+                ],
+                'primaryIntent' => 'Discuss Seqrite Products',
+                'seoTitle' => 'Seqrite Products and Services | Tekvista',
+                'seoDescription' => 'Tekvista authorised Seqrite seller services for endpoint security, EDR, XDR, UTM, deployment, renewal, and support.',
+                'seoKeywords' => 'Seqrite seller Kolkata, Seqrite endpoint security, Seqrite renewal support, Seqrite deployment',
+            ],
+            'microsoft' => [
+                'slug' => 'microsoft',
+                'name' => 'Microsoft',
+                'logo' => asset('images/tekvista/logos/microsoft.svg'),
+                'heroImage' => asset('images/tekvista/Mailing-Solutions.png'),
+                'heroKicker' => 'Microsoft Products and Services',
+                'heroTitle' => 'Microsoft 365, Azure, security, and business software from Tekvista',
+                'heroSummary' => 'Tekvista is an authorised seller of Microsoft products and services, helping customers buy, migrate, configure, secure, and support Microsoft cloud and productivity platforms.',
+                'overviewTitle' => 'Microsoft services for everyday business operations',
+                'overviewBody' => [
+                    'We help organizations choose the right Microsoft licenses, move users safely, configure security, and support admins after go-live.',
+                    'Our Microsoft work covers productivity, email, collaboration, identity, endpoint security, cloud infrastructure, backup planning, and user adoption.',
+                ],
+                'products' => [
+                    ['title' => 'Microsoft 365 and Office Apps', 'copy' => 'Licensing, tenant setup, Office apps, Exchange Online, Teams, OneDrive, and SharePoint rollout.'],
+                    ['title' => 'Azure Cloud Services', 'copy' => 'Azure planning, virtual machines, identity, backup, networking, monitoring, and cost governance.'],
+                    ['title' => 'Microsoft Teams and Collaboration', 'copy' => 'Teams setup, meeting policies, calling readiness, channels, guest access, and adoption support.'],
+                    ['title' => 'Microsoft Defender', 'copy' => 'Email, endpoint, identity, and cloud security baseline setup with monitoring guidance.'],
+                    ['title' => 'Windows and Server Licensing', 'copy' => 'Business software licensing, server planning, renewal support, and compliance-friendly procurement.'],
+                    ['title' => 'Power Platform Enablement', 'copy' => 'Practical Power Apps, Power Automate, and Power BI support for workflow and reporting improvements.'],
+                ],
+                'delivery' => [
+                    'License and tenant requirement review',
+                    'Procurement, renewal, and migration planning',
+                    'Security baseline and admin configuration',
+                    'User onboarding and adoption support',
+                    'Ongoing support for changes, reporting, and optimization',
+                ],
+                'relatedRoutes' => [
+                    ['label' => 'Mailing Solutions', 'route' => 'mailing'],
+                    ['label' => 'Cloud Solutions', 'route' => 'cloud'],
+                    ['label' => 'Email Security', 'route' => 'email-security'],
+                ],
+                'primaryIntent' => 'Discuss Microsoft Products',
+                'seoTitle' => 'Microsoft Products and Services | Tekvista',
+                'seoDescription' => 'Tekvista authorised Microsoft seller services for Microsoft 365, Office apps, Teams, Exchange Online, Azure, Defender, and business software.',
+                'seoKeywords' => 'Microsoft authorised seller Kolkata, Microsoft 365 services, Azure services, Microsoft Defender setup, Office 365 migration',
+            ],
+        ];
+    }
+
+    private function industryPages(): array
+    {
+        return [
+            'finance-bfsi' => [
+                'slug' => 'finance-bfsi',
+                'name' => 'Finance and BFSI',
+                'heroImage' => asset('images/tekvista/Cybersecurity.png'),
+                'heroKicker' => 'Industry Wise IT for Finance',
+                'heroTitle' => 'Secure, auditable IT systems for finance and BFSI teams',
+                'heroSummary' => 'Tekvista helps finance teams strengthen cybersecurity, cloud access, email security, endpoint control, backup readiness, and reporting workflows.',
+                'focus' => [
+                    ['title' => 'Cybersecurity and Audit Readiness', 'copy' => 'Firewall policy, endpoint security, MFA, email protection, backup validation, and evidence packs.'],
+                    ['title' => 'Cloud and Remote Access', 'copy' => 'Secure Tally on Cloud, Microsoft 365, Azure, VPN, and role-based access controls.'],
+                    ['title' => 'Business Application Support', 'copy' => 'Zoho, Odoo, reporting, approval flows, and finance-user support.'],
+                ],
+                'services' => ['Cybersecurity', 'Email security', 'Cloud and Tally hosting', 'Microsoft 365', 'Backup and recovery', 'IT support'],
+                'seoTitle' => 'IT Solutions for Finance and BFSI | Tekvista',
+                'seoDescription' => 'Tekvista industry wise IT services for finance and BFSI teams covering cybersecurity, cloud, email security, backup, Microsoft 365, and support.',
+                'seoKeywords' => 'IT services for finance, BFSI cybersecurity, finance cloud support, Tally on cloud finance',
+            ],
+            'healthcare' => [
+                'slug' => 'healthcare',
+                'name' => 'Healthcare',
+                'heroImage' => asset('images/tekvista/Infrastructure.png'),
+                'heroKicker' => 'Industry Wise IT for Healthcare',
+                'heroTitle' => 'Reliable IT operations for clinics, hospitals, and healthcare offices',
+                'heroSummary' => 'Tekvista supports healthcare organizations with secure networks, endpoint protection, email controls, backup planning, and dependable support for daily operations.',
+                'focus' => [
+                    ['title' => 'Data Protection and Access Control', 'copy' => 'Role-based access, endpoint hardening, secure mail, backup checks, and privacy-aware operations.'],
+                    ['title' => 'Network and Infrastructure Stability', 'copy' => 'Firewall, Wi-Fi, server, storage, monitoring, and uptime-focused support.'],
+                    ['title' => 'Collaboration and Support', 'copy' => 'Microsoft 365, mail migration, support desk, and practical user onboarding.'],
+                ],
+                'services' => ['Cybersecurity', 'Networking', 'Infrastructure', 'Email security', 'Microsoft 365', 'Managed IT support'],
+                'seoTitle' => 'IT Solutions for Healthcare | Tekvista',
+                'seoDescription' => 'Tekvista IT services for healthcare teams including secure infrastructure, endpoint protection, email security, Microsoft 365, and managed support.',
+                'seoKeywords' => 'healthcare IT services, clinic IT support, hospital cybersecurity, healthcare email security',
+            ],
+            'education' => [
+                'slug' => 'education',
+                'name' => 'Education',
+                'heroImage' => asset('images/tekvista/CSR.png'),
+                'heroKicker' => 'Industry Wise IT for Education',
+                'heroTitle' => 'Digital classrooms, secure networks, and simple support for education',
+                'heroSummary' => 'Tekvista helps schools, institutes, and training teams with AV rooms, secure Wi-Fi, email, device protection, cloud collaboration, and support.',
+                'focus' => [
+                    ['title' => 'Classroom and AV Enablement', 'copy' => 'Displays, projectors, conference rooms, audio, digital signage, and classroom collaboration systems.'],
+                    ['title' => 'Secure Student and Staff IT', 'copy' => 'Endpoint protection, content controls, email security, and identity setup for users.'],
+                    ['title' => 'Cloud Collaboration', 'copy' => 'Microsoft 365, Google Workspace, Zoho Mail, storage, and guided user onboarding.'],
+                ],
+                'services' => ['AV solutions', 'Networking', 'Mailing solutions', 'Endpoint security', 'Cloud collaboration', 'IT support'],
+                'seoTitle' => 'IT Solutions for Education | Tekvista',
+                'seoDescription' => 'Tekvista education IT services for schools and institutes covering AV rooms, networking, email, endpoint security, cloud collaboration, and support.',
+                'seoKeywords' => 'education IT services, school AV setup, campus WiFi, classroom technology support',
+            ],
+            'manufacturing' => [
+                'slug' => 'manufacturing',
+                'name' => 'Manufacturing',
+                'heroImage' => asset('images/tekvista/Infrastructure.png'),
+                'heroKicker' => 'Industry Wise IT for Manufacturing',
+                'heroTitle' => 'Connected IT systems for manufacturing, inventory, and plant operations',
+                'heroSummary' => 'Tekvista supports manufacturing teams with Odoo, inventory workflows, secure networks, branch connectivity, endpoint security, backup, and support.',
+                'focus' => [
+                    ['title' => 'Operations and ERP Support', 'copy' => 'Odoo modules, inventory, purchase, manufacturing, maintenance, and reporting workflows.'],
+                    ['title' => 'Plant and Branch Connectivity', 'copy' => 'Firewall, VPN, Wi-Fi, switching, monitoring, and secure access between offices and sites.'],
+                    ['title' => 'Endpoint and Backup Controls', 'copy' => 'Device security, patch checks, backup planning, and recovery readiness.'],
+                ],
+                'services' => ['Odoo services', 'Networking', 'Infrastructure', 'Cybersecurity', 'Backup and recovery', 'IT support'],
+                'seoTitle' => 'IT Solutions for Manufacturing | Tekvista',
+                'seoDescription' => 'Tekvista manufacturing IT services for ERP, inventory, networking, cybersecurity, infrastructure, backup, and support.',
+                'seoKeywords' => 'manufacturing IT services, Odoo manufacturing support, plant network security, inventory ERP services',
+            ],
+            'retail-distribution' => [
+                'slug' => 'retail-distribution',
+                'name' => 'Retail and Distribution',
+                'heroImage' => asset('images/tekvista/About.png'),
+                'heroKicker' => 'Industry Wise IT for Retail',
+                'heroTitle' => 'Retail and distribution IT systems that connect sales, stock, and support',
+                'heroSummary' => 'Tekvista helps retail and distribution businesses run POS, inventory, CRM, email, endpoint security, cloud access, and branch support more smoothly.',
+                'focus' => [
+                    ['title' => 'Sales and Inventory Systems', 'copy' => 'Odoo POS, inventory, Zoho CRM, reporting, and branch process workflows.'],
+                    ['title' => 'Branch IT and Support', 'copy' => 'Networking, endpoint protection, backup, remote access, and managed IT support for stores and offices.'],
+                    ['title' => 'Email and Collaboration', 'copy' => 'Microsoft 365, Google Workspace, Zoho Mail, email security, and user lifecycle support.'],
+                ],
+                'services' => ['Odoo POS', 'Zoho CRM', 'Inventory systems', 'Networking', 'Mailing solutions', 'IT support'],
+                'seoTitle' => 'IT Solutions for Retail and Distribution | Tekvista',
+                'seoDescription' => 'Tekvista retail and distribution IT services for POS, inventory, CRM, branch networking, email, endpoint security, and support.',
+                'seoKeywords' => 'retail IT services, distribution IT support, Odoo POS services, inventory system support',
+            ],
+            'professional-services' => [
+                'slug' => 'professional-services',
+                'name' => 'Professional Services',
+                'heroImage' => asset('images/tekvista/Mailing-Solutions.png'),
+                'heroKicker' => 'Industry Wise IT for Professional Services',
+                'heroTitle' => 'Productive and secure IT for consulting, legal, accounting, and service firms',
+                'heroSummary' => 'Tekvista helps professional service firms manage Microsoft 365, Zoho, secure mail, cloud access, endpoint security, and dependable day-to-day support.',
+                'focus' => [
+                    ['title' => 'Productivity and Collaboration', 'copy' => 'Microsoft 365, Teams, SharePoint, OneDrive, Zoho Workplace, and user onboarding.'],
+                    ['title' => 'Client Data Protection', 'copy' => 'Email security, endpoint controls, MFA, backup, and privacy-aware access practices.'],
+                    ['title' => 'Workflow and Reporting', 'copy' => 'Zoho CRM, Zoho Books, Odoo, automation, dashboards, and management reporting.'],
+                ],
+                'services' => ['Microsoft 365', 'Zoho services', 'Email security', 'Cloud backup', 'Cybersecurity', 'IT support'],
+                'seoTitle' => 'IT Solutions for Professional Services | Tekvista',
+                'seoDescription' => 'Tekvista IT services for professional service firms including Microsoft 365, Zoho, email security, cloud backup, cybersecurity, and support.',
+                'seoKeywords' => 'IT services for professional services, Microsoft 365 consulting firms, secure email for law firms, Zoho services accounting firms',
+            ],
+        ];
+    }
+
     private function pageData(): array
     {
         $services = [
@@ -1588,6 +1909,14 @@ class SiteController extends Controller
                 ->all(),
             'odooProductLinks' => collect($this->odooServicePages())
                 ->map(fn (array $service): array => ['slug' => $service['slug'], 'label' => $service['name'], 'logo' => $service['logo'] ?? null])
+                ->values()
+                ->all(),
+            'productPartnerLinks' => collect($this->productPartnerPages())
+                ->map(fn (array $partner): array => ['slug' => $partner['slug'], 'label' => $partner['name'], 'logo' => $partner['logo'] ?? null])
+                ->values()
+                ->all(),
+            'industryLinks' => collect($this->industryPages())
+                ->map(fn (array $industry): array => ['slug' => $industry['slug'], 'label' => $industry['name']])
                 ->values()
                 ->all(),
             'contact' => [

@@ -6,7 +6,7 @@
     <div class="absolute inset-0 -z-10 bg-[linear-gradient(110deg,rgba(5,7,13,0.82),rgba(5,7,13,0.58),rgba(5,7,13,0.26))]"></div>
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">Mailing Solutions</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Managed enterprise mail for Microsoft, Google, and Zoho.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Managed enterprise mail for Microsoft, Google, and Zoho</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Migration, configuration, security policy, and user lifecycle management for business email and collaboration suites.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Configure Enterprise Mailing Platform']) }}" class="btn-primary">

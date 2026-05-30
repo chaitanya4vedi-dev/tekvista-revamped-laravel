@@ -40,6 +40,20 @@ $odooServicePages = [
     'hr',
     'maintenance',
 ];
+$productPartnerPages = [
+    'sophos',
+    'fortinet',
+    'seqrite',
+    'microsoft',
+];
+$industryPages = [
+    'finance-bfsi',
+    'healthcare',
+    'education',
+    'manufacturing',
+    'retail-distribution',
+    'professional-services',
+];
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
@@ -62,6 +76,14 @@ Route::get('/odoo/{odooPage}', [SiteController::class, 'odooService'])
     ->name('odoo.service');
 Route::get('/mailing', [SiteController::class, 'mailing'])->name('mailing');
 Route::get('/email-security', [SiteController::class, 'emailSecurity'])->name('email-security');
+Route::get('/products', [SiteController::class, 'products'])->name('products');
+Route::get('/products/{vendor}', [SiteController::class, 'productPartner'])
+    ->whereIn('vendor', $productPartnerPages)
+    ->name('product.partner');
+Route::get('/industries', [SiteController::class, 'industries'])->name('industries');
+Route::get('/industries/{industry}', [SiteController::class, 'industry'])
+    ->whereIn('industry', $industryPages)
+    ->name('industry.show');
 Route::get('/infrastructure', [SiteController::class, 'infrastructure'])->name('infrastructure');
 Route::get('/csr', [SiteController::class, 'csr'])->name('csr');
 Route::get('/contact', [SiteController::class, 'contactPage'])->name('contact');
@@ -115,7 +137,7 @@ foreach ($policyPages as $slug => $label) {
         ->name("policy.{$slug}");
 }
 
-Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages, $odooServicePages) {
+Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages, $odooServicePages, $productPartnerPages, $industryPages) {
     $now = now()->toAtomString();
     $staticUrls = [
         ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly', 'lastmod' => $now],
@@ -133,6 +155,8 @@ Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages, $od
         ['loc' => route('odoo'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
         ['loc' => route('mailing'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
         ['loc' => route('email-security'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
+        ['loc' => route('products'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
+        ['loc' => route('industries'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
         ['loc' => route('infrastructure'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
         ['loc' => route('csr'), 'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => $now],
         ['loc' => route('contact'), 'priority' => '0.8', 'changefreq' => 'monthly', 'lastmod' => $now],
@@ -147,6 +171,18 @@ Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages, $od
     $odooUrls = collect($odooServicePages)->map(fn (string $slug): array => [
         'loc' => route('odoo.service', ['odooPage' => $slug]),
         'priority' => '0.75',
+        'changefreq' => 'monthly',
+        'lastmod' => $now,
+    ]);
+    $productPartnerUrls = collect($productPartnerPages)->map(fn (string $slug): array => [
+        'loc' => route('product.partner', ['vendor' => $slug]),
+        'priority' => '0.75',
+        'changefreq' => 'monthly',
+        'lastmod' => $now,
+    ]);
+    $industryUrls = collect($industryPages)->map(fn (string $slug): array => [
+        'loc' => route('industry.show', ['industry' => $slug]),
+        'priority' => '0.72',
         'changefreq' => 'monthly',
         'lastmod' => $now,
     ]);
@@ -190,6 +226,8 @@ Route::get('/sitemap.xml', function () use ($policyPages, $zohoServicePages, $od
     $urls = collect($staticUrls)
         ->merge($zohoUrls)
         ->merge($odooUrls)
+        ->merge($productPartnerUrls)
+        ->merge($industryUrls)
         ->merge($policyUrls)
         ->merge($blogUrls)
         ->values()

@@ -7,7 +7,7 @@
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker">Tekvista Enterprise Services</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Enterprise-grade IT solutions designed for scale and reliability.</h1>
+        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-[var(--text)] sm:text-6xl">Enterprise-grade IT solutions designed for scale and reliability</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--muted)]">A completely business-focused portfolio: cybersecurity, cloud (including Tally hosting), networking, Zoho, Odoo, and enterprise mailing ecosystems.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Request Enterprise Service Consultation']) }}" class="btn-primary">

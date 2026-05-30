@@ -7,7 +7,7 @@
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">IT Support</p>
-        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Reliable support operations for business continuity.</h1>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-tight text-white sm:text-6xl">Reliable support operations for business continuity</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#def2ff]">Tekvista provides structured incident management, proactive maintenance, and escalation-ready support for mission-critical enterprise environments.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Discuss Managed IT Support']) }}" class="btn-primary">

@@ -7,7 +7,7 @@
 
     <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <p class="section-kicker hero-kicker-readable">AV Solutions</p>
-        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Transforming spaces with cutting-edge enterprise AV technology.</h1>
+        <h1 class="mt-3 max-w-5xl text-4xl font-black leading-tight text-white sm:text-6xl">Transforming spaces with cutting-edge enterprise AV technology</h1>
         <p class="mt-5 max-w-3xl text-base leading-8 text-[#d5edf6]">Tekvista Infosolutions delivers end-to-end AV solutions, from system design to integration and managed support, for boardrooms, training rooms, campuses, and event spaces.</p>
         <div class="mt-7">
             <a href="{{ route('contact', ['intent' => 'Discuss AV Solutions Project']) }}" class="btn-primary">
